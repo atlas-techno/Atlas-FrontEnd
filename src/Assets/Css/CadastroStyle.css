@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: 1.7px;
+}
+
+
+:root{
+    --roxobase: #844FBA; 
+    --roxoclaro: #C285FF; 
+    --roxoclaro2: #af62fc; 
+    --roxoescuro: #46246D; 
+    --roxohover: #7646a6; 
+    --redDestroy: #CD0032;
+    --redDestroyHover: #9b0027;
+    --fontColor: #46246D;
+  }
+
+
+  .ContainerSignup{
+    background: linear-gradient(226.36deg, #844FBA 3.49%, #000000 69.9%);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .FormSingup{
+      border-radius: 80px;
+      background-color: rgba(255, 255, 255, 0.25);
+      height: 70%;
+      width: 70%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .FormSingup h1 {
+      color: #fff;
+      font-size: 4em;
+      font-weight: bold;
+      text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+
+  }
+.ContainerInputs1{
+    height: 70%;
+    margin-right: 14rem;
+    margin-bottom: 5rem;
+    width: 35.7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: flex-start;
+}
+
+.ContainerInputs2{
+    height: 64%;
+    width: 36%;
+    margin-top: 5.063rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: flex-start;
+    max-height: 64%;
+}
+
+/* .ContainerInputs2 label{
+    margin-bottom: 1rem;
+}
+.ContainerInputs2 input{
+    margin-bottom: 1rem;
+} */
+.LabelPrivateKey{
+    margin-top: 1rem;
+}
+
+#AccessKey{
+    margin-top: 1rem;
+}
+#PrivateKey{
+    margin-top: 1rem;
+}
+.FormSingup label{
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.FormSingup input{
+    color: var(--fontColor);
+    font-size: 1.5rem;
+    border: none;
+    width: 30rem;
+    height: 3rem;
+    border-radius: 10px;
+    outline: none;
+    padding: 1rem;
+}
+
+
+.BtnSignup{
+    width: 30rem;
+    height: 3rem;
+    background: rgba(0, 0, 0, 0.40);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1.5rem;
+    color: white;
+
+}
+
+.Containerbtn{
+    margin-top: 10rem;
+
+}
