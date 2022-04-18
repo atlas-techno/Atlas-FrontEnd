@@ -131,6 +131,23 @@
 
 }
 
+.ErrorMsG{
+    position: fixed;
+    bottom: 9em;
+    margin-top: 2em;
+    z-index: 2;
+    font-size: 1.5em;
+    color: var(--redDestroy);
+}
+
+.VoltarCadastro{
+    color: white;
+    
+
+}
+
+
+
 @media only screen and (max-height: 768px) {
     .ContainerInputs2{
         height: 70%;
@@ -247,5 +264,9 @@
     .Containerbtn{
         margin-top: 5rem;
     
+    }
+
+    .ErrorMsG{
+        font-size: 1.3em;
     }
 }

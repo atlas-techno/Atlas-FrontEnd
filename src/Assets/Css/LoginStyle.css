@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: 1.7px;
+}
+
+
+:root{
+    --roxobase: #844FBA; 
+    --roxoclaro: #C285FF; 
+    --roxoclaro2: #af62fc; 
+    --roxoescuro: #46246D; 
+    --roxohover: #7646a6; 
+    --redDestroy: #CD0032;
+    --redDestroyHover: #9b0027;
+    --fontColor: #46246D;
+  }
+
+.mainContainerLogin{
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+}
+
+.BgMainLogin{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100vh;
+    width: 70%;
+    background: linear-gradient(216.15deg, #844FBA 4.13%, #000000 82.74%);
+    clip-path: polygon(5% 0, 100% 0%, 100% 100%, 30% 100%);
+}
+
+.FormContainerLogin{
+    display: flex;
+    
+    align-items: center;
+    margin-right: 19%;
+    height: 68%;
+    width: 46%;
+    border-radius: 10%;
+    background-color: rgba(255, 255, 255, 0.25);
+
+}
+
+.containerForm{
+    padding: 4em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+}
+
+.ContainerInputsLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 55%;
+    width: 100%;
+}
+
+.ContainerInputsLogin label{
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    color: white;
+    font-size:2.5em;
+    
+}
+
+.ContainerInputsLogin input{
+    height: 3.5rem;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: 1.5rem;
+    color: var(--roxohover);
+}
+
+.h1Login{
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #fff;
+    font-size: 3.5em;
+}
+
+.ContainerLabels{
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.BtnLogin{
+    /* margin-top: ; */
+    width: 100%;
+    height: 4rem;
+    background: rgba(0, 0, 0, 0.40);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    transition: ease-in-out;
+    transition-duration: 0.5s;
+}
+
+.BtnLogin:hover{
+    
+    background: rgba(0, 0, 0, 0.80);
+}
+
+.ContainerNaoTemConta{
+    margin-top: 10%;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+}
+
+
+.ContainerNaoTemConta span{
+    /* font-weight: 300; */
+    font-family: 'Ubuntu', sans-serif;}
+.linktoCadastro{
+    color: white;
+    text-decoration: none;
+}
+
+.linktoCadastro:hover{
+    
+    text-decoration: underline;
+}
+
+.ErrorMsGLogin{
+    position: fixed;
+    bottom: 12em;
+    /* margin-top: 2em; */
+    z-index: 2;
+    font-size: 1.35em;
+    color: red;
+    font-weight: 700;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+.mainContainerLogin img{
+    margin-top: 14%;
+    z-index: 2;
+    margin-left: 15%;
+    height: 25%;
+    width: 25%;
+}
