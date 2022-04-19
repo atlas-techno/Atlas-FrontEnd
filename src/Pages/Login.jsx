@@ -4,6 +4,7 @@ import UserPool from "../Utils/UserPool";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import "../Assets/Css/LoginStyle.css"
 import { Link, useNavigate } from "react-router-dom";
+import { usuarioAutenticado } from "../Services/auth";
 
 
 
@@ -33,9 +34,9 @@ export default function Login() {
         user.authenticateUser(authDetails, {
             onSuccess: (data) => {
                 setLoading(false)
+                localStorage.setItem('usuario-login', data.getIdToken().getJwtToken());
+                
                 console.log("onSuccess: ", data);
-                
-                
 
                 navigate("/main")
             },

@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: 1.7px;
+}
+
+
+:root{
+    --roxobase: #844FBA; 
+    --roxoclaro: #C285FF; 
+    --roxoclaro2: #af62fc; 
+    --roxoescuro: #46246D; 
+    --roxohover: #7646a6; 
+    --redDestroy: #CD0032;
+    --redDestroyHover: #9b0027;
+    --fontColor: #46246D;
+  }
+
+.MainBG{
+    background: linear-gradient(109.68deg, #46246D 6.82%, #844FBA 100%);
+    /* transform: matrix(1, 1, 0, 1, 0, 0);; */
+    height: 80vh;
+    
+}

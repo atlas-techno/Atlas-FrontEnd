@@ -1,8 +1,16 @@
+import Header from "../Components/Header"
+import "../Assets/Css/MainPage.css"
+
+
 export default function MainPage() {
-    
+
     return (
         <>
-            <div>MAIN PAGE</div>
+            <Header />
+            <main className="MainBG">
+
+                <div>MAIN PAGE</div>
+            </main>
         </>
     )
 }
