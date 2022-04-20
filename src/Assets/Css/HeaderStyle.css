@@ -50,5 +50,8 @@
 }
 
 .btnLogoutHeader{
-
+ border: none;
+ background-color: #fff;
+ cursor: pointer;
 }
+

@@ -32,6 +32,13 @@ function App() {
   //     <Main />
   //   )
 
+  // element={
+  //   usuarioAutenticado() ? (
+  //     <Navigate replace to="main" />
+  //     ) : (
+  //     <Login />
+  // )} />
+
   return (
     <>
       <Router>

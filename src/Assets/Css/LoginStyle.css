@@ -167,3 +167,8 @@
     height: 25%;
     width: 25%;
 }
+
+.linkBtnLogin{
+    text-decoration: none;
+    color: #fff;
+}

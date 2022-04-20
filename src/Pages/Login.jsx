@@ -1,18 +1,22 @@
 import logo from "../Assets/img/Logo.svg";
-import React, { useState } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import UserPool from "../Utils/UserPool";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import "../Assets/Css/LoginStyle.css"
-import { Link, useNavigate } from "react-router-dom";
-import { usuarioAutenticado } from "../Services/auth";
+import { Link, useNavigate, Navigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+// import {AccountContext} from "../Components/Account";
 
 
 
 export default function Login() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
-    const [msg, setMsg] = useState(false)
+    // const [msg, setMsg] = useState(false)
     const [loading, setLoading] = useState(false)
+
+    // const { authenticate } = useContext(AccountContext);
 
     const navigate = useNavigate()
 
@@ -20,6 +24,14 @@ export default function Login() {
     const EfetuarLogin = (e) => {
         e.preventDefault();
         setLoading(true)
+
+        // authenticate(email, senha)
+        //     .then((data) => {
+        //         console.log(data)
+        //     })
+        //     .catch((err) => {
+        //         console.error(err)
+        //     })
 
         const user = new CognitoUser({
             Username: email,
@@ -35,30 +47,33 @@ export default function Login() {
             onSuccess: (data) => {
                 setLoading(false)
                 localStorage.setItem('usuario-login', data.getIdToken().getJwtToken());
-                
-                console.log("onSuccess: ", data);
-
-                navigate("/main")
+                // navigate('main')
             },
             onFailure: (err) => {
                 setLoading(false)
-                setMsg(true)
+                // setMsg(true)
                 console.error("onFailure: ", err);
+                toast.error("Login não efetuado com sucesso!")
             },
             newPasswordRequired: (data) => {
                 setLoading(false)
+                // navigate("/main")
                 console.log("newPasswordRequired: ", data);
             },
         });
 
     }
 
+    // useEffect(() => {
+    //     localStorage.removeItem("usuario-login")
+    // }, [])
+
     return (
         <div>
             <main className="mainContainerLogin" >
-            <img src={logo}  alt="" />
+                <img src={logo} alt="" />
                 <div className="BgMainLogin">
-                    <form className="FormContainerLogin" onSubmit={EfetuarLogin}>
+                    <form className="FormContainerLogin" >
                         <div className="containerForm">
                             <h1 className="h1Login" >Login</h1>
 
@@ -73,16 +88,16 @@ export default function Login() {
                                     <label htmlFor="Senha">Senha</label>
                                     <input type="password" value={senha} id="Senha" onChange={(e) => setSenha(e.target.value)} />
                                 </div>
-                                {
+                                {/* {
                                     msg === true && <span className="ErrorMsGLogin">Login não efetuado corretamente</span>
-                                }
+                                } */}
 
                             </div>
                             {
-                                loading === true &&  <button type="submit" disabled className="BtnLogin">Login</button>
+                                loading === true && <button type="submit" disabled className="BtnLogin">Login</button>
                             }
                             {
-                                loading === false &&  <button type="submit"  className="BtnLogin">Login</button>
+                                loading === false && <button onClick={EfetuarLogin} className="BtnLogin"><Link className="linkBtnLogin" to='/main'>Login</Link></button>
                             }
 
                             <div className="ContainerNaoTemConta">
@@ -92,8 +107,8 @@ export default function Login() {
                         </div>
                     </form>
                 </div>
+                <ToastContainer />
 
-                
             </main>
         </div>
     )
