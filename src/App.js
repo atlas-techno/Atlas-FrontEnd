@@ -5,6 +5,7 @@ import Cadastro from './Pages/Cadastro';
 
 
 function App() {
+  
   return (
     <Router>
         <Routes>
