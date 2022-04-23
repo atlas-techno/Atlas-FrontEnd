@@ -58,9 +58,9 @@
 
   }
 .ContainerInputs1{
-    height: 70%;
-    margin-right: 14rem;
-    margin-bottom: 5rem;
+    height: 86%;
+    margin-right: 10rem;
+    
     width: 35.7%;
     display: flex;
     flex-direction: column;
@@ -69,9 +69,9 @@
 }
 
 .ContainerInputs2{
-    height: 64%;
+    height: 70%;
     width: 36%;
-    margin-top: 7rem;
+    margin-top: 9rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around; 
@@ -131,6 +131,28 @@
 
 }
 
+.ErrorMsG{
+    position: fixed;
+    bottom: 9em;
+    margin-top: 2em;
+    z-index: 2;
+    font-size: 1.5em;
+    color: var(--redDestroy);
+}
+
+.VoltarCadastro{
+    color: white;
+    
+
+}
+
+.containerListCad{
+    /* margin-top:; */
+    color: white;
+}
+
+
+
 @media only screen and (max-height: 768px) {
     .ContainerInputs2{
         height: 70%;
@@ -176,9 +198,9 @@
     
       }
     .ContainerInputs1{
-        height: 70%;
-        margin-right: 6rem;
-        margin-bottom: 5rem;
+        height: 85%;
+    margin-right: 6rem;
+    margin-bottom: 1rem;
         width: 35.7%;
         display: flex;
         flex-direction: column;
@@ -189,7 +211,7 @@
     .ContainerInputs2{
         height: 70%;
         width: 36%;
-        margin-top: 2rem;
+        margin-top: 3.8rem;
         display: flex;
         flex-direction: column;
         justify-content: space-around; 
@@ -247,5 +269,9 @@
     .Containerbtn{
         margin-top: 5rem;
     
+    }
+
+    .ErrorMsG{
+        font-size: 1.3em;
     }
 }

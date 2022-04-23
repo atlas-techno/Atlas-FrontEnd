@@ -1,0 +1,44 @@
+:root{
+    --roxobase: #844FBA; 
+    --roxoclaro: #C285FF; 
+    --roxoclaro2: #af62fc; 
+    --roxoescuro: #46246D; 
+    --roxohover: #7646a6; 
+    --redDestroy: #CD0032;
+    --redDestroyHover: #9b0027;
+    --fontColor: #46246D;
+  }
+
+
+.containerNotfound{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+}
+
+.containerNotfound h1{
+    color: var(--roxobase);
+}
+
+
+.BackLoginNF{
+    margin-top: 3rem;
+    text-decoration: none;
+    color: var(--roxoclaro2);
+    font-size: 2rem;
+}
+
+.BackLoginNF:hover{
+    text-decoration: underline;
+}
+
+
+@media only screen and (max-width: 1778px) {
+    .containerNotfound img {
+        height: 50%;
+        width: 50%;
+    }
+}

@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import UserPool from "../Utils/UserPool";
 import "../Assets/Css/CadastroStyle.css";
-// import {CognitoUser} from 'amazon-cognito-identity-js';
-// import S3FileUpload from 'react-s3';
-// import Amplify from "@aws-amplify/core";
-// import { Storage } from "aws-amplify";
-// import { Auth } from 'aws-amplify';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Cadastrar() {
     const [email, setEmail] = useState("")
@@ -13,32 +10,18 @@ export default function Cadastrar() {
     const [nomeC, setNomeC] = useState("")
     const [Access, setAccess] = useState("")
     const [Private, setPrivate] = useState("")
+    const [msg, setMsg] = useState(false)
+    const [loading, setLoading] = useState(false)
 
-
+    const navigate = useNavigate()
 
 
     const Cadastrar = (event) => {
         event.preventDefault()
-
+        setLoading(true)
         console.log(email)
         console.log(senha)
         console.log(nomeC)
-
-
-        var AtributeList = [
-            {
-                Name: 'name',
-                Value: nomeC
-            },
-            {
-                Name: 'custom:Access_Key',
-                Value: Access
-            },
-            {
-                Name: 'custom:Private_Key',
-                Value: Private
-            }
-        ]
 
 
         UserPool.signUp(email, senha, [{
@@ -54,10 +37,26 @@ export default function Cadastrar() {
             Value: Private
         }], null, (err, data) => {
             if (err) {
+                setLoading(false)
+                setMsg(true)
                 console.error(err)
+            } else {
+                setLoading(false)
+                setMsg(false)
+                console.log(data)
+                setEmail('')
+                setSenha('')
+                setNomeC('')
+                setAccess('')
+                setPrivate('')
+
+                navigate("/")
+
             }
-            console.log(data)
+
+
         })
+
 
 
     }
@@ -69,6 +68,7 @@ export default function Cadastrar() {
             <div className="ContainerSignup">
                 <form onSubmit={Cadastrar} className="FormSingup">
                     <div className="ContainerInputs1">
+                        <Link to="/" className="VoltarCadastro">Voltar</Link>
                         <h1 >Cadastro</h1>
                         <label htmlFor="Name">Nome Completo</label>
                         <input type="text" value={nomeC} id="Name" onChange={(e) => setNomeC(e.target.value)} />
@@ -76,6 +76,19 @@ export default function Cadastrar() {
                         <input type="email" value={email} id="Email" onChange={(e) => setEmail(e.target.value)} />
                         <label htmlFor="Senha">Senha</label>
                         <input type="password" value={senha} id="Senha" onChange={(e) => setSenha(e.target.value)} />
+                        <div className="containerListCad">
+
+                            <span >Sua senha de conter:</span>
+                            <ul>
+                                <li>No minimo 8 caracteres.</li>
+                                <li>Ter pelo menos uma letra maiuscula.</li>
+                                <li>Ter pelo menos um caracter especial.</li>
+                            </ul>
+                        </div>
+                        {
+                            msg === true && <span className="ErrorMsG">Cadastro não efetuado corretamente</span>
+                        }
+
                     </div>
 
                     <div className="ContainerInputs2">
@@ -84,7 +97,14 @@ export default function Cadastrar() {
                         <label htmlFor="PrivateKey" className="LabelPrivateKey">Private Key</label>
                         <input type="password" value={Private} id="PrivateKey" onChange={(e) => setPrivate(e.target.value)} />
                         <div className="Containerbtn">
-                            <button type="submit" className="BtnSignup">Cadastrar</button>
+
+                            {
+                                loading === true && <button type="submit" disabled className="BtnSignup">Cadastrar</button>
+                            }
+                            {
+                                loading === false && <button type="submit" className="BtnSignup">Cadastrar</button>
+                            }
+
 
                         </div>
                     </div>
