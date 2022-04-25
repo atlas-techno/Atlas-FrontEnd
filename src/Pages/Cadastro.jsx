@@ -24,6 +24,9 @@ export default function Cadastrar() {
         console.log(nomeC)
 
 
+    
+
+
         UserPool.signUp(email, senha, [{
             Name: 'name',
             Value: nomeC

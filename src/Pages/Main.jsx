@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../Components/Header"
 import "../Assets/Css/MainPage.css"
 import axios from 'axios';
@@ -7,8 +7,25 @@ import axios from 'axios';
 export default function MainPage() {
 
     const [imagemProduto, setImagemProduto] = useState('');
+    const [listworkspaces, setListworkspaces] = useState([])
 
+    const listarWS = () => {
+        axios.get("https://oioioioi.free.beeceptor.com/oi")
+            .then(d => {
+                
+                setListworkspaces(d.data)
+                console.log(  d.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    useEffect(() => {
+        listarWS()
+    }, [])
     
+
 
     const PostIMG = () => {
         var forms = new FormData();
@@ -34,18 +51,69 @@ export default function MainPage() {
             })
             .catch(erro => console.log(erro))
 
-        
+
     }
 
-
-    const GetImg = () =>{
-
-        
-    }
     return (
         <>
             <Header />
             <main className="MainBG">
+                <div className="containerBtnCreate">
+                    <div className="btn">
+
+                        <span>Teste</span>
+                    </div>
+                </div>
+                <div className="containerWrapper">
+
+                {
+                    listworkspaces.map((WK) => {
+                        return(
+
+                            <div className="containerWS" key={WK.idworkspace}>
+
+                                <h2>{WK.nameworkspace}</h2>
+                                <span>{WK.region}</span>
+
+                            </div>
+                                )
+                    })
+                }
+
+                        </div>
+                {/* <div className="containerWS">
+
+                        <h2>Darede</h2>
+                        <span>Us-East-01</span>
+
+                    </div>
+                    <div className="containerWS">
+
+                        <span>Teste</span>
+                    </div>
+                    <div className="containerWS">
+
+                        <span>Teste</span>
+                    </div>
+                    <div className="containerWS">
+
+                        <span>Teste</span>
+                    </div>
+                    <div className="containerWS">
+
+                        <span>Teste</span>
+                    </div>
+                    <div className="containerWS">
+
+                        <span>Teste</span>
+                    </div>
+                   */}
+
+
+
+
+
+
                 {/* <form onSubmit={PostIMG}>
 
                     <input
@@ -60,7 +128,7 @@ export default function MainPage() {
                     <button type="submit">Upload</button>
                 </form> */}
 
-                
+
             </main>
         </>
     )

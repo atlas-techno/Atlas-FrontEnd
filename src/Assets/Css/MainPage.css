@@ -30,6 +30,79 @@
 .MainBG{
     background: linear-gradient(109.68deg, #46246D 6.82%, #844FBA 100%);
     /* transform: matrix(1, 1, 0, 1, 0, 0);; */
-    height: 80vh;
+    /* height: 80vh; */
+    /* max-height: none; */
+    width: 100%;
+    /* overflow-y: initial; */
+    display: flex;
+    justify-content: flex-start;
+
+    align-items: center;
+    min-height: 80vh;
+    flex-direction: column;
     
+}
+
+/* Header{
+  position: fixed;
+  z-index: 2;
+} */
+
+.containerWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 89.5%;
+}
+.containerWS{
+  
+  margin: 20px;
+  background-color: white;
+  height: 10em;
+  width: 15em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1em;
+  margin-top: 4em;
+  margin-left: 5.8em;
+  margin-right: 5.8em;
+  margin-bottom: 5.8em;
+  /* margin: 5.8em; */
+  font-family: 'Ubuntu';
+  color: var(--roxoclaro2);
+  text-shadow: 4px 2px 4px rgba(0, 0, 0, 0.25);
+  /* font-weight: bold; */
+  transition:ease;
+  transition-duration: 0.5s;
+}
+
+.containerWS:hover{
+  transform: rotate3d(1, 2.0, 3.0, 6deg);
+  background: var(--roxobase);
+  color: white;
+}
+
+
+.containerBtnCreate{
+  width: 79.6%;
+  height: 7em;
+  background: transparent;
+  display: grid;
+  justify-content: flex-end;
+  align-items:flex-end;
+}
+
+.btn{
+  width: 7em;
+  color: blue;
+  height: 3em;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
