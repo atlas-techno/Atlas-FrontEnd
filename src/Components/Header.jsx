@@ -1,8 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logo from "../Assets/img/Logo.svg";
 import logoutIcon from "../Assets/img/logout.png";
 import "../Assets/Css/HeaderStyle.css"
 import Pool from "../Utils/UserPool";
+
 
 export default function Header() {
 
@@ -23,12 +24,18 @@ export default function Header() {
         
     }
 
+    const BackHome = () =>{
+        navigate("/main")
+    }
+
+    
+
     return (
         <>
             <div className="MainHeader">
                 <div className="Container_Header">
 
-                    <img src={Logo} alt="Foto de Perfil" className="PfPHeader" />
+                    <img src={Logo} onClick={BackHome} alt="Foto de Perfil" className="PfPHeader" />
                     <button onClick={Logout} className="btnLogoutHeader"><img src={logoutIcon} alt="Botão Logout" /> </button>
                 </div>
             </div>

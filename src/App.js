@@ -6,6 +6,7 @@ import Main from "./Pages/Main";
 import NotFound from "./Pages/notFound";
 import { parseJwt, usuarioAutenticado } from '../src/Services/auth';
 import UserPool from './Utils/UserPool';
+import Workspace from "./Pages/Workspace";
 // import { render } from '@testing-library/react';
 
 function App() {
@@ -50,6 +51,13 @@ function App() {
           <Route path="/main" element={
             UserPool.getCurrentUser() ? (
             <Main />
+            ) : (
+              <Navigate to="/" />
+          )} >
+            </Route>
+          <Route path="main/workspace" element={
+            UserPool.getCurrentUser() ? (
+            <Workspace />
             ) : (
               <Navigate to="/" />
           )} />

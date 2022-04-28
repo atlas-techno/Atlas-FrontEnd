@@ -47,6 +47,13 @@
 .PfPHeader{
     height: 100%;
     width: 10%;
+    transition: ease-in-out;
+        transition-duration: 0.5s;
+        cursor: pointer;
+}
+
+.PfPHeader:hover{
+  transform: scale(1.2);
 }
 
 .btnLogoutHeader{
@@ -58,8 +65,8 @@
 }
 
 .btnLogoutHeader img{
-  height: 100%;
-  width: 100%;
+  height: 80%;
+  width: 80%;
 }
 
 
