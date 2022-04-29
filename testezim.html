@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>ZIM - Code Creativity</title>
+
+<!-- zimjs.com - JavaScript Canvas Framework -->
+<script type=module>
+
+import zim from "https://zimjs.org/cdn/00/zim";
+
+// See Docs under Frame for FIT, FILL, FULL, and TAG scaling modes
+const frame = new Frame(FIT, 1024, 768, light, dark);
+frame.on("ready", () => {
+    new Rectangle(50, 50, green).center().drag(); // for a centered draggable rectangle!
+
+new MotionController(new Emitter().center(), "mousemove"); // for a particle emitter following the mouse
+
+const squiggle = new Squiggle().loc(100, 100); // wavy line with Bezier handles
+new Circle(20, pink).addTo().animate({path:squiggle}, 1000); // animate along a squiggle
+
+new Button(200, 70, "TRY ME")
+  .pos(30,30,RIGHT,BOTTOM) 
+  .tap(()=>{zgo("https://zimjs.com");}); // go to URL
+});
+
+</script>
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+</head>
+<body></body>
+</html>

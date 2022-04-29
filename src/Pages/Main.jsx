@@ -53,6 +53,8 @@ export default function MainPage() {
 
     ])
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [nomeWS, setNomeWS] = useState("")
+    const [regionWS, setRegionWS] = useState("")
     const navigate = useNavigate()
 
 
@@ -78,14 +80,28 @@ export default function MainPage() {
         setModalIsOpen(false)
     }
 
-    function GoWS(e) {
-        e.preventDefault()
+    function GoWS(WK) {
+        console.log(WK.idworkspace)
 
-        navigate("workspace")
+
+        var selectedWk = listworkspaces.filter((w) =>  w.idworkspace == WK.idworkspace)
+
+        
+        console.log(selectedWk)
+
+        // console.log(e.getAttribute('key'))
+        // console.log(e.target.options[selectedIndex].getAttribute('key'));
+
+        
+
+        navigate("workspace",{state: {name: selectedWk[0].nameworkspace,region: selectedWk[0].region}})
     }
 
     function CreateWS() {
-        navigate({pathname: 'workspace',data: listworkspaces })
+        console.log(nomeWS)
+        console.log(regionWS)
+
+        navigate( 'workspace',{state: {name: nomeWS.toString(),region: regionWS.toString()}})
     }
 
     return (
@@ -106,9 +122,16 @@ export default function MainPage() {
                 >
                     <form className="MainForms" onSubmit={CreateWS}>
                         <label >Nome Workspace</label>
-                        <input className="InputMain" />
+                        <input className="InputMain"
+                            value={nomeWS}
+                            onChange={(e) => setNomeWS(e.target.value)}
+                        />
                         <label >Região </label>
-                        <select name="RegionsSelect" id="RegionSelec">
+                        <select name="RegionsSelect" id="RegionSelec"
+                            value={regionWS}
+                            onChange={(e) => setRegionWS(e.target.value)}
+                        
+                        >
                             <option value="us-east-1">US East (N. Virginia)</option>
                             <option value="us-east-2">US East (Ohio)</option>
                             <option value="sa-east-1">South America (São Paulo)</option>
@@ -128,10 +151,10 @@ export default function MainPage() {
                         listworkspaces.map((WK) => {
                             return (
 
-                                <div onClick={GoWS} className="containerWS" key={WK.idworkspace}>
+                                <div onClick={() => GoWS(WK)} className="containerWS" key={WK.idworkspace}>
 
-                                    <h2>{WK.nameworkspace}</h2>
-                                    <span>{WK.region}</span>
+                                    <h2    id="h2Name">{WK.nameworkspace}</h2>
+                                    <span  id="SpanRegion">{WK.region}</span>
 
                                 </div>
                             )
