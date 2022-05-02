@@ -16,13 +16,13 @@ export default function Workspace() {
 
 
             <Header />
-            {/* <Grid /> */}
-            <div >
+            <Grid />
+            {/* <div >
                 
                 <h1>{location.state.name}</h1>
                 <h2>{location.state.region}</h2>
 
-            </div>
+            </div> */}
         </>
     )
 }
