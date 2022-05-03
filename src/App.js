@@ -42,25 +42,29 @@ function App() {
   // )} />
   // localStorage.getItem('usuario-login') != null
 
+  
+  // UserPool.getCurrentUser() ? (
+  //   <Main />
+  //   ) : (
+  //     <Navigate to="/" />
+  // )} >
+
+  
+  // UserPool.getCurrentUser() ? (
+  //   <Workspace />
+  //   ) : (
+  //     <Navigate to="/" />
+  // )} />
+
   return (
     <>
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/main" element={
-            UserPool.getCurrentUser() ? (
-            <Main />
-            ) : (
-              <Navigate to="/" />
-          )} >
+          <Route path="/main" element={<Main/>}>
             </Route>
-          <Route path="main/workspace" element={
-            UserPool.getCurrentUser() ? (
-            <Workspace />
-            ) : (
-              <Navigate to="/" />
-          )} />
+          <Route path="main/workspace" element={<Workspace />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

@@ -3,6 +3,8 @@ import UserPool from "../Utils/UserPool";
 import "../Assets/Css/CadastroStyle.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Cadastrar() {
     const [email, setEmail] = useState("")
@@ -10,7 +12,6 @@ export default function Cadastrar() {
     const [nomeC, setNomeC] = useState("")
     const [Access, setAccess] = useState("")
     const [Private, setPrivate] = useState("")
-    const [msg, setMsg] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
@@ -41,11 +42,11 @@ export default function Cadastrar() {
         }], null, (err, data) => {
             if (err) {
                 setLoading(false)
-                setMsg(true)
+                toast.error("Cadastro não efetuado corretamente!")
                 console.error(err)
             } else {
                 setLoading(false)
-                setMsg(false)
+                
                 console.log(data)
                 setEmail('')
                 setSenha('')
@@ -68,6 +69,7 @@ export default function Cadastrar() {
 
     return (
         <>
+            <ToastContainer/>
             <div className="ContainerSignup">
                 <form onSubmit={Cadastrar} className="FormSingup">
                     <div className="ContainerInputs1">
@@ -88,9 +90,7 @@ export default function Cadastrar() {
                                 <li>Ter pelo menos um caracter especial.</li>
                             </ul>
                         </div>
-                        {
-                            msg === true && <span className="ErrorMsG">Cadastro não efetuado corretamente</span>
-                        }
+                        
 
                     </div>
 

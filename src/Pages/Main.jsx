@@ -4,6 +4,10 @@ import "../Assets/Css/MainPage.css"
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
+import UserPool from "../Utils/UserPool";
+import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
+import { parseJwt } from "../Services/auth.js";
+
 
 Modal.setAppElement('#root')
 
@@ -74,6 +78,7 @@ export default function MainPage() {
     // }, [])
     function OpenModal() {
         setModalIsOpen(true)
+        
     }
 
     function CloseModal() {
@@ -98,6 +103,8 @@ export default function MainPage() {
     }
 
     function CreateWS() {
+        // axios.post("http://3.214.253.118:8000/"+ )
+
         console.log(nomeWS)
         console.log(regionWS)
 

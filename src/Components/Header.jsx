@@ -18,7 +18,7 @@ export default function Header() {
 
         if (user) {
             user.signOut()
-            localStorage.removeItem("usuario-login")
+            localStorage.clear()
         }
         navigate("/")
         
