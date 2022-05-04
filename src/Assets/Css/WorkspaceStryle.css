@@ -49,16 +49,40 @@
     border-radius: 20px;
     
     align-items: center;
+    justify-content: space-evenly;
     flex-direction: column;
 }
 
 .containerH1H2{
     width: 80%;
-    /* height: ; */
+    
     color: white;
-    margin-top: 2em;
+    
 }
 
 .containerH1H2 h1 {
     text-transform: uppercase;
+}
+
+.Ec2PlaceHolder{
+  height: 3rem;
+  width: 3rem;
+  background: #000;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+ 
+}
+
+.containerDrag{
+  display: flex;
+  border-radius: 10px;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  height: 70%;
+  width: 80%;
+  background: #fff;
 }
