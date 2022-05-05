@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: 'Ubuntu', sans-serif;
@@ -16,55 +16,56 @@
 }
 
 
-:root{
-    --roxobase: #844FBA; 
-    --roxoclaro: #C285FF; 
-    --roxoclaro2: #af62fc; 
-    --roxoescuro: #46246D; 
-    --roxohover: #7646a6; 
-    --redDestroy: #CD0032;
-    --redDestroyHover: #9b0027;
-    --fontColor: #46246D;
-  }
-
-
-.bodyWS{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.ContainerWSgrid{
-    width: 100vw;
-    height: 73vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+:root {
+  --roxobase: #844FBA;
+  --roxoclaro: #C285FF;
+  --roxoclaro2: #af62fc;
+  --roxoescuro: #46246D;
+  --roxohover: #7646a6;
+  --redDestroy: #CD0032;
+  --redDestroyHover: #9b0027;
+  --fontColor: #46246D;
 }
 
-.boxPropsWS{
-    height: 100%;
-    width: 20vw;
-    background: var(--roxoclaro2);
-    display: flex;
-    border-radius: 20px;
-    
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
+
+.bodyWS {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.containerH1H2{
-    width: 80%;
-    
-    color: white;
-    
+.ContainerWSgrid {
+  width: 92vw;
+  height: 73vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.boxPropsWS {
+  height: 100%;
+  width: 20vw;
+  background: var(--roxoclaro2);
+  display: flex;
+  border-radius: 20px;
+
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.containerH1H2 {
+  width: 80%;
+
+  color: white;
+
 }
 
 .containerH1H2 h1 {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
-.Ec2PlaceHolder{
+.Ec2PlaceHolder {
   height: 3rem;
   width: 3rem;
   background: #000;
@@ -73,10 +74,10 @@
   justify-content: center;
   align-items: center;
   color: white;
- 
+
 }
 
-.containerDrag{
+.containerDrag {
   display: flex;
   border-radius: 10px;
   justify-content: space-around;
@@ -85,4 +86,19 @@
   height: 70%;
   width: 80%;
   background: #fff;
+}
+
+.SquareGrid {
+  height: 3rem;
+  width: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.247);
+}
+
+.Grid{
+  height: 54%;
+  width: 22%;
+  display: flex;
+  flex-wrap: wrap;
+
+  
 }

@@ -17,6 +17,7 @@ export default function Ec2() {
     return (
         <>
             <div
+              onClick={() => console.log("OIOIOIOI")}
                 ref={drag}
                 style={{
                   opacity: isDragging ? 0.5 : 1,
