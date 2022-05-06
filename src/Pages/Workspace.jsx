@@ -2,28 +2,17 @@ import Header from "../Components/Header";
 import { useLocation } from "react-router-dom";
 import Grid from "../Components/Grid.jsx";
 import "../Assets/Css/WorkspaceStryle.css";
-import { useState } from "react";
-import Ec2, { ItemType } from "../Components/Ec2";
+import { useMemo } from "react";
+import Ec2 from "../Components/Ec2";
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { observe } from "../Components/Effect";
-import { createRoot } from 'react-dom/client'
-
-
-// import { useDrag } from '@use-gesture/react'
-// import { animated, useSpring } from "@react-spring/three";
-
-// import GridSquares from "../Components/GridSquares";
-// import GridBoard from "../Components/GridBoard";
+import { Game } from "../Components/Game";
+import Vpc from "../Components/Vpc";
 
 export default function Workspace() {
-    const [ec2, setEc2] = useState(false)
     const location = useLocation()
 
-
-    
-
-    let ec2Position = [0, 0]
+    const game = useMemo(() => new Game(), [])
  
     return (
         <>
@@ -32,6 +21,7 @@ export default function Workspace() {
             <Header />
             <DndProvider backend={HTML5Backend}>
                 <body className="bodyWS">
+                    
 
                     <div className="ContainerWSgrid">
                         <div className="boxPropsWS">
@@ -43,15 +33,14 @@ export default function Workspace() {
                             </div>
                             <div className="containerDrag">
                                 <Ec2 />
+                                <Vpc/>
 
                             </div>
 
-                            {
-                                ec2 === true && <div className="containerec2"><h1>Ec21</h1></div>
-                            }
+                            
                         </div>
                         
-                        <Grid ec2Position={ec2Position} />
+                        <Grid game={game} />
 
                     </div>
                 </body>

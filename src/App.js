@@ -4,10 +4,7 @@ import Login from "./Pages/Login";
 import Cadastro from './Pages/Cadastro';
 import Main from "./Pages/Main";
 import NotFound from "./Pages/notFound";
-import { parseJwt, usuarioAutenticado } from '../src/Services/auth';
-import UserPool from './Utils/UserPool';
 import Workspace from "./Pages/Workspace";
-// import { render } from '@testing-library/react';
 
 function App() {
   

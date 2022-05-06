@@ -2,21 +2,37 @@ import React from "react";
 import Square from "../Components/SquareGrid";
 import { useDrop } from "react-dnd";
 import { ItemType } from "./Constants";
-import {moveEc2} from "./Effect";
+import { useEffect } from "react";
 
 
-export default function SquareBoard({ x, y, children }) {
+export default function SquareBoard({ x, y, children, game }) {
 
-    const [{ isOver }, drop] = useDrop(() => ({
-        accept: ItemType.EC2,
-        drop: () => moveEc2(x, y),
-        collect: monitor => ({
+    
+
+
+    const [{isDropped,isOver }, drop] = useDrop(() => ({
+        accept: ItemType.EC2 && ItemType.VPC,
+        drop(_item,monitor){
+            const didDrop = monitor.didDrop()
+            
+            game.movevpc(x, y)
+
+            return didDrop
+        }, 
+        collect: (monitor) => ({
             isOver: monitor.isOver(),
+            isDropped: monitor.didDrop()
         }),
-    }), [x, y])
+    }), [game])
+
+    
+    
+    
+
     return (
         <div
             ref={drop}
+            
             style={{
                 position: 'relative',
                 width: '100%',

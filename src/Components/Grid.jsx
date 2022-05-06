@@ -1,49 +1,61 @@
 import React from "react";
 import Ec2 from "../Components/Ec2";
-import Square from "../Components/SquareGrid";
-import { moveEc2 } from "./Effect";
-import { ItemType } from "./Constants";
-import { useDrop } from "react-dnd";
+import Vpc from "../Components/Vpc";
+// import { Piece } from "./Element.jsx";
 import SquareBoard from "./SquareBoard";
-import game from "./Effect";
+import { useEffect, useState } from "react";
 
 
 
 
-function renderSquare(i, ec2Position) {
-    const x = i % 8
-    const y = Math.floor(i / 8)
+
+
+
+export default function Grid({ game  }) {
+    const [[ec2X, ec2Y], setec2Pos] = useState(game.ec2Position)
+    const [[vpc2X, vpc2Y], setvpcPos] = useState(game.vpcPosition)
+    // const [children, setChildren] = useState(Vpc)
+    useEffect(() => game.observe(setec2Pos))
+
+    const Piece = ({ isEc2 }) => (isEc2 ? <Ec2 /> : null)
+    const PieceVpc = ({ isVpc }) => (isVpc ? <Vpc /> : null)
+
+    function renderPiece(x, y, [ec2X, ec2Y]) {
+        
+        if (x === ec2X && y === ec2Y) {
+            return <Ec2/>
+        }
+    }
+    function renderVpc(x, y, [vpcX, vpcY]) {
+        
+        if (x === vpcX && y === vpcY) {
+            return <Vpc/>
+        }
+    }
+
+    function renderSquare(i) {
+        const x = i % 15
+        const y = Math.floor(i / 15)
+
+        return (
+            <div key={i} >
+                <SquareBoard x={x} y={y} game={game}>
+
+                    {renderVpc(x, y, [ec2X, ec2Y])}
+                </SquareBoard>
+            </div>
+        )
+    }
+    const square = []
+    for (let i = 0; i < 171; i++) {
+        square.push(renderSquare(i))
+    }
 
     return (
-        <div key={i} >
-            <SquareBoard x={x} y={y}>
-
-                {renderPiece(x, y, ec2Position)}
-            </SquareBoard>
+        <div className="Grid">
+            {square}
         </div>
     )
 }
 
-function renderPiece(x, y, [ec2X, ec2Y]) {
-    if (x === ec2X && y === ec2Y) {
-        return <Ec2 />
-    }
-}
 
-
-
-
-export default function Grid({ ec2Position }) {
-    
-
-        const square = []
-        for (let i = 0; i < 64; i++) {
-            square.push(renderSquare(i, ec2Position))
-        }
-
-        return (
-            <div className="Grid">
-                {square}
-            </div>
-        )
-    }
