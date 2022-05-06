@@ -1,11 +1,13 @@
 import "../Assets/Css/WorkspaceStryle.css";
-import { useDrag } from 'react-dnd'
+import { useDrag, useDrop } from 'react-dnd'
 import { ItemType } from "./Constants";
 
+import { useRef } from "react";
 
 
 
-export default function Ec2() {
+export default function Ec2({data}) {
+    
 
     const [{isDragging}, drag] = useDrag(() => ({
         type: ItemType.EC2,
@@ -14,11 +16,17 @@ export default function Ec2() {
         }),
       }))
 
+      
+
+    
+    
     return (
         <>
             <div
               onClick={() => console.log("OIOIOIOI")}
+                id={Math.floor(Math.random())}
                 ref={drag}
+                
                 style={{
                   opacity: isDragging ? 0.5 : 1,
                   

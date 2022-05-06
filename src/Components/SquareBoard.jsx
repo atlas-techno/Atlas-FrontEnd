@@ -9,6 +9,11 @@ export default function SquareBoard({ x, y, children }) {
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: ItemType.EC2,
+        hover(item) {
+            console.log(item)
+            console.log(children)
+            
+        },
         drop: () => moveEc2(x, y),
         collect: monitor => ({
             isOver: monitor.isOver(),
