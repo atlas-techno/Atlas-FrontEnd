@@ -58,8 +58,10 @@ export default function MainPage() {
     ])
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [nomeWS, setNomeWS] = useState("")
-    const [regionWS, setRegionWS] = useState("")
+    const [regionWS, setRegionWS] = useState("us-east-1")
     const navigate = useNavigate()
+
+    
 
 
     // const listarWS = () => {
@@ -103,13 +105,30 @@ export default function MainPage() {
     }
 
     function CreateWS() {
-        // axios.post("http://3.214.253.118:8000/"+ )
+        let config = {
+            headers: {
+              
+            }
+          }
+
+        axios.post("http://api.atlas.senai.info/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
+            "name" : nomeWS,
+            "region" : regionWS
+        } ).then((r) => {
+            console.log(r)
+        }).catch((err) => {
+            console.error(err)
+        })
 
         console.log(nomeWS)
         console.log(regionWS)
 
         navigate( 'workspace',{state: {name: nomeWS.toString(),region: regionWS.toString()}})
     }
+
+    useEffect(() => {
+       console.log( UserPool.getCurrentUser().getUsername())
+    }, [])
 
     return (
         <>

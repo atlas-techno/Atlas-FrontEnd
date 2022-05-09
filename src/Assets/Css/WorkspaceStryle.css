@@ -14,7 +14,7 @@
   font-family: 'Ubuntu', sans-serif;
   letter-spacing: 1.7px;
   overflow-y: none;
-  
+
 }
 
 
@@ -47,7 +47,7 @@
 }
 
 .boxPropsWS {
-  
+
   height: 80%;
   width: 20vw;
   background: var(--roxoclaro2);
@@ -74,10 +74,10 @@
 }
 
 .Ec2PlaceHolder {
-  height: 5.4rem;
-  width: 5rem;
+  height: 7rem;
+  width: 7rem;
   background: #000;
-  /* border-radius: 10px; */
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,31 +96,42 @@
   border: 2px solid var(--roxoclaro);
 }
 
+.vpcblock{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-.VpcPlaceHolder{
-  height: 5.4rem;
-  width: 10rem;
+.VpcPlaceHolder {
+  height: 2rem;
+  width: 4rem;
   background: #000;
-  /* border-radius: 10px; */
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: white;
-  border: 1px solid var(--roxoclaro);
+  border-top: 1px solid var(--roxoclaro);
+  border-left: 1px solid var(--roxoclaro);
+  border-right: 1px solid var(--roxoclaro);
   font-size: 1em;
+  cursor: pointer;
 
 
 }
 
-
-
-.VpcPlaceHolder div{
-  width: 70%;
-  height: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid var(--roxoclaro);
+.vpcblock{
+  /* background: #000; */
+  border: 3px solid black;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 10rem;
+  width: 15rem;
 }
 
 .containerDrag {
@@ -140,13 +151,145 @@
   border: 1px solid rgba(0, 0, 0, 0.247);
 }
 
-.Grid{
+.Grid {
   height: 100%;
-    width: 80%;
+  width: 80%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
 
-  
+
+}
+
+.ContainerTitle {
+  /* padding-top: 1rem; */
+  /* position: fixed; */
+  width: auto;
+  height: 9vh;
+
+
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  color: white;
+  text-transform: capitalize;
+}
+
+
+.containerForms {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.listWS {
+
+  height: 60vh;
+  width: 70%;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.buttonEc2VPC {
+  height: 27%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.GeneralContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.BtnWK {
+  width: 100%;
+  height: 4rem;
+  background: rgba(0, 0, 0, 0.40);
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1.4rem;
+  color: white;
+  cursor: pointer;
+  -webkit-transition: ease-in-out;
+  -o-transition: ease-in-out;
+  transition: ease-in-out;
+  -webkit-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.MainWK {
+  background: -o-linear-gradient(340.32deg, #46246D 6.82%, #844FBA 100%);
+  background: linear-gradient(109.68deg, #46246D 6.82%, #844FBA 100%);
+  /* transform: matrix(1, 1, 0, 1, 0, 0);; */
+  /* height: 80vh; */
+  /* max-height: none; */
+  width: 100%;
+  /* overflow-y: initial; */
+
+  display: flex;
+
+  justify-content: center;
+  flex-direction: column;
+
+
+  align-items: center;
+  min-height: 80vh;
+  min-width: 100vh;
+
+}
+
+.containerNameWK {
+  display: flex;
+  align-items: flex-start;
+  height: 90%;
+  width: 78%;
+  margin-bottom: 1rem;
+}
+
+.containerManeger {
+  height: 60vh;
+  width: 20vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+
+
+}
+
+.contWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 78%;
+  height: 100%;
 }
