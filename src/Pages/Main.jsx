@@ -153,7 +153,6 @@ export default function MainPage() {
                     </form>
                 </Modal>
                 <div className="containerWrapper">
-
                     {
                         listworkspaces.map((WK) => {
                             return (

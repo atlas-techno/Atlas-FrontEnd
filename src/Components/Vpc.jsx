@@ -1,16 +1,17 @@
 import "../Assets/Css/WorkspaceStryle.css";
-import { useDrag } from 'react-dnd'
+import { useDrag  } from 'react-dnd'
 import { ItemType } from "./Constants";
-import Modal from 'react-modal';
-import { useState } from "react";
+// import Modal from 'react-modal';
 
 
 
-export default function Vpc() {
+
+export default function Vpc({ props }) {
+    
     const [, drag] = useDrag(() => ({
-        type: ItemType.VPC ,
+        type: ItemType.VPC,
         collect: (monitor) => ({
-            isDragging: !!monitor.isDragging()
+            isDragging: !!monitor.isDragging()  
         })
 
     }),
@@ -26,13 +27,15 @@ export default function Vpc() {
             }}
 
             className="VpcPlaceHolder">
-                
+
             <span>+</span>
             <div>
 
                 <span>Vpc</span>
             </div>
+            
 
+            
         </div>
     )
 }

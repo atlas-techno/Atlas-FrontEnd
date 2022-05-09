@@ -20,9 +20,7 @@ export default function Workspace() {
 
             <Header />
             <DndProvider backend={HTML5Backend}>
-                <body className="bodyWS">
-                    
-
+                <div className="bodyWS">
                     <div className="ContainerWSgrid">
                         <div className="boxPropsWS">
                             <div className="containerH1H2">
@@ -33,17 +31,18 @@ export default function Workspace() {
                             </div>
                             <div className="containerDrag">
                                 <Ec2 />
-                                <Vpc/>
+                                <Vpc />
 
                             </div>
 
                             
                         </div>
                         
-                        <Grid game={game} />
 
+                         <Grid game={game} />
                     </div>
-                </body>
+                    
+                </div>
             </DndProvider>
             {/* <div >
                 

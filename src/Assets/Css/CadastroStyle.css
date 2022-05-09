@@ -123,8 +123,14 @@
     outline: none;
     font-size: 1.5rem;
     color: white;
-
+    cursor: pointer;
 }
+
+.BtnSignup:hover{
+    background: rgba(0, 0, 0, 0.80);
+}
+
+
 
 .Containerbtn{
     margin-top: 10rem;

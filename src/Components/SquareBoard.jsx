@@ -16,7 +16,7 @@ export default function SquareBoard({ x, y, children, game }) {
             const didDrop = monitor.didDrop()
             
             game.movevpc(x, y)
-
+            
             return didDrop
         }, 
         collect: (monitor) => ({
@@ -27,7 +27,7 @@ export default function SquareBoard({ x, y, children, game }) {
 
     
     
-    
+   
 
     return (
         <div
