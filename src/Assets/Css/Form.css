@@ -154,19 +154,21 @@
 }
 
 .container_Form{
-    padding: 55px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     height: 100%;
-    width: 76%;
+    width: 66%;
 }
 
 /* switch input */
 .switch {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
     position: relative;
-    width: 55px;
-    height: 8%;
+    width: 20%;
+    height: 6%;
   }
   
   .switch input { 
@@ -190,10 +192,10 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 100%;
-    width: 26px;
+    height: 80%;
+    width: 36%;
     left: 4px;
-    bottom: 4px;
+    bottom: 3px;
     background-color: #fff;
     -webkit-transition: .4s;
     transition: .4s;
@@ -247,10 +249,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: ease-in-out;
   }
 
 
   .btn_Viewr:hover{
+    box-shadow: inset 10px 10px 10px -3px rgba(0,0,0,0.2);
+    
     transition-duration: 0.1s;
     background-color: var(--roxohover);
     color: var(--roxoclaro);
@@ -292,8 +297,10 @@
 
   .btn_Destory:hover{
     transition-duration: 0.1s;
-    background-color: var(--redDestroyHover);
-    color: #c4c4c4;
+    /* background-color: var(--redDestroyHover); */
+    /* color: #c4c4c4; */
+    
+    box-shadow: inset 10px 10px 10px -3px rgba(0,0,0,0.2);
   }
 
   .btn_Destoryl{

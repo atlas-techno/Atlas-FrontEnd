@@ -64,20 +64,7 @@ export default function MainPage() {
     
 
 
-    // const listarWS = () => {
-    //     axios.get("https://oioioioi.free.beeceptor.com/oi")
-    //         .then(d => {
-
-    //             setListworkspaces(d.data)
-    //             console.log(d.data)
-    //         })
-    //         .catch(err => {
-    //             console.log(err)
-    //         })
-    // }
-    // useEffect(() => {
-    //     listarWS()
-    // }, [])
+    
     function OpenModal() {
         setModalIsOpen(true)
         
