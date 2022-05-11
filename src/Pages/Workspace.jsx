@@ -7,6 +7,8 @@ import Ec2Icon from "../Assets/img/Ec2Icon.svg";
 import axios from 'axios';
 import '../Assets/Css/Form.css';
 import UserPool from "../Utils/UserPool";
+import CadAberto from "../Assets/img/lock-open-solid.svg";
+import Cad from "../Assets/img/lock-solid.svg";
 
 
 
@@ -19,6 +21,26 @@ const customStyles = {
     content: {
         width: '30%',
         height: '68%',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        zIndex: '4',
+
+        // borderRadius: '10px',
+        backgroundColor: '#000',
+        transform: 'translate(-50%, -50%)',
+
+    },
+};
+const ec2Form = {
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.40)'
+
+    },
+    content: {
+        width: '30%',
+        height: '73%',
         top: '50%',
         left: '50%',
         right: 'auto',
@@ -60,13 +82,36 @@ export default function Workspace() {
     const [modal2IsOpen, setModa2lIsOpen] = useState(false)
     const [modal3IsOpen, setModa3lIsOpen] = useState(false)
     const [modal4IsOpen, setModal4IsOpen] = useState(false)
+    const [modalVpc, setModalVpc] = useState(false)
+    const [modalSub, setModalSub] = useState(false)
+
+    // const [element, setElement] = useState({
+    //     idVpc: '',
+    //     vpc_name: '',
+    //     cidr_block: 0,
+    //     subnets: [{
+    //         idSub: '',
+    //         vpc_name: '',
+    //         cidr_block: 0,
+    //         access: false,
+    //         ec2s: [{
+    //             resource_name: '',
+    //             ami: '',
+    //             type: '',
+    //             count: 1,
+    //             tag_name: '',
+    //             delete_on_termination: false,
+
+    //         }]
+    //     }]
+    // })
     const [vpc, setVpc] = useState({
         vpc_name: '',
         cidr_block: 0
     })
     const [subnet, setSubnet] = useState({
         idsub: "",
-        vpc_name: vpc.vpc_name,
+        vpc_name: "",
         cidr_block: 0,
         access: false
     })
@@ -75,7 +120,6 @@ export default function Workspace() {
         ami: 'ami-04505e74c0741db8d',
         type: 't2.nano',
         count: 1,
-        tag_name: '',
         delete_on_termination: false,
         vpc: ''
     }
@@ -165,7 +209,7 @@ export default function Workspace() {
         //     })
 
         console.log(listSubnet)
-        
+
         setModal4IsOpen(false)
         setTandF(false)
     }
@@ -215,6 +259,22 @@ export default function Workspace() {
     }
 
 
+    function OpenVpc() {
+        setModalVpc(true)
+
+    }
+
+    function CloseVpc() {
+        setModalVpc(false)
+    }
+    function OpenSub() {
+        setModalSub(true)
+
+    }
+
+    function CloseSub() {
+        setModalSub(false)
+    }
     function OpenModal() {
         setModalIsOpen(true)
 
@@ -249,7 +309,7 @@ export default function Workspace() {
         setModal4IsOpen(false)
     }
 
-    
+
 
     return (
         <>
@@ -277,10 +337,36 @@ export default function Workspace() {
 
             </Modal>
             <Modal
+                isOpen={modalVpc}
+
+                onRequestClose={CloseVpc}
+                style={customStyles2}
+                contentLabel="Example Modal"
+            >
+                <h1>Vpc Name: {vpc.vpc_name}</h1>
+                <h1>Cidr_block: {vpc.cidr_block}</h1>
+            </Modal>
+            <Modal
+                isOpen={modalSub}
+                onRequestClose={CloseSub}
+                style={customStyles2}
+                contentLabel="Example Modal"
+            >
+                <h1>Vpc Name: {subnet.vpc_name}</h1>
+                <h1>Cidr_block: {subnet.cidr_block}</h1>
+                <h1>Acesso:
+                    {
+                        subnet.access ? <span>privado</span> : <span>publico</span>
+
+                    }
+
+                </h1>
+            </Modal>
+            <Modal
                 isOpen={modalIsOpen}
 
                 onRequestClose={CloseModal}
-                style={customStyles}
+                style={ec2Form}
                 contentLabel="Example Modal"
             >
                 <form className="Forms_P" onSubmit={createEc2}>
@@ -296,16 +382,6 @@ export default function Workspace() {
                             }))}
                             type="text" className='input_Name' />
 
-
-                        <label htmlFor="ami_Sel" className='ami_Sel'>Name</label>
-
-                        <input
-                            value={ec2.tag_name}
-                            onChange={e => setEc2(prevState => ({
-                                ...prevState,
-                                tag_name: e.target.value
-                            }))}
-                            type="text" className='input_Name' />
 
                         <label htmlFor="ami_Sel" className='ami_Sel'>Ami</label>
 
@@ -466,7 +542,7 @@ export default function Workspace() {
                         }))}>
                             {listWS.map((vpc) => {
                                 return (
-                                    <option key={vpc.vpc_name} value={vpc.vpc_name}>
+                                    <option key={vpc.vpc_name} value={subnet.vpc_name}>
                                         {vpc.vpc_name}
                                     </option>
                                 );
@@ -488,37 +564,37 @@ export default function Workspace() {
 
                         <label className="ami_Sel fontSize">Acesso</label>
 
-                        
-
-                            <label className="switch">
-
-                                <input
-                                    type="checkbox"
-
-                                    value={TandF}
-
-                                    onChange={e => setTandF(e.target.checked)}
 
 
-                                />
-                                <span className="slider round"></span>
+                        <label className="switch">
 
-                                
+                            <input
+                                type="checkbox"
 
-                                
+                                value={TandF}
+
+                                onChange={e => setTandF(e.target.checked)}
 
 
-                            </label>
+                            />
+                            <span className="slider round"></span>
 
-                            {
-                                TandF && <span className="private">privado</span>
-                            }
-                            {
-                                !TandF && <span className="private">publico</span>
-                            }
-                                    
 
-                        
+
+
+
+
+                        </label>
+
+                        {
+                            TandF && <span className="private">privado</span>
+                        }
+                        {
+                            !TandF && <span className="private">publico</span>
+                        }
+
+
+
                         {
                             loading === true && <button type='submit' disabled className="btn_FormD disable" >Create</button>
                         }
@@ -555,31 +631,57 @@ export default function Workspace() {
 
                                 <div key={elements.id} className="EntireVpc">
 
-                                    <div onClick={() => OpenModal2()} className="VpcPlaceHolder">
+                                    <div onClick={() => OpenVpc()} className="VpcPlaceHolder">
                                         <span>Vpc {elements.id}</span>
                                     </div>
                                     <div className="vpcblock">
                                         {
                                             listSubnet.map((sub) => {
 
-                                                let bg = {
-                                                    background: sub.access ? '#7646a6' : '#C285FF' 
+                                                let bC = {
+                                                    borderColor: sub.access ? '#7646a6' : '#C285FF'
                                                 };
+
+                                                let bg = {
+                                                    backgroundColor: sub.access ? '#7646a6' : '#C285FF'
+                                                }
                                                 return (
-                                                    
-                                                    
-                                                    <div key={sub.idsub}  style={bg} className="subnet">
-                                                        {listEc2.map((ec2) => {
-                                                            return (
+                                                    <div className="entireSubnet">
+                                                        <div onClick={() => OpenSub()} style={bg} className="Subnetblock">
+                                                            <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
+                                                        </div>
+                                                        <div key={sub.idsub} style={bC} className="subnet">
+                                                            {listEc2.map((ec2) => {
 
-                                                                <div key={ec2.idEc2} value={ec2.resource_name} onClick={(e) => OpenModal2(e)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder">
-                                                                    <span >{ec2.resource_name}</span>
-                                                                    <img src={Ec2Icon} alt="Icon Ec2" />
-                                                                </div>
+                                                                let opacity 
+                                                                let opacity2
+                                                                
+                                                                
+                                                                ec2.count === 1 ? opacity = 0 : opacity = 1
+                                                               
+                                                                ec2.count === 2 ? opacity2 = 1 : opacity2 = 0
+                                                                
+                                                                ec2.count === 3 ? opacity = 1 : opacity = 0
+                                                            
+                                                                
+                                                                return (
+
+                                                                    <div className="ContainerEc2Count">
+                                                                        <div style={opacity} className="Ec2PlaceHolder top"></div>
+                                                                        <div style={opacity2} className="Ec2PlaceHolder top2"></div>
+                                                                        <div key={ec2.idEc2} value={ec2.resource_name} onClick={(e) => OpenModal2(e)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
+
+                                                                            <img src={Ec2Icon} alt="Icon Ec2" />
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                )
+                                                            })}
 
 
-                                                            )
-                                                        })}
+                                                        </div>
+
 
 
                                                     </div>

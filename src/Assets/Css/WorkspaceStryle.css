@@ -74,6 +74,7 @@
 }
 
 .Ec2PlaceHolder {
+  
   height: 7rem;
   width: 7rem;
   background: #000;
@@ -130,8 +131,8 @@
   border: 3px solid black;
   border-bottom-left-radius: 10px;
   border-top-right-radius: 10px;
-  height: 15rem;
-  min-width: 25rem;
+  height: 20rem;
+  min-width: 40rem;
   padding: 1rem;
   /* width: 15rem; */
 }
@@ -302,11 +303,11 @@
 }
 
 .subnet{
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   width: 100%;
   min-height: 95%;
 padding: 1rem;
-  background: var(--roxoclaro);
+  border: 2px solid var(--roxoclaro) ;
   border-bottom-left-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
@@ -317,4 +318,57 @@ padding: 1rem;
 
 .private{
   color:var(--roxoclaro);
+}
+
+.Subnetblock{
+  height: 2rem;
+  width: 6rem;
+  background: var(--roxoclaro);
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+
+}
+
+.entireSubnet{
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+  width: 98%;
+  height: 90%;
+}
+
+.cadPrivate{
+  height: 1rem;
+  width: 1rem;
+  /* filter: invert(86%) sepia(84%) saturate(2532%) hue-rotate(188deg) brightness(132%) contrast(99%); */
+  filter: invert(20%) sepia(34%) saturate(1526%) hue-rotate(231deg) brightness(95%) contrast(105%);
+}
+
+.ContainerEc2Count{
+  display: grid;
+  grid-template: 1fr / 1fr;
+  place-items: center;
+}
+
+.ContainerEc2Count > *{
+  grid-column: 1/1;
+  grid-row: 1/1;
+}
+
+.ContainerEc2Count .top{
+  margin-left: 3rem;
+  margin-top: 3rem;
+}
+.ContainerEc2Count .top2{
+  margin-left: 1.5rem;
+  margin-top: 1.5rem;
 }
