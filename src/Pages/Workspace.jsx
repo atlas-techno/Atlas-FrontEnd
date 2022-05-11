@@ -59,9 +59,16 @@ export default function Workspace() {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [modal2IsOpen, setModa2lIsOpen] = useState(false)
     const [modal3IsOpen, setModa3lIsOpen] = useState(false)
+    const [modal4IsOpen, setModal4IsOpen] = useState(false)
     const [vpc, setVpc] = useState({
         vpc_name: '',
         cidr_block: 0
+    })
+    const [subnet, setSubnet] = useState({
+        idsub: "",
+        vpc_name: vpc.vpc_name,
+        cidr_block: 0,
+        access: false
     })
     const [ec2, setEc2] = useState({
         resource_name: '',
@@ -75,8 +82,8 @@ export default function Workspace() {
     );
 
 
-    
-    
+
+
     const [loading, setLoading] = useState(false)
     const [loadingD, setLoadingD] = useState(true)
     const [loadingDe, setLoadingDe] = useState(true)
@@ -88,8 +95,8 @@ export default function Workspace() {
 
     const [listWS, setListWS] = useState([])
 
-
     const [listEc2, setListEc2] = useState([])
+    const [listSubnet, setListSubnet] = useState([])
 
 
 
@@ -137,6 +144,30 @@ export default function Workspace() {
 
         console.log(listWS)
         setModa3lIsOpen(false)
+    }
+    function createSubnet(event) {
+        // setLoading(true)
+        event.preventDefault()
+        listSubnet.push(subnet)
+        subnet.access = TandF
+
+        console.log(subnet)
+
+        // axios.post("http://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
+        //     .then((r) => {
+        //         console.log(r)
+        //         setLoading(false)
+        //         setLoadingDe(false)
+        //     })
+        //     .catch((erro) => {
+        //         console.log(erro)
+        //         setLoading(false)
+        //     })
+
+        console.log(listSubnet)
+        
+        setModal4IsOpen(false)
+        setTandF(false)
     }
 
     function deployEc2(event) {
@@ -209,6 +240,16 @@ export default function Workspace() {
     function Close3Modal() {
         setModa3lIsOpen(false)
     }
+    function OpenModal4() {
+        setModal4IsOpen(true)
+
+    }
+
+    function CloseModal4() {
+        setModal4IsOpen(false)
+    }
+
+    
 
     return (
         <>
@@ -335,7 +376,7 @@ export default function Workspace() {
                                     </option>
                                 );
                             })}
-                            
+
                         </select>
 
 
@@ -397,6 +438,100 @@ export default function Workspace() {
 
                 </form>
             </Modal>
+            <Modal
+                isOpen={modal4IsOpen}
+
+                onRequestClose={CloseModal4}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+                <form className="Forms_P" onSubmit={createSubnet}>
+                    <div className='container_Form'>
+                        <h1 className="h1_ec2">Subnet</h1>
+                        <label htmlFor="ami_Sel" className='ami_Sel'>Id</label>
+
+                        <input
+                            value={subnet.idsub}
+                            onChange={e => setSubnet(prevState => ({
+                                ...prevState,
+                                idsub: e.target.value
+                            }))}
+                            type="text" className='input_Name'
+                        />
+                        <label htmlFor="ami_Sel" className='ami_Sel'>Vpc Name</label>
+                        <select value={subnet.vpc_name} className='sel' name="Ami" id="ami_Sel" onChange={e => setSubnet(prevState => ({
+                            ...prevState,
+                            vpc_name: e.target.value
+
+                        }))}>
+                            {listWS.map((vpc) => {
+                                return (
+                                    <option key={vpc.vpc_name} value={vpc.vpc_name}>
+                                        {vpc.vpc_name}
+                                    </option>
+                                );
+                            })}
+
+                        </select>
+
+
+                        <label htmlFor="ami_Sel" className='ami_Sel'>Cidr Block</label>
+                        <select value={subnet.cidr_block} className='sel' name="Ami" id="ami_Sel" onChange={e => setSubnet(prevState => ({
+                            ...prevState,
+                            cidr_block: e.target.value
+
+                        }))}>
+                            <option className='opt' value="0">0</option>
+                            <option className='opt' value="1">1</option>
+                            <option className='opt' value="2">2</option>
+                        </select>
+
+                        <label className="ami_Sel fontSize">Acesso</label>
+
+                        
+
+                            <label className="switch">
+
+                                <input
+                                    type="checkbox"
+
+                                    value={TandF}
+
+                                    onChange={e => setTandF(e.target.checked)}
+
+
+                                />
+                                <span className="slider round"></span>
+
+                                
+
+                                
+
+
+                            </label>
+
+                            {
+                                TandF && <span className="private">privado</span>
+                            }
+                            {
+                                !TandF && <span className="private">publico</span>
+                            }
+                                    
+
+                        
+                        {
+                            loading === true && <button type='submit' disabled className="btn_FormD disable" >Create</button>
+                        }
+
+                        {
+                            loading === false && <button type='submit' className="btn_Form " >Create</button>
+                        }
+
+
+                    </div>
+
+                </form>
+            </Modal>
             <div className="MainWK">
 
                 <div className="containerNameWK">
@@ -424,18 +559,40 @@ export default function Workspace() {
                                         <span>Vpc {elements.id}</span>
                                     </div>
                                     <div className="vpcblock">
-                                        {listEc2.map((ec2) => {
-                                            return (
+                                        {
+                                            listSubnet.map((sub) => {
 
-                                                <div key={ec2.idEc2} value={ec2.resource_name} onClick={(e) => OpenModal2(e)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder">
-                                                    <span >{ec2.resource_name}</span>
-                                                    <img src={Ec2Icon} alt="Icon Ec2" />
-                                                </div>
+                                                let bg = {
+                                                    background: sub.access ? '#7646a6' : '#C285FF' 
+                                                };
+                                                return (
+                                                    
+                                                    
+                                                    <div key={sub.idsub}  style={bg} className="subnet">
+                                                        {listEc2.map((ec2) => {
+                                                            return (
+
+                                                                <div key={ec2.idEc2} value={ec2.resource_name} onClick={(e) => OpenModal2(e)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder">
+                                                                    <span >{ec2.resource_name}</span>
+                                                                    <img src={Ec2Icon} alt="Icon Ec2" />
+                                                                </div>
 
 
-                                            )
-                                        })}
+                                                            )
+                                                        })}
+
+
+                                                    </div>
+
+
+                                                )
+                                            })
+                                        }
+
+
+
                                     </div>
+
                                 </div>
                             )
                         })}
@@ -451,15 +608,17 @@ export default function Workspace() {
 
                             <button className="BtnWK" onClick={() => OpenModal()} ><span>+</span> Adicionar Ec2</button>
                             <button className="BtnWK" onClick={() => OpenModal3()} ><span>+</span> Adicionar Vpc</button>
+                            <button className="BtnWK" onClick={() => OpenModal4()} ><span>+</span> Adicionar Subnet</button>
 
+                            <div className="ContainerViewrButtons">
+                                <button className="btn_Destory " onClick={() => destoryEC2()} >Destroy</button>
+                                <button className="btn_Viewr" onClick={() => deployEc2()} >Deploy</button>
+                            </div>
 
                         </div>
 
 
-                        <div className="ContainerViewrButtons">
-                            <button className="btn_Viewr" onClick={() => deployEc2()} >Deploy</button>
-                            <button className="btn_Destory " onClick={() => destoryEC2()} >Destroy</button>
-                        </div>
+
 
                         {/* <div className="Forms_V ">
                             <div className="ContainerViewr">

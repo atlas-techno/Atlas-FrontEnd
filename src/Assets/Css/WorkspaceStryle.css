@@ -97,11 +97,6 @@
   border: 2px solid var(--roxoclaro);
 }
 
-.vpcblock{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .VpcPlaceHolder {
   height: 2rem;
@@ -127,12 +122,16 @@
 }
 
 .vpcblock{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   /* background: #000; */
   border: 3px solid black;
   border-bottom-left-radius: 10px;
   border-top-right-radius: 10px;
-  height: 10rem;
-  min-width: 15rem;
+  height: 15rem;
+  min-width: 25rem;
   padding: 1rem;
   /* width: 15rem; */
 }
@@ -205,7 +204,7 @@
 }
 
 .buttonEc2VPC {
-  /* height: 27%; */
+  height: 47%;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -300,4 +299,22 @@
 
   width: 78%;
   height: 100%;
+}
+
+.subnet{
+  margin-left: 1rem;
+  width: 100%;
+  min-height: 95%;
+padding: 1rem;
+  background: var(--roxoclaro);
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* flex-wrap: wrap; */
+}
+
+.private{
+  color:var(--roxoclaro);
 }
