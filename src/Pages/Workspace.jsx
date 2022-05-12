@@ -84,6 +84,7 @@ export default function Workspace() {
     const [modal4IsOpen, setModal4IsOpen] = useState(false)
     const [modalVpc, setModalVpc] = useState(false)
     const [modalSub, setModalSub] = useState(false)
+    const [indexEc2, setIndexEc2] = useState(0)
 
     // const [element, setElement] = useState({
     //     idVpc: '',
@@ -139,7 +140,14 @@ export default function Workspace() {
 
     const [listWS, setListWS] = useState([])
 
-    const [listEc2, setListEc2] = useState([])
+    const [listEc2, setListEc2] = useState([{
+        resource_name: 'a',
+        ami: "null",
+        type: 't2.nano',
+        count: 0,
+        delete_on_termination: false,
+        vpc: 'a'
+    }])
     const [listSubnet, setListSubnet] = useState([])
 
 
@@ -285,7 +293,8 @@ export default function Workspace() {
     }
     function OpenModal2(e) {
         setModa2lIsOpen(true)
-        console.log(e)
+        setIndexEc2(e)
+        console.log(listEc2)
 
     }
 
@@ -328,11 +337,11 @@ export default function Workspace() {
                 style={customStyles2}
                 contentLabel="Example Modal"
             >
-                <h1>Name: {ec2.resource_name}</h1>
-                <h1>ami: {ec2.ami}</h1>
-                <h1>type: {ec2.type}</h1>
-                <h1>{wsName}</h1>
-                <h1>{wsRegion}</h1>
+                <h1>Name: {listEc2[indexEc2].resource_name}</h1>
+                <h1>Ami: {listEc2[indexEc2].ami}</h1>
+                <h1>Type: {listEc2[indexEc2].type}</h1>
+                <h1>Count: {listEc2[indexEc2].count}</h1>
+                <h1>Delete on Termination: {listEc2[indexEc2].delete_on_termination ? "True": "False"}</h1>
 
 
             </Modal>
@@ -651,25 +660,21 @@ export default function Workspace() {
                                                             <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
                                                         </div>
                                                         <div key={sub.idsub} style={bC} className="subnet">
-                                                            {listEc2.map((ec2) => {
+                                                            {listEc2.filter(e => e.count >= 1).map((ec2, index) => 
+                                                                (
 
-                                                                let opacity 
-                                                                let opacity2
-                                                                
-                                                                
-                                                                ec2.count === 1 ? opacity = 0 : opacity = 1
-                                                               
-                                                                ec2.count === 2 ? opacity2 = 1 : opacity2 = 0
-                                                                
-                                                                ec2.count === 3 ? opacity = 1 : opacity = 0
-                                                            
-                                                                
-                                                                return (
+                                                                    <div key={index} className="ContainerEc2Count">
+                                                                        {
+                                                                            ec2.count === "2" && <div  className="Ec2PlaceHolder top2"></div>
+                                                                        }
+                                                                        {
+                                                                            ec2.count === "3" && <div  className="Ec2PlaceHolder top"></div>
+                                                                        }
+                                                                        {
+                                                                            ec2.count === "3" && <div  className="Ec2PlaceHolder top2"></div>
+                                                                        }
 
-                                                                    <div className="ContainerEc2Count">
-                                                                        <div style={opacity} className="Ec2PlaceHolder top"></div>
-                                                                        <div style={opacity2} className="Ec2PlaceHolder top2"></div>
-                                                                        <div key={ec2.idEc2} value={ec2.resource_name} onClick={(e) => OpenModal2(e)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
+                                                                        <div value={ec2.resource_name} onClick={() => OpenModal2(index)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
 
                                                                             <img src={Ec2Icon} alt="Icon Ec2" />
                                                                         </div>
@@ -677,7 +682,7 @@ export default function Workspace() {
                                                                     </div>
 
                                                                 )
-                                                            })}
+                                                            )}
 
 
                                                         </div>
