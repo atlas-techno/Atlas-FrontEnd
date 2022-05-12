@@ -9,6 +9,8 @@ import '../Assets/Css/Form.css';
 import UserPool from "../Utils/UserPool";
 import CadAberto from "../Assets/img/lock-open-solid.svg";
 import Cad from "../Assets/img/lock-solid.svg";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 
 
@@ -140,14 +142,7 @@ export default function Workspace() {
 
     const [listWS, setListWS] = useState([])
 
-    const [listEc2, setListEc2] = useState([{
-        resource_name: 'a',
-        ami: "null",
-        type: 't2.nano',
-        count: 0,
-        delete_on_termination: false,
-        vpc: 'a'
-    }])
+    const [listEc2, setListEc2] = useState([])
     const [listSubnet, setListSubnet] = useState([])
 
 
@@ -171,6 +166,7 @@ export default function Workspace() {
                 console.log(erro)
                 setLoading(false)
             })
+
 
         console.log(listEc2)
         setModalIsOpen(false)
@@ -223,7 +219,7 @@ export default function Workspace() {
     }
 
     function deployEc2(event) {
-        event.preventDefault()
+
         setLoadingDe(true)
 
         axios("http://api.atlas.senai.info/deploy")
@@ -238,6 +234,7 @@ export default function Workspace() {
                 console.log(erro)
                 setLoadingD(false)
             })
+        toast.success("Deploy feito com sucesso")
 
     }
 
@@ -264,6 +261,13 @@ export default function Workspace() {
         //     })
 
         navigate('/main')
+    }
+
+
+    function DeleteEc2() {
+      
+        listEc2.splice(indexEc2)
+        setModa2lIsOpen(false)
     }
 
 
@@ -294,6 +298,8 @@ export default function Workspace() {
     function OpenModal2(e) {
         setModa2lIsOpen(true)
         setIndexEc2(e)
+
+
         console.log(listEc2)
 
     }
@@ -337,11 +343,16 @@ export default function Workspace() {
                 style={customStyles2}
                 contentLabel="Example Modal"
             >
-                <h1>Name: {listEc2[indexEc2].resource_name}</h1>
-                <h1>Ami: {listEc2[indexEc2].ami}</h1>
-                <h1>Type: {listEc2[indexEc2].type}</h1>
-                <h1>Count: {listEc2[indexEc2].count}</h1>
-                <h1>Delete on Termination: {listEc2[indexEc2].delete_on_termination ? "True": "False"}</h1>
+                <div className="containerModelEc2">
+
+                    <h1>Name: {ec2.resource_name}</h1>
+                    <h1>Ami: {ec2.ami}</h1>
+                    <h1>Type: {ec2.type}</h1>
+                    <h1>Count: {ec2.count}</h1>
+                    <h1>Delete on Termination: {ec2.delete_on_termination ? "True" : "False"}</h1>
+
+                    <button className="btn_Destory" onClick={()=>DeleteEc2()}>Excluir</button>
+                </div>
 
 
             </Modal>
@@ -361,15 +372,9 @@ export default function Workspace() {
                 style={customStyles2}
                 contentLabel="Example Modal"
             >
-                <h1>Vpc Name: {subnet.vpc_name}</h1>
+                <h1>Vpc Name: {vpc.vpc_name}</h1>
                 <h1>Cidr_block: {subnet.cidr_block}</h1>
-                <h1>Acesso:
-                    {
-                        subnet.access ? <span>privado</span> : <span>publico</span>
-
-                    }
-
-                </h1>
+                <h1>Acesso: {subnet.access ? <span>privado</span> : <span>publico</span>}</h1>
             </Modal>
             <Modal
                 isOpen={modalIsOpen}
@@ -634,14 +639,14 @@ export default function Workspace() {
                 <div className="contWrapper">
                     <div className="listWS">
 
-                        {listWS.map((elements) => {
+                        {listWS.map((elements, index) => {
 
                             return (
 
-                                <div key={elements.id} className="EntireVpc">
+                                <div key={index} className="EntireVpc">
 
                                     <div onClick={() => OpenVpc()} className="VpcPlaceHolder">
-                                        <span>Vpc {elements.id}</span>
+                                        <span>Vpc </span>
                                     </div>
                                     <div className="vpcblock">
                                         {
@@ -655,33 +660,32 @@ export default function Workspace() {
                                                     backgroundColor: sub.access ? '#7646a6' : '#C285FF'
                                                 }
                                                 return (
-                                                    <div className="entireSubnet">
+                                                    <div key={sub.idsub} className="entireSubnet">
                                                         <div onClick={() => OpenSub()} style={bg} className="Subnetblock">
                                                             <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
                                                         </div>
-                                                        <div key={sub.idsub} style={bC} className="subnet">
-                                                            {listEc2.filter(e => e.count >= 1).map((ec2, index) => 
-                                                                (
+                                                        <div  style={bC} className="subnet">
+                                                            {listEc2.map((ec2, index) =>
+                                                            (
+                                                                <div key={index} className="ContainerEc2Count">
+                                                                    {
+                                                                        ec2.count === "2" && <div className="Ec2PlaceHolder top2"></div>
+                                                                    }
+                                                                    {
+                                                                        ec2.count === "3" && <div className="Ec2PlaceHolder top"></div>
+                                                                    }
+                                                                    {
+                                                                        ec2.count === "3" && <div className="Ec2PlaceHolder top2"></div>
+                                                                    }
 
-                                                                    <div key={index} className="ContainerEc2Count">
-                                                                        {
-                                                                            ec2.count === "2" && <div  className="Ec2PlaceHolder top2"></div>
-                                                                        }
-                                                                        {
-                                                                            ec2.count === "3" && <div  className="Ec2PlaceHolder top"></div>
-                                                                        }
-                                                                        {
-                                                                            ec2.count === "3" && <div  className="Ec2PlaceHolder top2"></div>
-                                                                        }
+                                                                    <div value={ec2.resource_name} onClick={() => OpenModal2(index)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
 
-                                                                        <div value={ec2.resource_name} onClick={() => OpenModal2(index)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
-
-                                                                            <img src={Ec2Icon} alt="Icon Ec2" />
-                                                                        </div>
-
+                                                                        <img src={Ec2Icon} alt="Icon Ec2" />
                                                                     </div>
 
-                                                                )
+                                                                </div>
+
+                                                            )
                                                             )}
 
 
@@ -713,9 +717,9 @@ export default function Workspace() {
                         <div className="buttonEc2VPC">
 
 
-                            <button className="BtnWK" onClick={() => OpenModal()} ><span>+</span> Adicionar Ec2</button>
                             <button className="BtnWK" onClick={() => OpenModal3()} ><span>+</span> Adicionar Vpc</button>
                             <button className="BtnWK" onClick={() => OpenModal4()} ><span>+</span> Adicionar Subnet</button>
+                            <button className="BtnWK" onClick={() => OpenModal()} ><span>+</span> Adicionar Ec2</button>
 
                             <div className="ContainerViewrButtons">
                                 <button className="btn_Destory " onClick={() => destoryEC2()} >Destroy</button>
@@ -729,35 +733,35 @@ export default function Workspace() {
 
                         {/* <div className="Forms_V ">
                             <div className="ContainerViewr">
-                                <div className="TerraformCode">
-                                    <span>resource "aws_instance" "<span className="span_color">{ec2.resource_name}</span>" {'{'}</span>
-
-                                    <span className="mfl">ami = <span className="span_color">{ec2.ami}</span></span>
-
-                                    <span className="mfl">instance_type           = <span className="span_color">{ec2.type}</span></span>
-
-                                    <span className="mfl">count                   = <span className="span_color">{ec2.count}</span></span>
-
-                                    <span className="mfl">{'root_block_device {'}</span>
-
-                                    {
-                                        TandF === true && <span className="mfll">delete_on_termination = <span className="span_color">true</span></span>
-                                    }
-
-                                    {
-                                        TandF === false && <span className="mfll">delete_on_termination = <span className="span_color">false</span></span>
-                                    }
-
-                                    < span className="mfl">{'}'}</span>
-
-                                    <span className="mfl">{'tags = { '}</span>
-
-                                    <span className="mfll">Name = "<span className="span_color">{ec2.tag_name}</span>"</span>
-
-                                    <span className="mfl">{'}'}</span>
-
-                                    <span>{'}'}</span>
-                                </div>
+                            <div className="TerraformCode">
+                            <span>resource "aws_instance" "<span className="span_color">{ec2.resource_name}</span>" {'{'}</span>
+                            
+                            <span className="mfl">ami = <span className="span_color">{ec2.ami}</span></span>
+                            
+                            <span className="mfl">instance_type           = <span className="span_color">{ec2.type}</span></span>
+                            
+                            <span className="mfl">count                   = <span className="span_color">{ec2.count}</span></span>
+                            
+                            <span className="mfl">{'root_block_device {'}</span>
+                            
+                            {
+                                TandF === true && <span className="mfll">delete_on_termination = <span className="span_color">true</span></span>
+                            }
+                            
+                            {
+                                TandF === false && <span className="mfll">delete_on_termination = <span className="span_color">false</span></span>
+                            }
+                            
+                            < span className="mfl">{'}'}</span>
+                            
+                            <span className="mfl">{'tags = { '}</span>
+                            
+                            <span className="mfll">Name = "<span className="span_color">{ec2.tag_name}</span>"</span>
+                            
+                            <span className="mfl">{'}'}</span>
+                            
+                            <span>{'}'}</span>
+                            </div>
                             </div>
                         </div> */}
 
@@ -765,6 +769,7 @@ export default function Workspace() {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }
