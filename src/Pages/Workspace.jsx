@@ -61,13 +61,13 @@ const customStyles2 = {
 
     },
     content: {
-        width: '30%',
-        height: '30%',
+        width: '40%',
+        height: '40%',
         top: '50%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
-
+        padding: '3rem',
         border: '5px solid #000',
 
         // borderRadius: '10px',
@@ -249,16 +249,16 @@ export default function Workspace() {
 
 
 
-        // axios("http://api.atlas.senai.info/" + wsName + "/destroy")
-        //     .then((r) => {
-        //         console.log(r)
-        //         setLoading(false)
-        //         setLoadingDe(true)
-        //     })
-        //     .catch((erro) => {
-        //         console.log(erro)
-        //         setLoading(false)
-        //     })
+        axios("http://api.atlas.senai.info/" + wsName + "/destroy")
+            .then((r) => {
+                console.log(r)
+                setLoading(false)
+                setLoadingDe(true)
+            })
+            .catch((erro) => {
+                console.log(erro)
+                setLoading(false)
+            })
 
         navigate('/main')
     }
