@@ -62,15 +62,63 @@ const customStyles2 = {
     },
     content: {
         width: '40%',
-        height: '40%',
+        height: '50%',
         top: '50%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
-        padding: '3rem',
-        border: '5px solid #000',
+        paddingLeft: '3rem',
+        paddingBottom: '3rem',
+        // paddingRight: '2rem',
 
-        // borderRadius: '10px',
+
+        borderRadius: '10px',
+        // backgroundColor: 'rgba(255, 255, 255, 1)',
+        transform: 'translate(-50%, -50%)',
+        backdropFilter: 'blur(6px)',
+    },
+};
+const StyleEc2 = {
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.30)'
+
+    },
+    content: {
+        width: '40%',
+        height: '35%',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        paddingLeft: '3rem',
+        paddingBottom: '3rem',
+        // paddingRight: '2rem',
+
+
+        borderRadius: '10px',
+        // backgroundColor: 'rgba(255, 255, 255, 1)',
+        transform: 'translate(-50%, -50%)',
+        backdropFilter: 'blur(6px)',
+    },
+};
+const StyleSub = {
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.30)'
+
+    },
+    content: {
+        width: '40%',
+        height: '35%',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        paddingLeft: '3rem',
+        paddingBottom: '3rem',
+        // paddingRight: '2rem',
+
+
+        borderRadius: '10px',
         // backgroundColor: 'rgba(255, 255, 255, 1)',
         transform: 'translate(-50%, -50%)',
         backdropFilter: 'blur(6px)',
@@ -150,26 +198,35 @@ export default function Workspace() {
     function createEc2(event) {
         // setLoading(true)
         event.preventDefault()
-        listEc2.push(ec2)
 
-        ec2.delete_on_termination = TandF
-        console.log(ec2)
-        console.log(TandF)
+        if (listSubnet.length === 0) {
+            toast.warn("Não ha nenhuma subnet cadastrado na Workspace")
+            return
+        }
 
-        axios.post("http://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
-            .then((r) => {
-                console.log(r)
-                setLoading(false)
-                setLoadingDe(false)
-            })
-            .catch((erro) => {
-                console.log(erro)
-                setLoading(false)
-            })
+        if (listSubnet.length > 0) {
+
+            listEc2.push(ec2)
+
+            ec2.delete_on_termination = TandF
+            console.log(ec2)
+            console.log(TandF)
+
+            axios.post("http://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
+                .then((r) => {
+                    console.log(r)
+                    setLoading(false)
+                    setLoadingDe(false)
+                })
+                .catch((erro) => {
+                    console.log(erro)
+                    setLoading(false)
+                })
 
 
-        console.log(listEc2)
-        setModalIsOpen(false)
+            console.log(listEc2)
+            setModalIsOpen(false)
+        }
     }
     function createVpc(event) {
         // setLoading(true)
@@ -196,26 +253,31 @@ export default function Workspace() {
     function createSubnet(event) {
         // setLoading(true)
         event.preventDefault()
-        listSubnet.push(subnet)
-        subnet.access = TandF
+        if (listWS.length === 0) {
+            toast.warn("Não ha nenhuma vpc cadastrado na Workspace")
+            return
+        }
 
-        console.log(subnet)
+        if (listWS.length > 0) {
+            subnet.access = TandF
+            listSubnet.push(subnet)
 
-        // axios.post("http://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
-        //     .then((r) => {
-        //         console.log(r)
-        //         setLoading(false)
-        //         setLoadingDe(false)
-        //     })
-        //     .catch((erro) => {
-        //         console.log(erro)
-        //         setLoading(false)
-        //     })
+            // axios.post("http://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
+            //     .then((r) => {
+            //         console.log(r)
+            //         setLoading(false)
+            //         setLoadingDe(false)
+            //     })
+            //     .catch((erro) => {
+            //         console.log(erro)
+            //         setLoading(false)
+            //     })
+            console.log(subnet)
+            console.log(listSubnet)
+            setModal4IsOpen(false)
+            setTandF(false)
 
-        console.log(listSubnet)
-
-        setModal4IsOpen(false)
-        setTandF(false)
+        }
     }
 
     function deployEc2(event) {
@@ -263,16 +325,25 @@ export default function Workspace() {
         navigate('/main')
     }
 
+    function DeleteVpc() {
+
+        listWS.splice(indexEc2, 1)
+        setListEc2([])
+        setListSubnet([])
+        setModalVpc(false)
+    }
 
     function DeleteEc2() {
-      
-        listEc2.splice(indexEc2)
+        console.log(indexEc2)
+        listEc2.splice(indexEc2, 1)
         setModa2lIsOpen(false)
     }
 
 
-    function OpenVpc() {
+    function OpenVpc(e) {
         setModalVpc(true)
+        setIndexEc2(e)
+
 
     }
 
@@ -298,7 +369,7 @@ export default function Workspace() {
     function OpenModal2(e) {
         setModa2lIsOpen(true)
         setIndexEc2(e)
-
+        console.log(indexEc2)
 
         console.log(listEc2)
 
@@ -344,14 +415,20 @@ export default function Workspace() {
                 contentLabel="Example Modal"
             >
                 <div className="containerModelEc2">
+                    <div className="CloseIcon">
+                        <h1>Ec2 <span>{indexEc2 + 1}</span></h1> <span onClick={() => CloseModal2()}>X</span>
+                    </div>
+                    <div className="navNames">
 
-                    <h1>Name: {ec2.resource_name}</h1>
-                    <h1>Ami: {ec2.ami}</h1>
-                    <h1>Type: {ec2.type}</h1>
-                    <h1>Count: {ec2.count}</h1>
-                    <h1>Delete on Termination: {ec2.delete_on_termination ? "True" : "False"}</h1>
 
-                    <button className="btn_Destory" onClick={()=>DeleteEc2()}>Excluir</button>
+                        <h1>Name: <span>{ec2.resource_name}</span></h1>
+                        <h1>Ami: <span>{ec2.ami}</span></h1>
+                        <h1>Type: <span>{ec2.type}</span></h1>
+                        <h1>Count: <span>{ec2.count}</span></h1>
+                        <h1>Delete on Termination: <span>{ec2.delete_on_termination ? "True" : "False"}</span></h1>
+
+                    </div>
+                    <button className="btn_Destory" onClick={() => DeleteEc2()}>Excluir</button>
                 </div>
 
 
@@ -360,21 +437,47 @@ export default function Workspace() {
                 isOpen={modalVpc}
 
                 onRequestClose={CloseVpc}
-                style={customStyles2}
+                style={StyleEc2}
                 contentLabel="Example Modal"
             >
-                <h1>Vpc Name: {vpc.vpc_name}</h1>
-                <h1>Cidr_block: {vpc.cidr_block}</h1>
+                <div className="containerModelEc2">
+                    <div className="CloseIconVpc">
+                        <span onClick={() => CloseVpc()}>X</span>
+                    </div>
+                    <div className="navNamesVpc">
+
+
+                        <h1>Vpc Name: <span>{vpc.vpc_name}</span></h1>
+                        <h1>Cidr Block: <span>{vpc.cidr_block}</span></h1>
+
+                    </div>
+                    <button className="btn_Destory" onClick={() => DeleteVpc()}>Excluir</button>
+                </div>
+
             </Modal>
             <Modal
                 isOpen={modalSub}
                 onRequestClose={CloseSub}
-                style={customStyles2}
+                style={StyleSub}
                 contentLabel="Example Modal"
             >
-                <h1>Vpc Name: {vpc.vpc_name}</h1>
-                <h1>Cidr_block: {subnet.cidr_block}</h1>
-                <h1>Acesso: {subnet.access ? <span>privado</span> : <span>publico</span>}</h1>
+
+                <div className="containerModelEc2">
+                    <div className="CloseIconVpc">
+                        <span onClick={() => CloseSub()}>X</span>
+                    </div>
+                    <div className="navNamesSub">
+
+
+                        <h1>Vpc Name: <span>{vpc.vpc_name}</span></h1>
+                        <h1>Cidr Block: <span>{subnet.cidr_block}</span></h1>
+                        <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1>
+
+                    </div>
+                    <button className="btn_Destory" onClick={() => DeleteVpc()}>Excluir</button>
+                </div>
+
+
             </Modal>
             <Modal
                 isOpen={modalIsOpen}
@@ -645,7 +748,7 @@ export default function Workspace() {
 
                                 <div key={index} className="EntireVpc">
 
-                                    <div onClick={() => OpenVpc()} className="VpcPlaceHolder">
+                                    <div onClick={() => OpenVpc(index)} className="VpcPlaceHolder">
                                         <span>Vpc </span>
                                     </div>
                                     <div className="vpcblock">
@@ -664,7 +767,7 @@ export default function Workspace() {
                                                         <div onClick={() => OpenSub()} style={bg} className="Subnetblock">
                                                             <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
                                                         </div>
-                                                        <div  style={bC} className="subnet">
+                                                        <div style={bC} className="subnet">
                                                             {listEc2.map((ec2, index) =>
                                                             (
                                                                 <div key={index} className="ContainerEc2Count">

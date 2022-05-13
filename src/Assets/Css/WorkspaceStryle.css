@@ -372,3 +372,85 @@ padding: 1rem;
   margin-left: 1.5rem;
   margin-top: 1.5rem;
 }
+
+
+.containerModelEc2{
+  color: var(--roxoescuro);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.navNames{
+  height: 65%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.CloseIcon{
+  width: 95%;
+  height: 15%;
+  padding-top: 1rem;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.CloseIcon h1{
+  font-size: 2rem;
+}
+
+
+.CloseIcon span{
+  cursor: pointer;
+}
+
+.CloseIcon h1 span{
+  color:var(--roxobase);
+}
+.navNames h1 span{
+  color: var(--roxobase);
+}
+
+
+.CloseIconVpc{
+  width: 95%;
+  height: 15%;
+  padding-top: 1rem;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.navNamesVpc{
+  height: 35%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navNamesVpc h1 span{
+  color: var(--roxobase);
+}
+
+.navNamesSub{
+  height: 47%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navNamesSub h1 span{
+  color: var(--roxobase);
+}
