@@ -263,7 +263,7 @@ export default function Workspace() {
             subnet.access = TandF
             listSubnet.push(subnet)
 
-            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
+            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_subpub", subnet)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
