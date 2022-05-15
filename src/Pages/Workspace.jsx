@@ -206,6 +206,8 @@ export default function Workspace() {
         }
 
         if (listSubnet.length > 0) {
+            ec2.subnet_name = subnet.resource_name
+            console.log(ec2)
 
             listEc2.push(ec2)
 
@@ -261,6 +263,10 @@ export default function Workspace() {
 
         if (listWS.length > 0) {
             subnet.access = TandF
+            subnet.vpc_name = vpc.resource_name
+
+            console.log(subnet)
+
             listSubnet.push(subnet)
 
             axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_subpub", subnet)
@@ -592,10 +598,10 @@ export default function Workspace() {
                             subnet_name: e.target.value
 
                         }))}>
-                            {listSubnet.map((sub) => {
+                            {listSubnet.map((sub,index) => {
                                 return (
-                                    <option key={sub.idsub} value={vpc.vpc_name}>
-                                        {vpc.vpc_name}
+                                    <option key={index} value={sub.resource_name}>
+                                        {sub.resource_name}
                                     </option>
                                 );
                             })}
@@ -682,14 +688,17 @@ export default function Workspace() {
                             type="text" className='input_Name'
                         />
                         <label htmlFor="ami_Sel" className='ami_Sel'>Vpc Name</label>
-                        <select value={subnet.vpc_name} className='sel' name="Ami" id="ami_Sel" onChange={e => setSubnet(prevState => ({
+                        <select value={subnet.vpc_name} className='sel' name="vpc" id="ami_Sel" onChange={e => setSubnet(prevState => ({
                             ...prevState,
                             vpc_name: e.target.value
 
                         }))}>
-                            {listWS.map((vpc) => {
+
+
+                            {/* <option value={vpc.resource_name}>{vpc.re}</option> */}
+                            {listWS.map((vpc, index) => {
                                 return (
-                                    <option key={vpc.resource_name} value={subnet.vpc_name}>
+                                    <option key={index} value={vpc.resource_name}>
                                         {vpc.resource_name}
                                     </option>
                                 );
@@ -709,7 +718,7 @@ export default function Workspace() {
                             <option className='opt' value="2">2</option>
                         </select>
 
-                        <label className="ami_Sel fontSize">Acesso</label>
+                        {/* <label className="ami_Sel fontSize">Acesso</label>
 
 
 
@@ -738,7 +747,7 @@ export default function Workspace() {
                         }
                         {
                             !TandF && <span className="private">publico</span>
-                        }
+                        } */}
 
 
 
