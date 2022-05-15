@@ -291,7 +291,7 @@ export default function Workspace() {
 
         setLoadingDe(true)
 
-        axios("http://localhost:8000/deploy")
+        axios("http://localhost:8000/"+ UserPool.getCurrentUser().getUsername() + "/" + wsName + "deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
