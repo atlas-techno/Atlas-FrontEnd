@@ -689,8 +689,8 @@ export default function Workspace() {
                         }))}>
                             {listWS.map((vpc) => {
                                 return (
-                                    <option key={vpc.vpc_name} value={subnet.vpc_name}>
-                                        {vpc.vpc_name}
+                                    <option key={vpc.resource_name} value={subnet.vpc_name}>
+                                        {vpc.resource_name}
                                     </option>
                                 );
                             })}
