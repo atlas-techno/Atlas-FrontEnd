@@ -236,16 +236,16 @@ export default function Workspace() {
 
         console.log(vpc)
 
-        // axios.post("http://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
-        //     .then((r) => {
-        //         console.log(r)
-        //         setLoading(false)
-        //         setLoadingDe(false)
-        //     })
-        //     .catch((erro) => {
-        //         console.log(erro)
-        //         setLoading(false)
-        //     })
+        axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
+            .then((r) => {
+                console.log(r)
+                setLoading(false)
+                setLoadingDe(false)
+            })
+            .catch((erro) => {
+                console.log(erro)
+                setLoading(false)
+            })
 
         console.log(listWS)
         setModa3lIsOpen(false)
@@ -262,16 +262,16 @@ export default function Workspace() {
             subnet.access = TandF
             listSubnet.push(subnet)
 
-            // axios.post("http://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
-            //     .then((r) => {
-            //         console.log(r)
-            //         setLoading(false)
-            //         setLoadingDe(false)
-            //     })
-            //     .catch((erro) => {
-            //         console.log(erro)
-            //         setLoading(false)
-            //     })
+            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
+                .then((r) => {
+                    console.log(r)
+                    setLoading(false)
+                    setLoadingDe(false)
+                })
+                .catch((erro) => {
+                    console.log(erro)
+                    setLoading(false)
+                })
             console.log(subnet)
             console.log(listSubnet)
             setModal4IsOpen(false)
