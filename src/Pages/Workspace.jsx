@@ -318,7 +318,7 @@ export default function Workspace() {
 
 
 
-        axios("http://localhost:8000/" + wsName + "/destroy")
+        axios("http://localhost:8000/"+ UserPool.getCurrentUser().getUsername() + "/" + wsName + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
