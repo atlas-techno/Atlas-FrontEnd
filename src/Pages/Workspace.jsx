@@ -629,10 +629,10 @@ export default function Workspace() {
                         <label htmlFor="ami_Sel" className='ami_Sel'>Resource Name</label>
 
                         <input
-                            value={vpc.vpc_name}
+                            value={vpc.resource_name}
                             onChange={e => setVpc(prevState => ({
                                 ...prevState,
-                                vpc_name: e.target.value
+                                resource_name: e.target.value
                             }))}
                             type="text" className='input_Name'
                         />
