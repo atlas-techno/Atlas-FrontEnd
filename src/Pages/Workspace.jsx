@@ -161,7 +161,7 @@ export default function Workspace() {
         cidr_block: 0
     })
     const [subnet, setSubnet] = useState({
-        idsub: "",
+        resource_name: "",
         vpc_name: "",
         cidr_block: 0
     })
@@ -478,6 +478,7 @@ export default function Workspace() {
                     <div className="navNamesSub">
 
 
+                        <h1>Resource Name: <span>{subnet.resource_name}</span></h1>
                         <h1>Vpc Name: <span>{vpc.vpc_name}</span></h1>
                         <h1>Cidr Block: <span>{subnet.cidr_block}</span></h1>
                         {/* <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1> */}
@@ -554,8 +555,8 @@ export default function Workspace() {
                                 ...prevState,
                                 volume_size: e.target.value
                             }))}
-                            type="range" style={{color: "white"}}  className='input_Name'  min="4" max="16"/> 
-                            <span style={{color: "white"}}>{ec2.volume_size}</span>
+                            type="range" style={{ color: "white" }} className='input_Name' min="4" max="16" />
+                        <span style={{ color: "white" }}>{ec2.volume_size}</span>
 
 
                         <label htmlFor="ami_Sel" className='ami_Sel'>Volume Type</label>
@@ -670,13 +671,13 @@ export default function Workspace() {
                 <form className="Forms_P" onSubmit={createSubnet}>
                     <div className='container_Form'>
                         <h1 className="h1_ec2">Subnet</h1>
-                        <label htmlFor="ami_Sel" className='ami_Sel'>Id</label>
+                        <label htmlFor="ami_Sel" className='ami_Sel'>Resource Name</label>
 
                         <input
-                            value={subnet.idsub}
+                            value={subnet.resource_name}
                             onChange={e => setSubnet(prevState => ({
                                 ...prevState,
-                                idsub: e.target.value
+                                resource_name: e.target.value
                             }))}
                             type="text" className='input_Name'
                         />
@@ -782,7 +783,7 @@ export default function Workspace() {
                                     </div>
                                     <div className="vpcblock">
                                         {
-                                            listSubnet.map((sub) => {
+                                            listSubnet.map((sub, index) => {
 
                                                 let bC = {
                                                     borderColor: sub.access ? '#7646a6' : '#C285FF'
@@ -792,7 +793,7 @@ export default function Workspace() {
                                                     backgroundColor: sub.access ? '#7646a6' : '#C285FF'
                                                 }
                                                 return (
-                                                    <div key={sub.idsub} className="entireSubnet">
+                                                    <div key={index} className="entireSubnet">
                                                         <div onClick={() => OpenSub()} style={bg} className="Subnetblock">
                                                             <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
                                                         </div>
