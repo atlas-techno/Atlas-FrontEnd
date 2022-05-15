@@ -157,7 +157,7 @@ export default function Workspace() {
     //     }]
     // })
     const [vpc, setVpc] = useState({
-        vpc_name: '',
+        resource_name: '',
         cidr_block: 0
     })
     const [subnet, setSubnet] = useState({
