@@ -98,7 +98,7 @@ export default function MainPage() {
             }
           }
 
-        axios.post("http://api.atlas.senai.info/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
+        axios.post("http://localhost:8000/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
             "name" : nomeWS,
             "region" : regionWS
         } ).then((r) => {

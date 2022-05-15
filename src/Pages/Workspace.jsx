@@ -212,7 +212,7 @@ export default function Workspace() {
             console.log(ec2)
             console.log(TandF)
 
-            axios.post("http://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
+            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -284,7 +284,7 @@ export default function Workspace() {
 
         setLoadingDe(true)
 
-        axios("http://api.atlas.senai.info/deploy")
+        axios("http://localhost:8000/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -311,7 +311,7 @@ export default function Workspace() {
 
 
 
-        axios("http://api.atlas.senai.info/" + wsName + "/destroy")
+        axios("http://localhost:8000/" + wsName + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -331,6 +331,12 @@ export default function Workspace() {
         setListEc2([])
         setListSubnet([])
         setModalVpc(false)
+    }
+
+    function DeleteSub() {
+        listSubnet.splice(indexEc2, 1)
+        setListEc2([])
+        setModalSub(false)
     }
 
     function DeleteEc2() {
@@ -474,7 +480,7 @@ export default function Workspace() {
                         <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1>
 
                     </div>
-                    <button className="btn_Destory" onClick={() => DeleteVpc()}>Excluir</button>
+                    <button className="btn_Destory" onClick={() => DeleteSub()}>Excluir</button>
                 </div>
 
 
