@@ -42,7 +42,7 @@ const ec2Form = {
     },
     content: {
         width: '30%',
-        height: '73%',
+        height: '85%',
         top: '50%',
         left: '50%',
         right: 'auto',
@@ -163,16 +163,17 @@ export default function Workspace() {
     const [subnet, setSubnet] = useState({
         idsub: "",
         vpc_name: "",
-        cidr_block: 0,
-        access: false
+        cidr_block: 0
     })
     const [ec2, setEc2] = useState({
         resource_name: '',
         ami: 'ami-04505e74c0741db8d',
         type: 't2.nano',
-        count: 1,
+        count: 4,
+        volume_size: 1,
+        volume_type: 'gp2',
         delete_on_termination: false,
-        vpc: ''
+        subnet_name: ''
     }
     );
 
@@ -431,6 +432,8 @@ export default function Workspace() {
                         <h1>Ami: <span>{ec2.ami}</span></h1>
                         <h1>Type: <span>{ec2.type}</span></h1>
                         <h1>Count: <span>{ec2.count}</span></h1>
+                        <h1>Size: <span>{ec2.volume_size} Gb</span></h1>
+                        <h1>Volume Type: <span>{ec2.volume_type}</span></h1>
                         <h1>Delete on Termination: <span>{ec2.delete_on_termination ? "True" : "False"}</span></h1>
 
                     </div>
@@ -477,7 +480,7 @@ export default function Workspace() {
 
                         <h1>Vpc Name: <span>{vpc.vpc_name}</span></h1>
                         <h1>Cidr Block: <span>{subnet.cidr_block}</span></h1>
-                        <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1>
+                        {/* <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1> */}
 
                     </div>
                     <button className="btn_Destory" onClick={() => DeleteSub()}>Excluir</button>
@@ -544,6 +547,26 @@ export default function Workspace() {
                             <option className='opt' value="2">2</option>
                             <option className='opt' value="3">3</option>
                         </select>
+                        <label htmlFor="ami_Sel" className='ami_Sel'>Size</label>
+                        <input
+                            value={ec2.volume_size}
+                            onChange={e => setEc2(prevState => ({
+                                ...prevState,
+                                volume_size: e.target.value
+                            }))}
+                            type="range" style={{color: "white"}}  className='input_Name'  min="4" max="16"/> 
+                            <span style={{color: "white"}}>{ec2.volume_size}</span>
+
+
+                        <label htmlFor="ami_Sel" className='ami_Sel'>Volume Type</label>
+                        <select value={ec2.volume_type} className='sel' name="Ami" id="ami_Sel" onChange={e => setEc2(prevState => ({
+                            ...prevState,
+                            volume_type: e.target.value
+
+                        }))}>
+                            <option className='opt' value="gp2">Gp2</option>
+                            <option className='opt' value="gp3">Gp3</option>
+                        </select>
 
                         <label className="ami_Sel fontSize">Deletar Memoria apos a destruição?</label>
                         <label className="switch">
@@ -562,15 +585,15 @@ export default function Workspace() {
 
                         </label>
 
-                        <label htmlFor="ami_Sel" className='ami_Sel'>Vpc</label>
-                        <select value={ec2.vpc} className='sel' name="Ami" id="ami_Sel" onChange={e => setEc2(prevState => ({
+                        <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
+                        <select value={ec2.subnet_name} className='sel' name="Ami" id="ami_Sel" onChange={e => setEc2(prevState => ({
                             ...prevState,
-                            vpc: e.target.value
+                            subnet_name: e.target.value
 
                         }))}>
-                            {listWS.map((vpc) => {
+                            {listSubnet.map((sub) => {
                                 return (
-                                    <option key={vpc.vpc_name} value={vpc.vpc_name}>
+                                    <option key={sub.idsub} value={vpc.vpc_name}>
                                         {vpc.vpc_name}
                                     </option>
                                 );
