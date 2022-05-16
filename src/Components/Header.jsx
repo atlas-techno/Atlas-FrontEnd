@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import Logo from "../Assets/img/Logo.svg";
-import logoutIcon from "../Assets/img/logout.png";
+import logoutIcon from "../Assets/img/logoutIcon.svg";
 import "../Assets/Css/HeaderStyle.css"
 import Pool from "../Utils/UserPool";
+import profileIconsvg from "../Assets/img/ProfileIcon.svg"
 
 
 export default function Header() {
@@ -14,21 +15,21 @@ export default function Header() {
 
         const user = Pool.getCurrentUser()
 
-        
+
 
         if (user) {
             user.signOut()
             localStorage.clear()
         }
         navigate("/")
-        
+
     }
 
-    const BackHome = () =>{
+    const BackHome = () => {
         navigate("/main")
     }
 
-    
+
 
     return (
         <>
@@ -36,7 +37,17 @@ export default function Header() {
                 <div className="Container_Header">
 
                     <img src={Logo} onClick={BackHome} alt="Foto de Perfil" className="PfPHeader" />
-                    <button onClick={Logout} className="btnLogoutHeader"><img src={logoutIcon} alt="Botão Logout" /> </button>
+
+                    <div class="dropdown">
+                        <button class="dropbtn"> <img src={profileIconsvg} className="iconProfile" alt="Icone Perfil" /> </button>
+                        <div class="dropdown-content">
+                            {/* <button onClick={Logout} className="btnLogoutHeader"> </button> */}
+                            <a onClick={() => navigate("/perfil")}>Meu Perfil</a>
+                            <a href="#" onClick={Logout} ><img className="logoutIcon" src={logoutIcon} alt="Botão Logout" /> Logout</a>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>

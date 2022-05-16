@@ -167,7 +167,7 @@ export default function Workspace() {
     })
     const [ec2, setEc2] = useState({
         resource_name: '',
-        ami: 'ami-04505e74c0741db8d',
+        ami: '  ',
         type: 't2.nano',
         count: 4,
         volume_size: 1,

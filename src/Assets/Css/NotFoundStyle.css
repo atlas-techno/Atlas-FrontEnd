@@ -29,6 +29,7 @@
     text-decoration: none;
     color: var(--roxoclaro2);
     font-size: 2rem;
+    cursor: pointer;
 }
 
 .BackLoginNF:hover{
