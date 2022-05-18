@@ -291,7 +291,7 @@ export default function Workspace() {
 
         setLoadingDe(true)
 
-        axios("http://localhost:8000/"+ UserPool.getCurrentUser().getUsername() + "/" + wsName + "/deploy")
+        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -318,7 +318,7 @@ export default function Workspace() {
 
 
 
-        axios("http://localhost:8000/"+ UserPool.getCurrentUser().getUsername() + "/" + wsName + "/destroy")
+        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -598,7 +598,7 @@ export default function Workspace() {
                             subnet_name: e.target.value
 
                         }))}>
-                            {listSubnet.map((sub,index) => {
+                            {listSubnet.map((sub, index) => {
                                 return (
                                     <option key={index} value={sub.resource_name}>
                                         {sub.resource_name}
@@ -864,12 +864,29 @@ export default function Workspace() {
                             <button className="BtnWK" onClick={() => OpenModal()} ><span>+</span> Adicionar Ec2</button>
 
                             <div className="ContainerViewrButtons">
-                                <button className="btn_Destory " onClick={() => destoryEC2()} >Destroy</button>
-                                <button className="btn_Viewr" onClick={() => deployEc2()} >Deploy</button>
+                                {
+                                    loadingD === true && <button className="btn_Destory disable" disabled onClick={() => destoryEC2()} >Destroy</button>
+                                }
+                                {
+                                    loadingD === false && <button className="btn_Destory " onClick={() => destoryEC2()} >Destroy</button>
+                                }
+                                {
+                                    loadingDe && <button className="btn_ViewrNoHover disable" disabled onClick={() => deployEc2()} >Deploy</button>
+                                }
+                                {
+                                    loadingDe === false && <button className="btn_Viewr" onClick={() => deployEc2()} >Deploy</button>
+                                }
                             </div>
 
                         </div>
+                        <div className="display">
 
+                            <div className="dialogue">
+                                <p>
+                                    Voce Precisa criar no minimo uma Vpc para efetuar o deploy
+                                </p>
+                            </div>
+                        </div>
 
 
 

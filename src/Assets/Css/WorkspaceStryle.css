@@ -268,7 +268,7 @@
 
 
   align-items: center;
-  min-height: 80vh;
+  min-height: 85vh;
   min-width: 100vh;
 
 }
@@ -278,8 +278,7 @@
   align-items: flex-start;
   height: 90%;
   width: 78%;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem
 }
 
 .containerManeger {

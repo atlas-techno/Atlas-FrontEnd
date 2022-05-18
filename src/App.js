@@ -5,6 +5,7 @@ import Cadastro from './Pages/Cadastro';
 import Main from "./Pages/Main";
 import NotFound from "./Pages/notFound";
 import Workspace from "./Pages/Workspace";
+import Perfil from './Pages/Perfil';
 
 function App() {
   
@@ -62,6 +63,7 @@ function App() {
           <Route path="/main" element={<Main/>}>
             </Route>
           <Route path="main/workspace" element={<Workspace />}/>
+          <Route path="/profile" element={<Perfil/>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
