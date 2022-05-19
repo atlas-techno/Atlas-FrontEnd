@@ -244,6 +244,7 @@ export default function Workspace() {
                 console.log(r)
                 setLoading(false)
                 setLoadingDe(false)
+
             })
             .catch((erro) => {
                 console.log(erro)
@@ -296,7 +297,7 @@ export default function Workspace() {
                 console.log(r)
                 setLoading(false)
                 setLoadingD(false)
-                setLoadingDe(false)
+
 
             })
             .catch((erro) => {
@@ -304,6 +305,7 @@ export default function Workspace() {
                 setLoadingD(false)
             })
         toast.success("Deploy feito com sucesso")
+        setLoadingD(false)
 
     }
 
@@ -459,13 +461,22 @@ export default function Workspace() {
                     <div className="CloseIconVpc">
                         <span onClick={() => CloseVpc()}>X</span>
                     </div>
-                    <div className="navNamesVpc">
+
+                    {
+                        listWS.filter(vpc => vpc.resource_name === listWS[indexEc2].resource_name).map((vpc, index) => {
+                            return (
+                                <div key={index} className="navNamesVpc">
+
+                                    <h1>Vpc Name: <span>{vpc.resource_name}</span></h1>
+                                    <h1>Cidr Block: <span>{vpc.cidr_block}</span></h1>
+                                </div>
+                            )
+                        }
+                        )
+                    }
 
 
-                        <h1>Vpc Name: <span>{vpc.vpc_name}</span></h1>
-                        <h1>Cidr Block: <span>{vpc.cidr_block}</span></h1>
 
-                    </div>
                     <button className="btn_Destory" onClick={() => DeleteVpc()}>Excluir</button>
                 </div>
 
@@ -481,18 +492,25 @@ export default function Workspace() {
                     <div className="CloseIconVpc">
                         <span onClick={() => CloseSub()}>X</span>
                     </div>
-                    <div className="navNamesSub">
+
+                    {
+                        listSubnet.filter(sub => sub.resource_name === listSubnet[indexEc2].resource_name).map((sub, index) => {
+                            return (
+                                <div key={index} className="navNamesSub">
 
 
-                        <h1>Resource Name: <span>{subnet.resource_name}</span></h1>
-                        <h1>Vpc Name: <span>{vpc.vpc_name}</span></h1>
-                        <h1>Cidr Block: <span>{subnet.cidr_block}</span></h1>
-                        {/* <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1> */}
+                                    <h1>Resource Name: <span>{sub.resource_name}</span></h1>
+                                    <h1>Cidr Block: <span>{sub.cidr_block}</span></h1>
+                                    {/* <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1> */}
 
-                    </div>
+                                </div>
+
+                            )
+                        })
+                    }
+
                     <button className="btn_Destory" onClick={() => DeleteSub()}>Excluir</button>
                 </div>
-
 
             </Modal>
             <Modal
@@ -871,22 +889,19 @@ export default function Workspace() {
                                     loadingD === false && <button className="btn_Destory " onClick={() => destoryEC2()} >Destroy</button>
                                 }
                                 {
-                                    loadingDe && <button className="btn_ViewrNoHover disable" disabled onClick={() => deployEc2()} >Deploy</button>
+                                    listWS.length === 0 && <button className="btn_ViewrNoHover disable" disabled onClick={() => deployEc2()} >Deploy</button>
                                 }
                                 {
-                                    loadingDe === false && <button className="btn_Viewr" onClick={() => deployEc2()} >Deploy</button>
+                                    listWS.length > 0 && <button className="btn_Viewr" onClick={() => deployEc2()} >Deploy</button>
                                 }
                             </div>
 
                         </div>
-                        <div className="display">
+                        {
 
-                            <div className="dialogue">
-                                <p>
-                                    Voce Precisa criar no minimo uma Vpc para efetuar o deploy
-                                </p>
-                            </div>
-                        </div>
+                            listWS.length === 0 && <div className="display"><div className="dialogue"><p>Voce Precisa criar no minimo uma Vpc para efetuar o deploy</p></div> </div>
+
+                        }
 
 
 
