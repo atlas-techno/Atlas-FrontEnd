@@ -169,7 +169,7 @@ export default function Workspace() {
         resource_name: '',
         ami: 'ami-04505e74c0741db8d',
         type: 't2.nano',
-        count: 4,
+        count: 1,
         volume_size: 4,
         volume_type: 'gp2',
         delete_on_termination: false,
@@ -215,7 +215,7 @@ export default function Workspace() {
             console.log(ec2)
             console.log(TandF)
 
-            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
+            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -239,7 +239,20 @@ export default function Workspace() {
 
         console.log(vpc)
 
-        axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
+        
+
+        // axios.post("https://api.atlas.senai.info/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
+        //     .then((r) => {
+        //         console.log(r)
+        //         setLoading(false)
+        //         setLoadingDe(false)
+
+        //     })
+        //     .catch((erro) => {
+        //         console.log(erro)
+        //         setLoading(false)
+        //     })
+        axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -270,7 +283,7 @@ export default function Workspace() {
 
             listSubnet.push(subnet)
 
-            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_subpub", subnet)
+            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_subpub", subnet)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -292,7 +305,7 @@ export default function Workspace() {
 
         setLoadingDe(true)
 
-        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/deploy")
+        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -320,7 +333,7 @@ export default function Workspace() {
 
 
 
-        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/destroy")
+        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
