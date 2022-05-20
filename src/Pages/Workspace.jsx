@@ -167,10 +167,10 @@ export default function Workspace() {
     })
     const [ec2, setEc2] = useState({
         resource_name: '',
-        ami: '  ',
+        ami: 'ami-04505e74c0741db8d',
         type: 't2.nano',
         count: 4,
-        volume_size: 1,
+        volume_size: 4,
         volume_type: 'gp2',
         delete_on_termination: false,
         subnet_name: ''
@@ -365,9 +365,10 @@ export default function Workspace() {
     function CloseVpc() {
         setModalVpc(false)
     }
-    function OpenSub() {
+    function OpenSub(e) {
         setModalSub(true)
-
+        setIndexEc2(e)
+        console.log(e)
     }
 
     function CloseSub() {
@@ -417,11 +418,7 @@ export default function Workspace() {
 
 
             <Header />
-            {/* <div className="ContainerTitle">
-                <h1>{location.state.name}</h1>
-                <h2>{location.state.region}</h2>
-
-            </div> */}
+            
             <Modal
                 isOpen={modal2IsOpen}
 
@@ -462,18 +459,13 @@ export default function Workspace() {
                         <span onClick={() => CloseVpc()}>X</span>
                     </div>
 
-                    {
-                        listWS.filter(vpc => vpc.resource_name === listWS[indexEc2].resource_name).map((vpc, index) => {
-                            return (
-                                <div key={index} className="navNamesVpc">
+                   
+                                <div className="navNamesVpc">
 
                                     <h1>Vpc Name: <span>{vpc.resource_name}</span></h1>
                                     <h1>Cidr Block: <span>{vpc.cidr_block}</span></h1>
                                 </div>
-                            )
-                        }
-                        )
-                    }
+                         
 
 
 
@@ -493,21 +485,17 @@ export default function Workspace() {
                         <span onClick={() => CloseSub()}>X</span>
                     </div>
 
-                    {
-                        listSubnet.filter(sub => sub.resource_name === listSubnet[indexEc2].resource_name).map((sub, index) => {
-                            return (
-                                <div key={index} className="navNamesSub">
+                    
+                                <div  className="navNamesSub">
 
 
-                                    <h1>Resource Name: <span>{sub.resource_name}</span></h1>
-                                    <h1>Cidr Block: <span>{sub.cidr_block}</span></h1>
+                                    <h1>Resource Name: <span>{subnet.resource_name}</span></h1>
+                                    <h1>Cidr Block: <span>{subnet.cidr_block}</span></h1>
                                     {/* <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1> */}
 
                                 </div>
 
-                            )
-                        })
-                    }
+                      
 
                     <button className="btn_Destory" onClick={() => DeleteSub()}>Excluir</button>
                 </div>
@@ -515,7 +503,7 @@ export default function Workspace() {
             </Modal>
             <Modal
                 isOpen={modalIsOpen}
-
+                     
                 onRequestClose={CloseModal}
                 style={ec2Form}
                 contentLabel="Example Modal"
@@ -821,7 +809,7 @@ export default function Workspace() {
                                                 }
                                                 return (
                                                     <div key={index} className="entireSubnet">
-                                                        <div onClick={() => OpenSub()} style={bg} className="Subnetblock">
+                                                        <div onClick={() => OpenSub(index)} style={bg} className="Subnetblock">
                                                             <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
                                                         </div>
                                                         <div style={bC} className="subnet">
