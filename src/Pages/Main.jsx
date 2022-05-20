@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 import UserPool from "../Utils/UserPool";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import { parseJwt } from "../Services/auth.js";
+import { toast } from "aws-amplify";
 
 
 Modal.setAppElement('#root')
@@ -92,11 +93,12 @@ export default function MainPage() {
     }
 
     function CreateWS() {
-        let config = {
-            headers: {
-              
-            }
-          }
+        for (let i = 0; i < listworkspaces.length; i++) {
+            if (nomeWS === listworkspaces[i].nameworkspace) {
+                toast.error("Sua Workspace tem o mesmo nome");
+            }  
+            
+        }
 
         axios.post("https://api.atlas.senai.info/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
             "name" : nomeWS,

@@ -166,7 +166,24 @@
     margin-left: 15%;
     height: 25%;
     width: 25%;
+
+    /* animation: Rotation 30s infinite; */
 }
+
+/* @keyframes Rotation {
+    0% {
+        transform: rotateY(0);;
+         
+      }
+    
+
+      
+      
+      100% {
+        transform: rotateY(-360deg);
+        
+      }
+} */
 
 .linkBtnLogin{
     text-decoration: none;
