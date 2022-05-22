@@ -195,6 +195,15 @@ export default function Workspace() {
     const [listSubnet, setListSubnet] = useState([])
 
 
+    function ListarVpcs() {
+        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName + "query_vpcs")
+        .then((r) => {
+            console.log(r.data)
+            setListWS(r.data)
+        })
+    }
+
+
 
     function createEc2(event) {
         // setLoading(true)
@@ -231,10 +240,10 @@ export default function Workspace() {
             setModalIsOpen(false)
         }
     }
-    function createVpc(event) {
+    function createVpc() {
         // setLoading(true)
-        event.preventDefault()
-        listWS.push(vpc)
+        // event.preventDefault()
+        // listWS.push(vpc)
 
 
         console.log(vpc)
