@@ -196,7 +196,7 @@ export default function Workspace() {
 
 
     function ListarVpcs() {
-        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName + "query_vpcs")
+        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName + "/query_vpcs")
         .then((r) => {
             console.log(r.data)
             setListWS(r.data)

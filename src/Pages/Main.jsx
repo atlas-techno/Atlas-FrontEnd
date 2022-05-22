@@ -75,10 +75,10 @@ export default function MainPage() {
     }
 
     function GoWS(WK) {
-        console.log(WK.idworkspace)
+        // console.log(WK.idworkspace)
 
 
-        var selectedWk = listworkspaces.filter((w) =>  w.idworkspace == WK.idworkspace)
+        var selectedWk = listworkspaces.filter((w) =>  w.name == WK.name)
 
         
         console.log(selectedWk)
@@ -88,7 +88,7 @@ export default function MainPage() {
 
         
 
-        navigate("workspace",{state: {name: selectedWk[0].nameworkspace,region: selectedWk[0].region}})
+        navigate("workspace",{state: {name: selectedWk[0].name,region: selectedWk[0].region}})
     }
 
 
@@ -173,7 +173,7 @@ export default function MainPage() {
 
                                 <div onClick={() => GoWS(WK)} className="containerWS" key={WK.idworkspace}>
 
-                                    <h2    id="h2Name">{WK.nameworkspace}</h2>
+                                    <h2    id="h2Name">{WK.name}</h2>
                                     <span  id="SpanRegion">{WK.region}</span>
 
                                 </div>
