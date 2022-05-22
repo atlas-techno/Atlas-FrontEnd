@@ -201,6 +201,9 @@ export default function Workspace() {
             console.log(r.data)
             setListWS(r.data)
         })
+        .catch((err)=>{
+            console.error(err)
+        })
     }
 
 
@@ -420,6 +423,10 @@ export default function Workspace() {
         setModal4IsOpen(false)
     }
 
+    useEffect(() => {
+      ListarVpcs()
+    }, [])
+    
 
 
     return (

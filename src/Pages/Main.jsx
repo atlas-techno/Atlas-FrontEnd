@@ -98,6 +98,9 @@ export default function MainPage() {
             console.log(r)
             setListworkspaces(r.data)
         })
+        .catch((err)=>{
+            console.error(err)
+        })
     }
 
     function CreateWS() {
