@@ -34,28 +34,28 @@ const customStyles = {
 
 export default function MainPage() {
 
+    
+    // {
+    //     "user": "usertest",
+    //     "idworkspace": "1",
+    //     "nameworkspace": "teste1",
+    //     "region": "us-east-01"
+    // },
+    // {
+    //     "user": "usertest",
+    //     "idworkspace": "2",
+    //     "nameworkspace": "teste2",
+    //     "region": "us-east-01"
+    // },
+    // {
+    //     "user": "usertest",
+    //     "idworkspace": "3",
+    //     "nameworkspace": "teste3",
+    //     "region": "us-east-01"
+    // }
 
-    const [listworkspaces, setListworkspaces] = useState([
-        {
-            "user": "usertest",
-            "idworkspace": "1",
-            "nameworkspace": "teste1",
-            "region": "us-east-01"
-        },
-        {
-            "user": "usertest",
-            "idworkspace": "2",
-            "nameworkspace": "teste2",
-            "region": "us-east-01"
-        },
-        {
-            "user": "usertest",
-            "idworkspace": "3",
-            "nameworkspace": "teste3",
-            "region": "us-east-01"
-        }
 
-    ])
+    const [listworkspaces, setListworkspaces] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [nomeWS, setNomeWS] = useState("")
     const [regionWS, setRegionWS] = useState("us-east-1")
@@ -91,12 +91,17 @@ export default function MainPage() {
         navigate("workspace",{state: {name: selectedWk[0].nameworkspace,region: selectedWk[0].region}})
     }
 
+
+    function ListWorkspaces(){
+        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        .then((r) => {
+            console.log(r)
+            setListworkspaces(r)
+        })
+    }
+
     function CreateWS() {
-        let config = {
-            headers: {
-              
-            }
-          }
+        
 
         axios.post("http://localhost:8000/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
             "name" : nomeWS,
@@ -114,7 +119,7 @@ export default function MainPage() {
     }
 
     useEffect(() => {
-       console.log( UserPool.getCurrentUser().getUsername())
+       ListWorkspaces()
     }, [])
 
     return (
