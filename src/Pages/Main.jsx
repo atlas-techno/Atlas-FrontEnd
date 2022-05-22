@@ -96,7 +96,7 @@ export default function MainPage() {
         axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
         .then((r) => {
             console.log(r)
-            setListworkspaces(r)
+            setListworkspaces(r.data)
         })
     }
 
