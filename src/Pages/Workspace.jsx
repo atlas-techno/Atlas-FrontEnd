@@ -169,7 +169,7 @@ export default function Workspace() {
         resource_name: '',
         ami: 'ami-04505e74c0741db8d',
         type: 't2.nano',
-        count: 4,
+        count: 1,
         volume_size: 4,
         volume_type: 'gp2',
         delete_on_termination: false,
