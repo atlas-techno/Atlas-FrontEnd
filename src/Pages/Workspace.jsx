@@ -242,10 +242,10 @@ export default function Workspace() {
             setModalIsOpen(false)
         }
     }
-    function createVpc(event) {
+    function createVpc() {
         // setLoading(true)
-        event.preventDefault()
-        listWS.push(vpc)
+        // event.preventDefault()
+        // listWS.push(vpc)
 
 
         console.log(vpc)

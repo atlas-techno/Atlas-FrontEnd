@@ -35,28 +35,28 @@ const customStyles = {
 
 export default function MainPage() {
 
+    
+    // {
+    //     "user": "usertest",
+    //     "idworkspace": "1",
+    //     "nameworkspace": "teste1",
+    //     "region": "us-east-01"
+    // },
+    // {
+    //     "user": "usertest",
+    //     "idworkspace": "2",
+    //     "nameworkspace": "teste2",
+    //     "region": "us-east-01"
+    // },
+    // {
+    //     "user": "usertest",
+    //     "idworkspace": "3",
+    //     "nameworkspace": "teste3",
+    //     "region": "us-east-01"
+    // }
 
-    const [listworkspaces, setListworkspaces] = useState([
-        {
-            "user": "usertest",
-            "idworkspace": "1",
-            "nameworkspace": "teste1",
-            "region": "us-east-01"
-        },
-        {
-            "user": "usertest",
-            "idworkspace": "2",
-            "nameworkspace": "teste2",
-            "region": "us-east-01"
-        },
-        {
-            "user": "usertest",
-            "idworkspace": "3",
-            "nameworkspace": "teste3",
-            "region": "us-east-01"
-        }
 
-    ])
+    const [listworkspaces, setListworkspaces] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [nomeWS, setNomeWS] = useState("")
     const [regionWS, setRegionWS] = useState("us-east-1")
@@ -76,10 +76,10 @@ export default function MainPage() {
     }
 
     function GoWS(WK) {
-        console.log(WK.idworkspace)
+        // console.log(WK.idworkspace)
 
 
-        var selectedWk = listworkspaces.filter((w) =>  w.idworkspace == WK.idworkspace)
+        var selectedWk = listworkspaces.filter((w) =>  w.name == WK.name)
 
         
         console.log(selectedWk)
@@ -89,7 +89,19 @@ export default function MainPage() {
 
         
 
-        navigate("workspace",{state: {name: selectedWk[0].nameworkspace,region: selectedWk[0].region}})
+        navigate("workspace",{state: {name: selectedWk[0].name,region: selectedWk[0].region}})
+    }
+
+
+    function ListWorkspaces(){
+        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        .then((r) => {
+            console.log(r)
+            setListworkspaces(r.data)
+        })
+        .catch((err)=>{
+            console.error(err)
+        })
     }
 
     function CreateWS() {
@@ -116,7 +128,7 @@ export default function MainPage() {
     }
 
     useEffect(() => {
-       console.log( UserPool.getCurrentUser().getUsername())
+       ListWorkspaces()
     }, [])
 
     return (
@@ -167,7 +179,7 @@ export default function MainPage() {
 
                                 <div onClick={() => GoWS(WK)} className="containerWS" key={WK.idworkspace}>
 
-                                    <h2    id="h2Name">{WK.nameworkspace}</h2>
+                                    <h2    id="h2Name">{WK.name}</h2>
                                     <span  id="SpanRegion">{WK.region}</span>
 
                                 </div>
