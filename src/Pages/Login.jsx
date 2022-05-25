@@ -6,6 +6,7 @@ import "../Assets/Css/LoginStyle.css"
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import { parseJwt } from "../Services/auth";
 // import {AccountContext} from "../Components/Account";
 
 
@@ -45,6 +46,13 @@ export default function Login() {
 
         user.authenticateUser(authDetails, {
             onSuccess: (data) => {
+                
+
+                // var Parse = parseJwt(accessToken)
+                // console.log(Parse)
+
+                
+
                 setLoading(false)
                 localStorage.setItem('usuario-login', data.getIdToken().getJwtToken());
 

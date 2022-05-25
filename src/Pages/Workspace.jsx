@@ -175,7 +175,9 @@ export default function Workspace() {
         delete_on_termination: false,
         subnet_name: ''
     }
-    );
+    );  
+
+    const [nomeVpcSub, setNomeVpcSub] = useState("")
 
 
 
@@ -195,18 +197,6 @@ export default function Workspace() {
     const [listSubnet, setListSubnet] = useState([])
 
 
-    function ListarVpcs() {
-        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName + "/query_vpcs")
-        .then((r) => {
-            console.log(r.data)
-            setListWS(r.data)
-        })
-        .catch((err)=>{
-            console.error(err)
-        })
-    }
-
-
     function createEc2(event) {
         // setLoading(true)
         event.preventDefault()
@@ -220,13 +210,11 @@ export default function Workspace() {
             ec2.subnet_name = subnet.resource_name
             console.log(ec2)
 
-            listEc2.push(ec2)
-
             ec2.delete_on_termination = TandF
             console.log(ec2)
             console.log(TandF)
 
-            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
+            axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -243,32 +231,15 @@ export default function Workspace() {
         }
     }
     function createVpc() {
-        // setLoading(true)
-        // event.preventDefault()
-        // listWS.push(vpc)
-
-
         console.log(vpc)
-
-        
-
         // axios.post("https://api.atlas.senai.info/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
-        //     .then((r) => {
-        //         console.log(r)
-        //         setLoading(false)
-        //         setLoadingDe(false)
-
-        //     })
-        //     .catch((erro) => {
-        //         console.log(erro)
-        //         setLoading(false)
-        //     })
-        axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
+        axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
             .then((r) => {
                 console.log(r)
                 setLoading(false)
                 setLoadingDe(false)
-
+                ListarVpcs()
+                
             })
             .catch((erro) => {
                 console.log(erro)
@@ -287,25 +258,25 @@ export default function Workspace() {
         }
 
         if (listWS.length > 0) {
-            subnet.access = TandF
-            subnet.vpc_name = vpc.resource_name
+            // subnet.access = TandF
+            console.log(nomeVpcSub)
+            subnet.vpc_name = nomeVpcSub
 
             console.log(subnet)
 
-            listSubnet.push(subnet)
-
-            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_subpub", subnet)
+            axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_subpub", subnet)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
                     setLoadingDe(false)
+                    ListarSubs()
                 })
                 .catch((erro) => {
                     console.log(erro)
                     setLoading(false)
                 })
-            console.log(subnet)
-            console.log(listSubnet)
+            // console.log(subnet)
+            // console.log(listSubnet)
             setModal4IsOpen(false)
             setTandF(false)
 
@@ -316,11 +287,12 @@ export default function Workspace() {
 
         setLoadingDe(true)
 
-        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/deploy")
+        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
                 setLoadingD(false)
+                toast.success("Deploy feito com sucesso")
 
 
             })
@@ -328,7 +300,6 @@ export default function Workspace() {
                 console.log(erro)
                 setLoadingD(false)
             })
-        toast.success("Deploy feito com sucesso")
         setLoadingD(false)
 
     }
@@ -344,7 +315,7 @@ export default function Workspace() {
 
 
 
-        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/destroy")
+        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -435,11 +406,55 @@ export default function Workspace() {
         setModal4IsOpen(false)
     }
 
+    function ListarVpcs() {
+        axios("http://192.168.5.22:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName +"/query_vpcs")
+        .then((r) => {
+            console.log(r.data)
+            setListWS(r.data)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
     useEffect(() => {
         ListarVpcs()
     }, [])
 
+    
 
+    function ListarSubs() {
+        
+        axios("http://192.168.5.22:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName +"/"+ vpc.resource_name +"/query_subnets")
+        .then((r) => {
+            console.log(r)
+            setListSubnet(r.data)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
+    useEffect(() => {
+        console.log(listWS)
+        ListarSubs()
+        
+    }, [listWS])
+
+
+    // useEffect(() => {
+    //     function ListarEc2s() {
+    //         axios("http://192.168.5.22:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName +"/"+subnet.vpc_name+"/" +ec2.subnet_name +"/query_instances")
+    //         .then((r) => {
+    //             console.log(r.data)
+    //             setListEc2(r.data)
+    //         })
+    //         .catch((err)=>{
+    //             console.error(err)
+    //         })
+    //     }
+    //     ListarEc2s()
+    // }, [wsName, ec2.subnet_name, subnet.vpc_name])
+
+    // http://192.168.5.22:8000/
     return (
         <>
 
@@ -489,8 +504,8 @@ export default function Workspace() {
                    
                                 <div className="navNamesVpc">
 
-                                    <h1>Vpc Name: <span>{vpc.resource_name}</span></h1>
-                                    <h1>Cidr Block: <span>{vpc.cidr_block}</span></h1>
+                                    {/* <h1>Vpc Name: <span>{listWS.length > 0 && listWS[indexEc2].name}</span></h1>
+                                    <h1>Cidr Block: <span>{listWS.length > 0 && listWS[indexEc2].cidr_block}</span></h1> */}
                                 </div>
                          
 
@@ -626,7 +641,7 @@ export default function Workspace() {
                         </label>
 
                         <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
-                        <select value={ec2.subnet_name} className='sel' name="Ami" id="ami_Sel" onChange={e => setEc2(prevState => ({
+                        {/* <select value={ec2.subnet_name} className='sel' name="Ami" id="ami_Sel" onChange={e => setEc2(prevState => ({
                             ...prevState,
                             subnet_name: e.target.value
 
@@ -639,7 +654,7 @@ export default function Workspace() {
                                 );
                             })}
 
-                        </select>
+                        </select> */}
 
 
 
@@ -689,7 +704,7 @@ export default function Workspace() {
                         </select>
 
                         {
-                            loading === true && <button type='submit' disabled className="btn_FormD disable" >Create</button>
+                            loading === true && <button type='button' disabled className="btn_FormD disable" >Create</button>
                         }
 
                         {
@@ -721,18 +736,17 @@ export default function Workspace() {
                             type="text" className='input_Name'
                         />
                         <label htmlFor="ami_Sel" className='ami_Sel'>Vpc Name</label>
-                        <select value={subnet.vpc_name} className='sel' name="vpc" id="ami_Sel" onChange={e => setSubnet(prevState => ({
+
+                        {/* e => setSubnet(prevState => ({
                             ...prevState,
                             vpc_name: e.target.value
 
-                        }))}>
-
-
-                            {/* <option value={vpc.resource_name}>{vpc.re}</option> */}
-                            {listWS.map((vpc, index) => {
+                        }) */}
+                        <select value={nomeVpcSub} className='sel' id="ami_Sel" onChange={(e) => setNomeVpcSub(e.target.value)}>
+                            {listWS.length != null && listWS.map((vpc, index) => {
                                 return (
-                                    <option key={index} value={vpc.resource_name}>
-                                        {vpc.resource_name}
+                                    <option key={index} value={vpc.name}>
+                                        {vpc.name}
                                     </option>
                                 );
                             })}
@@ -835,7 +849,7 @@ export default function Workspace() {
                                                     backgroundColor: sub.access ? '#7646a6' : '#C285FF'
                                                 }
                                                 return (
-                                                    <div key={index} className="entireSubnet">
+                                                    <div key={sub._id} className="entireSubnet">
                                                         <div onClick={() => OpenSub(index)} style={bg} className="Subnetblock">
                                                             <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
                                                         </div>

@@ -132,7 +132,7 @@
   border-bottom-left-radius: 10px;
   border-top-right-radius: 10px;
   height: 20rem;
-  min-width: 40rem;
+  min-width: 20rem;
   padding: 1rem;
   /* width: 15rem; */
 }
@@ -349,7 +349,7 @@
 }
 
 .EntireVpc {
-  min-width: 20vw;
+  min-width: 10vw;
   max-width: 50vw;
 }
 

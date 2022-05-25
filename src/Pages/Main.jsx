@@ -94,7 +94,7 @@ export default function MainPage() {
 
 
     function ListWorkspaces(){
-        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        axios("http://192.168.5.22:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -105,14 +105,14 @@ export default function MainPage() {
     }
 
     function CreateWS() {
-        for (let i = 0; i < listworkspaces.length; i++) {
-            if (nomeWS === listworkspaces[i].nameworkspace) {
-                toast.error("Sua Workspace tem o mesmo nome");
-            }  
+        // for (let i = 0; i < listworkspaces.length; i++) {
+        //     if (nomeWS === listworkspaces[i].nameworkspace) {
+        //         toast.error("Sua Workspace tem o mesmo nome");
+        //     }  
             
-        }
+        // }
 
-        axios.post("https://api.atlas.senai.info/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
+        axios.post("http://192.168.5.22:8000/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
             "name" : nomeWS,
             "region" : regionWS
         } ).then((r) => {
