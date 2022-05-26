@@ -418,6 +418,7 @@ export default function Workspace() {
     }
     useEffect(() => {
         ListarVpcs()
+        ListarSubs()
     }, [])
 
     
@@ -433,11 +434,11 @@ export default function Workspace() {
             console.log(err)
         })
     }
-    useEffect(() => {
-        console.log(listWS)
-        ListarSubs()
+    // useEffect(() => {
+    //     console.log(listWS)
+    //     ListarSubs()
         
-    }, [listWS])
+    // }, [listWS])
 
 
     // useEffect(() => {

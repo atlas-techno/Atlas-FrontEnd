@@ -1,4 +1,5 @@
 import logo from "../Assets/img/Logo.svg";
+import logoM from "../Assets/img/LogoMobile.svg";
 import React, { useState, useEffect, useContext } from "react"
 import UserPool from "../Utils/UserPool";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
@@ -20,6 +21,7 @@ export default function Login() {
     // const { authenticate } = useContext(AccountContext);
 
     const navigate = useNavigate()
+
 
 
     const EfetuarLogin = (e) => {
@@ -46,21 +48,29 @@ export default function Login() {
 
         user.authenticateUser(authDetails, {
             onSuccess: (data) => {
-                
+                user.getUserAttributes((err, attributes) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log(attributes)
+                    }
+                })
 
-                // var Parse = parseJwt(accessToken)
-                // console.log(Parse)
 
-                
 
-                setLoading(false)
+                user.getSession((err, session) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        sessionStorage.setItem('user-session', session.idToken.jwtToken)
+                    }
+                })
+
                 localStorage.setItem('usuario-login', data.getIdToken().getJwtToken());
-
                 navigate("/main")
-                
                 // toast.success("Login efetuado com sucesso!", {autoClose: 1000})
-                    
-                
+                setLoading(false)
+
             },
             onFailure: (err) => {
                 setLoading(false)
@@ -76,13 +86,6 @@ export default function Login() {
         });
 
 
-        
-
-        
-
-
-        
-
     }
 
     // useEffect(() => {
@@ -92,10 +95,16 @@ export default function Login() {
     return (
         <div>
             <main className="mainContainerLogin" >
-                <img src={logo} alt="" />
+                <img src={logo} className="imgLogo" alt="" />
                 <div className="BgMainLogin">
+                    {/* <div className="containerHeaderMobile">
+
+                    </div> */}
+                        <img src={logo} className="LogoMobile" alt="" />
+                        <h1 className="H1Mobile">Bem Vindo ao Atlas</h1>
                     <form className="FormContainerLogin" >
                         <div className="containerForm">
+
                             <h1 className="h1Login" >Login</h1>
 
                             <div className="ContainerInputsLogin">

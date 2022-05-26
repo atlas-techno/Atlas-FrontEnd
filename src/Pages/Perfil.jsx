@@ -14,17 +14,30 @@ export default function Perfil() {
 
     var parseToken = parseJwt(token)
 
+    
+
     function SubmitForm(event) {
         event.preventDefault()
         
-        user.authenticateUser()
+        
         
         user.changePassword(oldPassword, newPassword, (err, result) => {
-            if(err) console.log(err);
-            console.log(result);
+            if (err) {
+                console.log(err)
+            } else {
+                console.log(result)
+            }
         })
 
     }
+
+    // user.getUserAttributes((err, attributes) => {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         console.log(attributes)
+    //     }
+    // })
 
     // console.log(user)
     // useEffect(() => {
