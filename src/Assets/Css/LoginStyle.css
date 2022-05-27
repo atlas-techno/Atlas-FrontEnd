@@ -472,7 +472,7 @@
     }
 
     .linktoCadastro:hover {
-
+        
         text-decoration: underline;
     }
 
@@ -503,3 +503,24 @@
 
 
 }
+
+@media only screen and ( max-width: 1366px) and (max-height: 768px){
+    .containerForm{
+        padding: 3rem;
+        font-size: 0.7rem;
+    }
+
+    .FormContainerLogin{
+        width: 54%;
+    }
+
+    .BtnLogin{
+        font-size: 1.5rem;
+        height: 3.5rem;
+    }
+
+    .ContainerNaoTemConta{
+        font-size: 1.1rem;
+    }
+}   
+    

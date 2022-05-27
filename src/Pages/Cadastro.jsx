@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import BackBtn from "../Assets/img/BackBtn.svg";
 
 
 export default function Cadastrar() {
@@ -73,7 +74,12 @@ export default function Cadastrar() {
             <ToastContainer/>
             <div className="ContainerSignup">
                 <form onSubmit={Cadastrar} className="FormSingup">
+                    <div className="contBtnBack">
+
+                        <Link to="/" className="VoltarCadastroMobile"><img src={BackBtn} className="backBtn" alt="Botão para voltar a tela de login" /></Link>
+                    </div>
                     <div className="ContainerInputs1">
+
                         <Link to="/" className="VoltarCadastro">Voltar</Link>
                         <h1 >Cadastro</h1>
                         <label htmlFor="Name">Nome Completo</label>

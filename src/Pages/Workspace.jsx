@@ -162,7 +162,7 @@ export default function Workspace() {
     })
     const [subnet, setSubnet] = useState({
         resource_name: "",
-        vpc_name: "",
+        vpc_name: "Teste",
         cidr_block: 0
     })
     const [ec2, setEc2] = useState({
@@ -175,7 +175,7 @@ export default function Workspace() {
         delete_on_termination: false,
         subnet_name: ''
     }
-    );  
+    );
 
     const [nomeVpcSub, setNomeVpcSub] = useState("")
 
@@ -207,12 +207,12 @@ export default function Workspace() {
         }
 
         if (listSubnet.length > 0) {
-            ec2.subnet_name = subnet.resource_name
-            console.log(ec2)
+            // ec2.subnet_name = subnet.resource_name
+            // console.log(ec2)
 
             ec2.delete_on_termination = TandF
             console.log(ec2)
-            console.log(TandF)
+            // console.log(TandF)
 
             axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
                 .then((r) => {
@@ -226,7 +226,7 @@ export default function Workspace() {
                 })
 
 
-            console.log(listEc2)
+            // console.log(listEc2)
             setModalIsOpen(false)
         }
     }
@@ -239,7 +239,7 @@ export default function Workspace() {
                 setLoading(false)
                 setLoadingDe(false)
                 ListarVpcs()
-                
+
             })
             .catch((erro) => {
                 console.log(erro)
@@ -259,10 +259,10 @@ export default function Workspace() {
 
         if (listWS.length > 0) {
             // subnet.access = TandF
-            console.log(nomeVpcSub)
-            subnet.vpc_name = nomeVpcSub
-
             console.log(subnet)
+            // subnet.vpc_name = nomeVpcSub
+
+            // console.log(subnet)
 
             axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_subpub", subnet)
                 .then((r) => {
@@ -407,51 +407,53 @@ export default function Workspace() {
     }
 
     function ListarVpcs() {
-        axios("http://192.168.5.22:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName +"/query_vpcs")
-        .then((r) => {
-            console.log(r.data)
-            setListWS(r.data)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/query_vpcs")
+            .then((r) => {
+                console.log(r.data)
+                setListWS(r.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
     useEffect(() => {
         ListarVpcs()
+        ListarEc2s()
         ListarSubs()
     }, [])
 
-    
+
 
     function ListarSubs() {
-        
-        axios("http://192.168.5.22:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName +"/"+ vpc.resource_name +"/query_subnets")
-        .then((r) => {
-            console.log(r)
-            setListSubnet(r.data)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+
+        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/" + "Teste" + "/query_subnets")
+            .then((r) => {
+                console.log(r)
+                setListSubnet(r.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
     // useEffect(() => {
     //     console.log(listWS)
     //     ListarSubs()
-        
+
     // }, [listWS])
+    function ListarEc2s() {
+        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/" + "Teste" + "/" + "testeSub1" + "/query_instances")
+            .then((r) => {
+                console.log(r.data)
+                setListEc2(r.data)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+    }
 
 
     // useEffect(() => {
-    //     function ListarEc2s() {
-    //         axios("http://192.168.5.22:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName +"/"+subnet.vpc_name+"/" +ec2.subnet_name +"/query_instances")
-    //         .then((r) => {
-    //             console.log(r.data)
-    //             setListEc2(r.data)
-    //         })
-    //         .catch((err)=>{
-    //             console.error(err)
-    //         })
-    //     }
+    //     
     //     ListarEc2s()
     // }, [wsName, ec2.subnet_name, subnet.vpc_name])
 
@@ -461,7 +463,7 @@ export default function Workspace() {
 
 
             <Header />
-            
+
             <Modal
                 isOpen={modal2IsOpen}
 
@@ -502,13 +504,13 @@ export default function Workspace() {
                         <span onClick={() => CloseVpc()}>X</span>
                     </div>
 
-                   
-                                <div className="navNamesVpc">
 
-                                    {/* <h1>Vpc Name: <span>{listWS.length > 0 && listWS[indexEc2].name}</span></h1>
-                                    <h1>Cidr Block: <span>{listWS.length > 0 && listWS[indexEc2].cidr_block}</span></h1> */}
-                                </div>
-                         
+                    <div className="navNamesVpc">
+
+                        <h1>Vpc Name: <span>{listWS.length > 0 && listWS[indexEc2].name}</span></h1>
+                                    <h1>Cidr Block: <span>{listWS.length > 0 && listWS[indexEc2].cidr_block}</span></h1>
+                    </div>
+
 
 
 
@@ -528,17 +530,17 @@ export default function Workspace() {
                         <span onClick={() => CloseSub()}>X</span>
                     </div>
 
-                    
-                                <div  className="navNamesSub">
+
+                    <div className="navNamesSub">
 
 
-                                    <h1>Resource Name: <span>{subnet.resource_name}</span></h1>
-                                    <h1>Cidr Block: <span>{subnet.cidr_block}</span></h1>
-                                    {/* <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1> */}
+                        <h1>Resource Name: <span>{subnet.resource_name}</span></h1>
+                        <h1>Cidr Block: <span>{subnet.cidr_block}</span></h1>
+                        {/* <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1> */}
 
-                                </div>
+                    </div>
 
-                      
+
 
                     <button className="btn_Destory" onClick={() => DeleteSub()}>Excluir</button>
                 </div>
@@ -546,7 +548,7 @@ export default function Workspace() {
             </Modal>
             <Modal
                 isOpen={modalIsOpen}
-                     
+
                 onRequestClose={CloseModal}
                 style={ec2Form}
                 contentLabel="Example Modal"
@@ -647,6 +649,8 @@ export default function Workspace() {
                             subnet_name: e.target.value
 
                         }))}>
+
+                            <option className='opt' value="testeSub1">testeSub1</option>
                             {listSubnet.map((sub, index) => {
                                 return (
                                     <option key={index} value={sub.resource_name}>
@@ -656,6 +660,14 @@ export default function Workspace() {
                             })}
 
                         </select> */}
+
+                        <input
+                            value={ec2.subnet_name}
+                            onChange={e => setEc2(prevState => ({
+                                ...prevState,
+                                subnet_name: e.target.value
+                            }))}
+                            type="text" className='input_Name' />
 
 
 
@@ -743,8 +755,14 @@ export default function Workspace() {
                             vpc_name: e.target.value
 
                         }) */}
-                        <select value={nomeVpcSub} className='sel' id="ami_Sel" onChange={(e) => setNomeVpcSub(e.target.value)}>
-                            {listWS.length != null && listWS.map((vpc, index) => {
+
+                        {/* listWS.length != null && */}
+                        {/* <select value={nomeVpcSub} className='sel' id="ami_Sel" onChange={e => setNomeVpcSub(e.target.value)}>
+
+                            <option  value="Teste">
+                                Teste
+                            </option>
+                            {listWS.map((vpc, index) => {
                                 return (
                                     <option key={index} value={vpc.name}>
                                         {vpc.name}
@@ -752,7 +770,16 @@ export default function Workspace() {
                                 );
                             })}
 
-                        </select>
+                        </select> */}
+
+                        <input
+                            value={subnet.vpc_name}
+                            onChange={e => setSubnet(prevState => ({
+                                ...prevState,
+                                vpc_name: e.target.value
+                            }))}
+                            type="text" className='input_Name'
+                        />
 
 
                         <label htmlFor="ami_Sel" className='ami_Sel'>Cidr Block</label>
@@ -842,19 +869,19 @@ export default function Workspace() {
                                         {
                                             listSubnet.map((sub, index) => {
 
-                                                let bC = {
-                                                    borderColor: sub.access ? '#7646a6' : '#C285FF'
-                                                };
+                                                // let bC = {
+                                                //     borderColor: sub.access ? '#7646a6' : '#C285FF'
+                                                // };
 
-                                                let bg = {
-                                                    backgroundColor: sub.access ? '#7646a6' : '#C285FF'
-                                                }
+                                                // let bg = {
+                                                //     backgroundColor: sub.access ? '#7646a6' : '#C285FF'
+                                                // }
                                                 return (
-                                                    <div key={sub._id} className="entireSubnet">
-                                                        <div onClick={() => OpenSub(index)} style={bg} className="Subnetblock">
+                                                    <div key={index} className="entireSubnet">
+                                                        <div onClick={() => OpenSub(index)} className="Subnetblock">
                                                             <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
                                                         </div>
-                                                        <div style={bC} className="subnet">
+                                                        <div className="subnet">
                                                             {listEc2.map((ec2, index) =>
                                                             (
                                                                 <div key={index} className="ContainerEc2Count">
