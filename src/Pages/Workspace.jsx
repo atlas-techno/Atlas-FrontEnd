@@ -11,6 +11,7 @@ import CadAberto from "../Assets/img/lock-open-solid.svg";
 import Cad from "../Assets/img/lock-solid.svg";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
+import { db } from "../Services/firebaseConfig";
 
 
 
@@ -136,26 +137,6 @@ export default function Workspace() {
     const [modalSub, setModalSub] = useState(false)
     const [indexEc2, setIndexEc2] = useState(0)
 
-    // const [element, setElement] = useState({
-    //     idVpc: '',
-    //     vpc_name: '',
-    //     cidr_block: 0,
-    //     subnets: [{
-    //         idSub: '',
-    //         vpc_name: '',
-    //         cidr_block: 0,
-    //         access: false,
-    //         ec2s: [{
-    //             resource_name: '',
-    //             ami: '',
-    //             type: '',
-    //             count: 1,
-    //             tag_name: '',
-    //             delete_on_termination: false,
-
-    //         }]
-    //     }]
-    // })
     const [vpc, setVpc] = useState({
         resource_name: '',
         cidr_block: 0
@@ -177,9 +158,6 @@ export default function Workspace() {
     }
     );
 
-
-
-
     const [loading, setLoading] = useState(false)
     const [loadingD, setLoadingD] = useState(true)
     const [loadingDe, setLoadingDe] = useState(true)
@@ -194,7 +172,6 @@ export default function Workspace() {
     const [listEc2, setListEc2] = useState([])
     const [listSubnet, setListSubnet] = useState([])
 
-
     function ListarVpcs() {
         axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/"+ wsName + "/query_vpcs")
         .then((r) => {
@@ -205,8 +182,6 @@ export default function Workspace() {
             console.error(err)
         })
     }
-
-
 
     function createEc2(event) {
         // setLoading(true)
@@ -423,9 +398,12 @@ export default function Workspace() {
         setModal4IsOpen(false)
     }
 
-    useEffect(() => {
-      ListarVpcs()
-    }, [])
+    // useEffect(() => {
+    //   ListarVpcs()
+    // }, [])
+    // useEffect(() => {
+    //   ListarVpcs()
+    // }, [createVpc()])
     
 
 

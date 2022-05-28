@@ -7,6 +7,18 @@ import Modal from 'react-modal';
 import UserPool from "../Utils/UserPool";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import { parseJwt } from "../Services/auth.js";
+import { db } from "../Services/firebaseConfig";
+import {
+    collection,
+    getDocs,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    doc,
+    query,
+    where
+} from "firebase/firestore";
+import { async } from "@firebase/util";
 
 
 Modal.setAppElement('#root')
@@ -34,40 +46,40 @@ const customStyles = {
 
 export default function MainPage() {
 
-    
-    // {
-    //     "user": "usertest",
-    //     "idworkspace": "1",
-    //     "nameworkspace": "teste1",
-    //     "region": "us-east-01"
-    // },
-    // {
-    //     "user": "usertest",
-    //     "idworkspace": "2",
-    //     "nameworkspace": "teste2",
-    //     "region": "us-east-01"
-    // },
-    // {
-    //     "user": "usertest",
-    //     "idworkspace": "3",
-    //     "nameworkspace": "teste3",
-    //     "region": "us-east-01"
-    // }
-
 
     const [listworkspaces, setListworkspaces] = useState([])
+    const [user, setUser] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [nomeWS, setNomeWS] = useState("")
     const [regionWS, setRegionWS] = useState("us-east-1")
     const navigate = useNavigate()
 
+    const [Path, setPath] = useState("Users/QZSVr1RLjuPg7I7e21nm/Workspaces")
+
+    
+    const workspaceCollection = collection(db, Path)
+
+    const userCollection = collection(db, "Users")
+
+    const idCognito = UserPool.getCurrentUser().getUsername()
+
+    useEffect(() => {
+        const GetIdUrl = async () => {
+            const seluser =  user.filter((u) => u.username === idCognito)
+    
+            
+            setPath("Users/"+seluser[0].id+"/Workspaces")
+             
+        }
+
+        GetIdUrl()
+    }, [])
+    
     
 
-
-    
     function OpenModal() {
         setModalIsOpen(true)
-        
+
     }
 
     function CloseModal() {
@@ -75,41 +87,32 @@ export default function MainPage() {
     }
 
     function GoWS(WK) {
-        // console.log(WK.idworkspace)
+        console.log(WK)
 
-
-        var selectedWk = listworkspaces.filter((w) =>  w.name == WK.name)
-
-        
-        console.log(selectedWk)
-
-        // console.log(e.getAttribute('key'))
-        // console.log(e.target.options[selectedIndex].getAttribute('key'));
-
-        
-
-        navigate("workspace",{state: {name: selectedWk[0].name,region: selectedWk[0].region}})
+        // var selectedWk = listworkspaces.filter((w) => w.name == WK.name)
+        // console.log(selectedWk)
+        navigate("workspace", { state: { name: WK.name, region: WK.region } })
     }
 
 
-    function ListWorkspaces(){
-        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
-        .then((r) => {
-            console.log(r)
-            setListworkspaces(r.data)
-        })
-        .catch((err)=>{
-            console.error(err)
-        })
-    }
+    // function ListWorkspaces(){
+    //     axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+    //     .then((r) => {
+    //         console.log(r)
+    //         setListworkspaces(r.data)
+    //     })
+    //     .catch((err)=>{
+    //         console.error(err)
+    //     })
+    // }
 
     function CreateWS() {
-        
 
-        axios.post("http://localhost:8000/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
-            "name" : nomeWS,
-            "region" : regionWS
-        } ).then((r) => {
+
+        axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/create_workspace", {
+            "name": nomeWS,
+            "region": regionWS
+        }).then((r) => {
             console.log(r)
         }).catch((err) => {
             console.error(err)
@@ -118,12 +121,41 @@ export default function MainPage() {
         console.log(nomeWS)
         console.log(regionWS)
 
-        navigate( 'workspace',{state: {name: nomeWS.toString(),region: regionWS.toString()}})
+        navigate('workspace', { state: { name: nomeWS.toString(), region: regionWS.toString() } })
     }
 
+
+
     useEffect(() => {
-       ListWorkspaces()
+
+        const getUsers = async () => {
+            const data = await getDocs(userCollection)
+
+
+            // console.log(data)
+            setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+
+
+        }
+
+        getUsers()
+        //    ListWorkspaces()
     }, [])
+
+    useEffect(() => {
+        const getWS = async () => {
+            const data = await getDocs(workspaceCollection)
+
+            setListworkspaces(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+
+            console.log(listworkspaces)
+        }
+
+        getWS()
+    }, [])
+
+
+
 
     return (
         <>
@@ -151,7 +183,7 @@ export default function MainPage() {
                         <select name="RegionsSelect" id="RegionSelec"
                             value={regionWS}
                             onChange={(e) => setRegionWS(e.target.value)}
-                        
+
                         >
                             <option value="us-east-1">US East (N. Virginia)</option>
                             <option value="us-east-2">US East (Ohio)</option>
@@ -169,17 +201,19 @@ export default function MainPage() {
                 <div className="containerWrapper">
                     {
                         listworkspaces.map((WK) => {
+
                             return (
 
-                                <div onClick={() => GoWS(WK)} className="containerWS" key={WK.idworkspace}>
+                                <div onClick={() => GoWS(WK)} className="containerWS" key={WK.id}>
 
-                                    <h2    id="h2Name">{WK.name}</h2>
-                                    <span  id="SpanRegion">{WK.region}</span>
+                                    <h2 id="h2Name">{WK.name}</h2>
+                                    <span id="SpanRegion">{WK.region}</span>
 
                                 </div>
                             )
                         })
                     }
+
 
                 </div>
 
