@@ -18,7 +18,6 @@ import {
     query,
     where
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 
 
 Modal.setAppElement('#root')
@@ -54,26 +53,26 @@ export default function MainPage() {
     const [regionWS, setRegionWS] = useState("us-east-1")
     const navigate = useNavigate()
 
-    const [Path, setPath] = useState("Users/QZSVr1RLjuPg7I7e21nm/Workspaces")
+    // const [Path, setPath] = useState("Users/QZSVr1RLjuPg7I7e21nm/Workspaces")
 
     
-    const workspaceCollection = collection(db, Path)
+    // const workspaceCollection = collection(db, Path)
 
-    const userCollection = collection(db, "Users")
+    // const userCollection = collection(db, "Users")
 
-    const idCognito = UserPool.getCurrentUser().getUsername()
+    // const idCognito = UserPool.getCurrentUser().getUsername()
 
-    useEffect(() => {
-        const GetIdUrl = async () => {
-            const seluser =  user.filter((u) => u.username === idCognito)
+    // useEffect(() => {
+    //     const GetIdUrl = async () => {
+    //         const seluser =  user.filter((u) => u.username === idCognito)
     
             
-            setPath("Users/"+seluser[0].id+"/Workspaces")
+    //         setPath("Users/"+seluser[0].id+"/Workspaces")
              
-        }
+    //     }
 
-        GetIdUrl()
-    }, [])
+    //     GetIdUrl()
+    // }, [])
     
     
 
