@@ -27,6 +27,9 @@
     --fontColor: #46246D;
   }
 
+  .contBtnBack{
+      display: none;
+  }
 
   .ContainerSignup{
     background: linear-gradient(226.36deg, #844FBA 3.49%, #000000 69.9%);
