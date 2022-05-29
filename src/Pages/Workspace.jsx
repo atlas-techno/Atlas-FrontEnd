@@ -191,7 +191,7 @@ export default function Workspace() {
             console.log(ec2)
             // console.log(TandF)
 
-            axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
+            axios.post("http://localhost:8000" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -210,7 +210,7 @@ export default function Workspace() {
     function createVpc() {
         console.log(vpc)
         // axios.post("https://api.atlas.senai.info/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
-        axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
+        axios.post("http://localhost:8000" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -241,7 +241,7 @@ export default function Workspace() {
 
             // console.log(subnet)
 
-            axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_subpub", subnet)
+            axios.post("http://localhost:8000" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_subpub", subnet)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -264,7 +264,7 @@ export default function Workspace() {
 
         setLoadingDe(true)
 
-        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/deploy")
+        axios("http://localhost:8000" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -292,7 +292,7 @@ export default function Workspace() {
 
 
 
-        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/destroy")
+        axios("http://localhost:8000" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -384,7 +384,7 @@ export default function Workspace() {
     }
 
     function ListarVpcs() {
-        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/query_vpcs")
+        axios("http://localhost:8000" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/query_vpcs")
             .then((r) => {
                 console.log(r.data)
                 setListWS(r.data)
@@ -403,7 +403,7 @@ export default function Workspace() {
 
     function ListarSubs() {
 
-        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/" + "Teste" + "/query_subnets")
+        axios("http://localhost:8000" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/" + "Teste" + "/query_subnets")
             .then((r) => {
                 console.log(r)
                 setListSubnet(r.data)
@@ -418,7 +418,7 @@ export default function Workspace() {
 
     // }, [listWS])
     function ListarEc2s() {
-        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/" + "Teste" + "/" + "testeSub1" + "/query_instances")
+        axios("http://localhost:8000" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/" + "Teste" + "/" + "testeSub1" + "/query_instances")
             .then((r) => {
                 console.log(r.data)
                 setListEc2(r.data)
@@ -427,6 +427,12 @@ export default function Workspace() {
                 console.error(err)
             })
     }
+
+    ffect(() => {
+        ListarVpcs()
+        ListarEc2s()
+        ListarSubs()
+    }, [])
 
 
     // useEffect(() => {

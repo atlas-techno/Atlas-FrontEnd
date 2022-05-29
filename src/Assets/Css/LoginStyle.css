@@ -209,6 +209,7 @@
         justify-content: center;
         width: 100vw;
         height: 100vh;
+        
 
     }
 
@@ -223,7 +224,7 @@
         justify-content: center;
         height: 100vh;
         width: 100vw;
-        background: linear-gradient(216.15deg, #844FBA 4.13%, #000000 82.74%);
+        background: white;
         clip-path: none;
     }
 
@@ -236,16 +237,20 @@
         font-size: 0.5rem;
         align-items: center;
         margin-right: 0;
-        height: 70%;
+        height: 81%;
         width: 100%;
         border-radius: 0%;
-        background-color: rgba(255, 255, 255, .0);
+        background-color: var(--roxoescuro);
+        /* border-top-left-radius: 50px;
+        border-top-right-radius: 50px; */
     }
 
     .H1Mobile {
-        display: block;
-        color: var(--roxoclaro);
-        font-size: 1.5rem;
+        display: none;
+        color: var(--roxobase);
+        font-size: 1.3rem;
+        padding-bottom: 1.3rem;
+
     }
 
     .containerHeaderMobile {
@@ -267,12 +272,13 @@
     }
 
     .ContainerNaoTemConta span {
-        display: none;
+        display: block;
     }
 
     .ContainerNaoTemConta {
         display: flex;
         justify-content: center;
+        flex-direction: column;
 
         align-items: center;
     }
@@ -281,7 +287,7 @@
         width: 75%;
         height: 3rem;
 
-        background: var(--roxoclaro2);
+        text-decoration: underline;
         border: none;
         border-radius: 10px;
         outline: none;
@@ -311,9 +317,13 @@
         margin-left: 1rem;
     }
 
+    
+
     .LogoMobile{
         display: block;
         width: 40%;
+        
+        
         animation: Rotation 6s infinite;
     }
 
@@ -504,14 +514,14 @@
 
 }
 
-@media only screen and ( max-width: 1366px) and (max-height: 768px){
+@media only screen and ( max-width: 1366px) and (max-height: 768px) and (min-width: 1000px){
     .containerForm{
         padding: 3rem;
         font-size: 0.7rem;
     }
 
     .FormContainerLogin{
-        width: 54%;
+        width: 100%;
     }
 
     .BtnLogin{

@@ -95,16 +95,16 @@ export default function MainPage() {
     }
 
 
-    // function ListWorkspaces(){
-    //     axios("http://192.168.5.22:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
-    //     .then((r) => {
-    //         console.log(r)
-    //         setListworkspaces(r.data)
-    //     })
-    //     .catch((err)=>{
-    //         console.error(err)
-    //     })
-    // }
+    function ListWorkspaces(){
+        axios("http://localhost:8000"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        .then((r) => {
+            console.log(r)
+            setListworkspaces(r.data)
+        })
+        .catch((err)=>{
+            console.error(err)
+        })
+    }
 
     function CreateWS() {
         // for (let i = 0; i < listworkspaces.length; i++) {
@@ -114,7 +114,7 @@ export default function MainPage() {
             
         // }
 
-        axios.post("http://192.168.5.22:8000/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
+        axios.post("http://localhost:8000"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
             "name" : nomeWS,
             "region" : regionWS
         } ).then((r) => {
@@ -133,31 +133,31 @@ export default function MainPage() {
 
     useEffect(() => {
 
-        const getUsers = async () => {
-            const data = await getDocs(userCollection)
+        // const getUsers = async () => {
+        //     const data = await getDocs(userCollection)
 
 
-            // console.log(data)
-            setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        //     // console.log(data)
+        //     setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
 
 
-        }
+        // }
 
-        getUsers()
-        //    ListWorkspaces()
+        // getUsers()
+           ListWorkspaces()
     }, [])
 
-    useEffect(() => {
-        const getWS = async () => {
-            const data = await getDocs(workspaceCollection)
+    // useEffect(() => {
+    //     const getWS = async () => {
+    //         const data = await getDocs(workspaceCollection)
 
-            setListworkspaces(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    //         setListworkspaces(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
 
-            console.log(listworkspaces)
-        }
+    //         console.log(listworkspaces)
+    //     }
 
-        getWS()
-    }, [])
+    //     getWS()
+    // }, [])
 
 
 
@@ -175,7 +175,9 @@ export default function MainPage() {
                     isOpen={modalIsOpen}
 
                     onRequestClose={CloseModal}
-                    style={customStyles}
+                    className="Content"
+                    
+                    overlayClassName="Overlay"
                     contentLabel="Example Modal"
                 >
                     <form className="MainForms" onSubmit={CreateWS}>
