@@ -428,7 +428,7 @@ export default function Workspace() {
             })
     }
 
-    ffect(() => {
+    useEffect(() => {
         ListarVpcs()
         ListarEc2s()
         ListarSubs()
