@@ -5,74 +5,21 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import UserPool from "../Utils/UserPool";
-import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
-import { parseJwt } from "../Services/auth.js";
-import { db } from "../Services/firebaseConfig";
-import {
-    collection,
-    getDocs,
-    addDoc,
-    updateDoc,
-    deleteDoc,
-    doc,
-    query,
-    where
-} from "firebase/firestore";
+
 
 
 Modal.setAppElement('#root')
-
-const customStyles = {
-    overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.40)'
-
-    },
-    content: {
-        width: '40%',
-        height: '40%',
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        border: 'none',
-        borderRadius: '10px',
-        backgroundColor: 'rgba(255, 255, 255, 1)',
-        transform: 'translate(-50%, -50%)',
-        backdropFilter: 'blur(6px)',
-    },
-};
 
 export default function MainPage() {
 
 
     const [listworkspaces, setListworkspaces] = useState([])
-    const [user, setUser] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [nomeWS, setNomeWS] = useState("")
     const [regionWS, setRegionWS] = useState("us-east-1")
+
+    const [idWorkspace, setIdWorkspace] = useState("")
     const navigate = useNavigate()
-
-    // const [Path, setPath] = useState("Users/QZSVr1RLjuPg7I7e21nm/Workspaces")
-
-    
-    // const workspaceCollection = collection(db, Path)
-
-    // const userCollection = collection(db, "Users")
-
-    // const idCognito = UserPool.getCurrentUser().getUsername()
-
-    // useEffect(() => {
-    //     const GetIdUrl = async () => {
-    //         const seluser =  user.filter((u) => u.username === idCognito)
-    
-            
-    //         setPath("Users/"+seluser[0].id+"/Workspaces")
-             
-    //     }
-
-    //     GetIdUrl()
-    // }, [])
     
     
 
@@ -90,12 +37,12 @@ export default function MainPage() {
 
         // var selectedWk = listworkspaces.filter((w) => w.name == WK.name)
         // console.log(selectedWk)
-        navigate("workspace", { state: { name: WK.name, region: WK.region } })
+        navigate("workspace", { state: { name: WK.name, region: WK.region, id: WK._id } })
     }
 
 
     function ListWorkspaces(){
-        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        axios("https://api.atlas.senai.info/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -106,18 +53,18 @@ export default function MainPage() {
     }
 
     function CreateWS() {
-        // for (let i = 0; i < listworkspaces.length; i++) {
-        //     if (nomeWS === listworkspaces[i].nameworkspace) {
-        //         toast.error("Sua Workspace tem o mesmo nome");
-        //     }  
-            
-        // }
 
-        axios.post("http://localhost:8000/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
+        axios.post("https://api.atlas.senai.info/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
             "name" : nomeWS,
             "region" : regionWS
         } ).then((r) => {
             console.log(r)
+
+
+            // navigate('workspace', { state: { name: nomeWS.toString(), region: regionWS.toString(), id: r.data.workspace_id.toString() } })
+            
+            
+
         }).catch((err) => {
             console.error(err)
         })
@@ -125,38 +72,18 @@ export default function MainPage() {
         console.log(nomeWS)
         console.log(regionWS)
 
-        navigate('workspace', { state: { name: nomeWS.toString(), region: regionWS.toString() } })
+
+        
+        
     }
 
 
 
     useEffect(() => {
-
-        // const getUsers = async () => {
-        //     const data = await getDocs(userCollection)
-
-
-        //     // console.log(data)
-        //     setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-
-
-        // }
-
-        // getUsers()
-           ListWorkspaces()
+        ListWorkspaces()
     }, [])
 
-    // useEffect(() => {
-    //     const getWS = async () => {
-    //         const data = await getDocs(workspaceCollection)
-
-    //         setListworkspaces(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-
-    //         console.log(listworkspaces)
-    //     }
-
-    //     getWS()
-    // }, [])
+    
 
 
 
@@ -210,7 +137,7 @@ export default function MainPage() {
 
                             return (
 
-                                <div onClick={() => GoWS(WK)} className="containerWS" key={WK.id}>
+                                <div onClick={() => GoWS(WK)} className="containerWS" key={WK._id}>
 
                                     <h2 id="h2Name">{WK.name}</h2>
                                     <span id="SpanRegion">{WK.region}</span>
