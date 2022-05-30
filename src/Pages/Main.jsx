@@ -42,7 +42,7 @@ export default function MainPage() {
 
 
     function ListWorkspaces(){
-        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        axios("http://192.168.5.119:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -54,13 +54,13 @@ export default function MainPage() {
 
     function CreateWS() {
 
-        axios.post("http://localhost:8000/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
+        axios.post("http://192.168.5.119:8000/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
             "name" : nomeWS,
             "region" : regionWS
         } ).then((r) => {
             console.log(r)
 
-
+            ListWorkspaces()
             // navigate('workspace', { state: { name: nomeWS.toString(), region: regionWS.toString(), id: r.data.workspace_id.toString() } })
             
             
