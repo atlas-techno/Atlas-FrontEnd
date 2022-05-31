@@ -40,7 +40,7 @@ const ec2Form = {
 
     },
     content: {
-        width: '30%',
+        width: '50%',
         height: '85%',
         top: '50%',
         left: '50%',
@@ -400,12 +400,6 @@ export default function Workspace() {
                 console.log(err)
             })
     }
-    // useEffect(() => {
-    //     ListarVpcs()
-    //     ListarEc2s()
-    //     ListarSubs()
-    // }, [])
-
 
 
     function ListarSubs() {
@@ -419,11 +413,7 @@ export default function Workspace() {
                 console.log(err)
             })
     }
-    // useEffect(() => {
-    //     console.log(listWS)
-    //     ListarSubs()
 
-    // }, [listWS])
     function ListarEc2s() {
         axios("http://192.168.5.119:8000/" + idWk + "/query_instances")
             .then((r) => {
@@ -442,12 +432,7 @@ export default function Workspace() {
     }, [])
 
 
-    // useEffect(() => {
-    //     
-    //     ListarEc2s()
-    // }, [wsName, ec2.subnet_name, subnet.vpc_name])
 
-    // http://192.168.5.22:8000/
 
     return (
         <>
@@ -603,8 +588,11 @@ export default function Workspace() {
                                 ...prevState,
                                 volume_size: e.target.value
                             }))}
-                            type="range" style={{ color: "white" }} className='input_Name' min="4" max="16" />
-                        <span style={{ color: "white" }}>{ec2.volume_size}</span>
+                            type="range" style={{ color: "white" }} className='input_range' min="4" max="16" />
+                        <div className="rangeviewr">
+                            <span style={{ color: "black" }} >{ec2.volume_size}</span>
+
+                        </div>
 
 
                         <label htmlFor="ami_Sel" className='ami_Sel'>Volume Type</label>

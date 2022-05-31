@@ -43,7 +43,7 @@ export default function Header() {
                         <button class="dropbtn"> <img src={Defaultpfp} className="iconProfile" alt="Icone Perfil" /> </button>
                         <div class="dropdown-content">
                             {/* <button onClick={Logout} className="btnLogoutHeader"> </button> */}
-                            <span onClick={() => navigate("/profile")}><img src={profileIconsvg} className="logoutIcon"/>Perfil</span>
+                            {/* <span onClick={() => navigate("/profile")}><img src={profileIconsvg} className="logoutIcon"/>Perfil</span> */}
                             <span href="#" onClick={Logout} ><img className="logoutIcon" src={logoutIcon} alt="Botão Logout" /> Logout</span>
 
                         </div>
