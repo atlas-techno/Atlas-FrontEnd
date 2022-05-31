@@ -17,6 +17,22 @@
   letter-spacing: 3px;
 }
 
+.Forms_PEc2 {
+  width: 90%;
+  height: 100%;
+  background: #000;
+
+  border-radius: 10px;
+  padding: 3rem;
+
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+
 .Forms_P {
   width: 100%;
   height: 100%;
@@ -70,13 +86,13 @@
   -webkit-appearance: none;
   background: var(--roxoescuro);
   outline: none;
-  
+
   width: 300px;
   height: 1rem;
   font-size: 15px;
   border-radius: 5px;
   border: none;
-  
+
   padding: 10px;
   color: var(--roxoescuro);
   margin-bottom: 1rem;
@@ -91,14 +107,14 @@
   cursor: pointer;
 }
 
-.rangeviewr{
+.rangeviewr {
   background-color: white;
   width: 3rem;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 18px 16px 15px -3px rgba(0,0,0,0.1);
+  box-shadow: inset 18px 16px 15px -3px rgba(0, 0, 0, 0.1);
 
 }
 
@@ -206,8 +222,8 @@
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
   position: relative;
-  width: 9%;
-  height: 4%;
+  width: 15%;
+  height: 4%; 
 }
 
 .switch input {

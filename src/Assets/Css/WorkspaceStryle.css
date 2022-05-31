@@ -180,7 +180,7 @@
 
 
 .containerForms {
-  width: 100%;
+  width: 75%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -457,4 +457,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+
+.containerSSH{
+  width: auto;
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.containerEc2b{
+  padding-top: 10%;
+  height:95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inputsContb{
+  height: 24%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

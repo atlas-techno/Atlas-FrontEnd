@@ -155,7 +155,7 @@ export default function Workspace() {
         volume_type: 'gp2',
         delete_on_termination: false,
         subnet_name: '',
-        key_name: 'dodo'
+        key_name: ''
     }
     );
 
@@ -195,7 +195,7 @@ export default function Workspace() {
             console.log(ec2)
             // console.log(TandF)
 
-            axios.post("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_ec2", ec2,)
+            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -214,8 +214,8 @@ export default function Workspace() {
     }
     function createVpc() {
         console.log(vpc)
-        // axios.post("http://192.168.5.119:8000/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
-        axios.post("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
+        // axios.post("http://localhost:8000/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
+        axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -248,7 +248,7 @@ export default function Workspace() {
 
             console.log(subnet)
 
-            axios.post("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
+            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -271,7 +271,7 @@ export default function Workspace() {
 
         setLoadingDe(true)
 
-        axios("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/deploy")
+        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -299,7 +299,7 @@ export default function Workspace() {
 
 
 
-        axios("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/destroy")
+        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -391,7 +391,7 @@ export default function Workspace() {
     }
 
     function ListarVpcs() {
-        axios("http://192.168.5.119:8000/" + idWk + "/query_vpcs")
+        axios("http://localhost:8000/" + idWk + "/query_vpcs")
             .then((r) => {
                 console.log(r.data)
                 setListWS(r.data)
@@ -404,7 +404,7 @@ export default function Workspace() {
 
     function ListarSubs() {
 
-        axios("http://192.168.5.119:8000/" + idWk + "/query_subnets")
+        axios("http://localhost:8000/" + idWk + "/query_subnets")
             .then((r) => {
                 console.log(r)
                 setListSubnet(r.data)
@@ -415,7 +415,7 @@ export default function Workspace() {
     }
 
     function ListarEc2s() {
-        axios("http://192.168.5.119:8000/" + idWk + "/query_instances")
+        axios("http://localhost:8000/" + idWk + "/query_instances")
             .then((r) => {
                 console.log(r.data)
                 setListEc2(r.data)
@@ -529,7 +529,7 @@ export default function Workspace() {
                 style={ec2Form}
                 contentLabel="Example Modal"
             >
-                <form className="Forms_P" onSubmit={createEc2}>
+                <form className="Forms_PEc2" onSubmit={createEc2}>
                     <div className='container_Form'>
                         <h1 className="h1_ec2">Ec2</h1>
                         <label htmlFor="ami_Sel" className='ami_Sel'>Resource Name</label>
@@ -627,29 +627,42 @@ export default function Workspace() {
 
                         })) */}
 
-                        <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
-                        <select value={idnameVpc} className='sel' name="Ami" id="vpcEc2_sel" onChange={e => setIdNameVpc(e.target.value)}>
-
-                            <option className='opt' value="0">seleecione uma Vpc</option>
-                            {listSubnet.map((sub) => {
-                                return (
-                                    <option key={sub._id} value={sub._id + "_" + sub.resource_name}>
-                                        {sub.resource_name}
-                                    </option>
-                                );
-                            })}
-
-                        </select>
-
-                        {/* <input
-                            value={ec2.subnet_name}
-                            onChange={e => setEc2(prevState => ({
-                                ...prevState,
-                                subnet_name: e.target.value
-                            }))}
-                            type="text" className='input_Name' /> */}
 
 
+
+                    </div>
+                    <div className="containerEc2b">
+                        <div className="inputsContb">
+
+                            <div>
+
+                                <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
+                                <select value={idnameVpc} className='sel' name="Ami" id="vpcEc2_sel" onChange={e => setIdNameVpc(e.target.value)}>
+
+                                    <option className='opt' value="0">seleecione uma Vpc</option>
+                                    {listSubnet.map((sub) => {
+                                        return (
+                                            <option key={sub._id} value={sub._id + "_" + sub.resource_name}>
+                                                {sub.resource_name}
+                                            </option>
+                                        );
+                                    })}
+
+                                </select>
+                            </div>
+                            <div className="containerSSH">
+
+
+                                <label htmlFor="" className="ami_Sel">Chave SSH</label>
+                                <input type="text" name="city" list="cityname" value={ec2.key_name} onChange={e => setEc2(prevState => ({ ...prevState, key_name: e.target.value }))} className="input_Name" />
+                                <datalist id="cityname">
+                                    <option value="Boston" />
+                                    <option value="Cambridge" />
+                                </datalist>
+
+                            </div>
+
+                        </div>
 
                         {
                             loading === true && <button type='submit' disabled className="btn_FormD disable" >Create</button>
@@ -658,7 +671,6 @@ export default function Workspace() {
                         {
                             loading === false && <button type='submit' className="btn_Form " >Create</button>
                         }
-
                     </div>
 
                 </form>
