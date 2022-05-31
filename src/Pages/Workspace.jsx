@@ -13,7 +13,6 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 
 
-
 Modal.setAppElement('#root')
 const customStyles = {
     overlay: {
@@ -41,7 +40,7 @@ const ec2Form = {
 
     },
     content: {
-        width: '30%',
+        width: '50%',
         height: '85%',
         top: '50%',
         left: '50%',
@@ -136,52 +135,32 @@ export default function Workspace() {
     const [modalSub, setModalSub] = useState(false)
     const [indexEc2, setIndexEc2] = useState(0)
 
-    // const [element, setElement] = useState({
-    //     idVpc: '',
-    //     vpc_name: '',
-    //     cidr_block: 0,
-    //     subnets: [{
-    //         idSub: '',
-    //         vpc_name: '',
-    //         cidr_block: 0,
-    //         access: false,
-    //         ec2s: [{
-    //             resource_name: '',
-    //             ami: '',
-    //             type: '',
-    //             count: 1,
-    //             tag_name: '',
-    //             delete_on_termination: false,
-
-    //         }]
-    //     }]
-    // })
     const [vpc, setVpc] = useState({
         resource_name: '',
         cidr_block: 0
     })
     const [subnet, setSubnet] = useState({
+        vpc_id: "",
         resource_name: "",
-        vpc_name: "Teste",
+        vpc_name: "",
         cidr_block: 0
     })
     const [ec2, setEc2] = useState({
+        subnet_id: '',
         resource_name: '',
         ami: 'ami-04505e74c0741db8d',
         type: 't2.nano',
         count: 1,
-        volume_size: 4,
+        volume_size: 8,
         volume_type: 'gp2',
         delete_on_termination: false,
-        subnet_name: ''
+        subnet_name: '',
+        key_name: 'dodo'
     }
     );
 
     const [nomeVpcSub, setNomeVpcSub] = useState("")
-
-
-
-
+    const [idnameVpc, setIdNameVpc] = useState("")
     const [loading, setLoading] = useState(false)
     const [loadingD, setLoadingD] = useState(true)
     const [loadingDe, setLoadingDe] = useState(true)
@@ -189,36 +168,39 @@ export default function Workspace() {
     const [wsRegion, setWsRegion] = useState(location.state.region)
 
     const [TandF, setTandF] = useState(false)
-    const [isVpc, setIsVpc] = useState(false)
 
     const [listWS, setListWS] = useState([])
 
     const [listEc2, setListEc2] = useState([])
     const [listSubnet, setListSubnet] = useState([])
-
+    const [idWk, setIdWk] = useState(location.state.id)
 
     function createEc2(event) {
         // setLoading(true)
         event.preventDefault()
 
         if (listSubnet.length === 0) {
-            toast.warn("Não ha nenhuma subnet cadastrado na Workspace")
+            toast.warn("Não ha nenhuma subnet cadastrada na Workspace")
             return
         }
 
         if (listSubnet.length > 0) {
             // ec2.subnet_name = subnet.resource_name
-            // console.log(ec2)
-
+            // console.log(ec2) 
+            console.log(idnameVpc)
+            var arrayslip = idnameVpc.split("_")
+            ec2.subnet_id = arrayslip[0]
+            ec2.subnet_name = arrayslip[1]
             ec2.delete_on_termination = TandF
             console.log(ec2)
             // console.log(TandF)
 
-            axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_ec2", ec2,)
+            axios.post("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
                     setLoadingDe(false)
+                    ListarEc2s()
                 })
                 .catch((erro) => {
                     console.log(erro)
@@ -232,8 +214,8 @@ export default function Workspace() {
     }
     function createVpc() {
         console.log(vpc)
-        // axios.post("https://api.atlas.senai.info/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
-        axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_vpc", vpc)
+        // axios.post("http://192.168.5.119:8000/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
+        axios.post("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -253,18 +235,20 @@ export default function Workspace() {
         // setLoading(true)
         event.preventDefault()
         if (listWS.length === 0) {
-            toast.warn("Não ha nenhuma vpc cadastrado na Workspace")
+            toast.warn("Não ha nenhuma vpc cadastrada na Workspace")
             return
         }
 
         if (listWS.length > 0) {
             // subnet.access = TandF
+            var idName = nomeVpcSub.split("_")
+            console.log(idName[0])
+            subnet.vpc_name = idName[1]
+            subnet.vpc_id = idName[0]
+
             console.log(subnet)
-            // subnet.vpc_name = nomeVpcSub
 
-            // console.log(subnet)
-
-            axios.post("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/create_subpub", subnet)
+            axios.post("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -287,12 +271,12 @@ export default function Workspace() {
 
         setLoadingDe(true)
 
-        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/deploy")
+        axios("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
                 setLoadingD(false)
-                toast.success("Deploy feito com sucesso")
+                toast.success("Seu Deploy esta sendo excedido com sucesso!")
 
 
             })
@@ -315,7 +299,7 @@ export default function Workspace() {
 
 
 
-        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/destroy")
+        axios("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -407,7 +391,7 @@ export default function Workspace() {
     }
 
     function ListarVpcs() {
-        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/query_vpcs")
+        axios("http://192.168.5.119:8000/" + idWk + "/query_vpcs")
             .then((r) => {
                 console.log(r.data)
                 setListWS(r.data)
@@ -416,17 +400,11 @@ export default function Workspace() {
                 console.log(err)
             })
     }
-    useEffect(() => {
-        ListarVpcs()
-        ListarEc2s()
-        ListarSubs()
-    }, [])
-
 
 
     function ListarSubs() {
 
-        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/" + "Teste" + "/query_subnets")
+        axios("http://192.168.5.119:8000/" + idWk + "/query_subnets")
             .then((r) => {
                 console.log(r)
                 setListSubnet(r.data)
@@ -435,13 +413,9 @@ export default function Workspace() {
                 console.log(err)
             })
     }
-    // useEffect(() => {
-    //     console.log(listWS)
-    //     ListarSubs()
 
-    // }, [listWS])
     function ListarEc2s() {
-        axios("http://192.168.5.22:8000/" + UserPool.getCurrentUser().getUsername() + "/" + wsName + "/" + "Teste" + "/" + "testeSub1" + "/query_instances")
+        axios("http://192.168.5.119:8000/" + idWk + "/query_instances")
             .then((r) => {
                 console.log(r.data)
                 setListEc2(r.data)
@@ -451,13 +425,15 @@ export default function Workspace() {
             })
     }
 
+    useEffect(() => {
+        ListarVpcs()
+        ListarEc2s()
+        ListarSubs()
+    }, [])
 
-    // useEffect(() => {
-    //     
-    //     ListarEc2s()
-    // }, [wsName, ec2.subnet_name, subnet.vpc_name])
 
-    // http://192.168.5.22:8000/
+
+
     return (
         <>
 
@@ -508,7 +484,7 @@ export default function Workspace() {
                     <div className="navNamesVpc">
 
                         <h1>Vpc Name: <span>{listWS.length > 0 && listWS[indexEc2].name}</span></h1>
-                                    <h1>Cidr Block: <span>{listWS.length > 0 && listWS[indexEc2].cidr_block}</span></h1>
+                        <h1>Cidr Block: <span>{listWS.length > 0 && listWS[indexEc2].cidr_block}</span></h1>
                     </div>
 
 
@@ -612,8 +588,11 @@ export default function Workspace() {
                                 ...prevState,
                                 volume_size: e.target.value
                             }))}
-                            type="range" style={{ color: "white" }} className='input_Name' min="4" max="16" />
-                        <span style={{ color: "white" }}>{ec2.volume_size}</span>
+                            type="range" style={{ color: "white" }} className='input_range' min="4" max="16" />
+                        <div className="rangeviewr">
+                            <span style={{ color: "black" }} >{ec2.volume_size}</span>
+
+                        </div>
 
 
                         <label htmlFor="ami_Sel" className='ami_Sel'>Volume Type</label>
@@ -642,32 +621,33 @@ export default function Workspace() {
 
 
                         </label>
-
-                        <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
-                        {/* <select value={ec2.subnet_name} className='sel' name="Ami" id="ami_Sel" onChange={e => setEc2(prevState => ({
+                        {/* setEc2(prevState => ({
                             ...prevState,
                             subnet_name: e.target.value
 
-                        }))}>
+                        })) */}
 
-                            <option className='opt' value="testeSub1">testeSub1</option>
-                            {listSubnet.map((sub, index) => {
+                        <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
+                        <select value={idnameVpc} className='sel' name="Ami" id="vpcEc2_sel" onChange={e => setIdNameVpc(e.target.value)}>
+
+                            <option className='opt' value="0">seleecione uma Vpc</option>
+                            {listSubnet.map((sub) => {
                                 return (
-                                    <option key={index} value={sub.resource_name}>
+                                    <option key={sub._id} value={sub._id + "_" + sub.resource_name}>
                                         {sub.resource_name}
                                     </option>
                                 );
                             })}
 
-                        </select> */}
+                        </select>
 
-                        <input
+                        {/* <input
                             value={ec2.subnet_name}
                             onChange={e => setEc2(prevState => ({
                                 ...prevState,
                                 subnet_name: e.target.value
                             }))}
-                            type="text" className='input_Name' />
+                            type="text" className='input_Name' /> */}
 
 
 
@@ -717,11 +697,11 @@ export default function Workspace() {
                         </select>
 
                         {
-                            loading === true && <button type='button' disabled className="btn_FormD disable" >Create</button>
+                            loading === true && <button type="button" disabled className="btn_FormD disable" >Create</button>
                         }
 
                         {
-                            loading === false && <button type='submit' className="btn_Form " >Create</button>
+                            loading === false && <button type="submit" className="btn_Form " >Create</button>
                         }
 
                     </div>
@@ -757,29 +737,17 @@ export default function Workspace() {
                         }) */}
 
                         {/* listWS.length != null && */}
-                        {/* <select value={nomeVpcSub} className='sel' id="ami_Sel" onChange={e => setNomeVpcSub(e.target.value)}>
-
-                            <option  value="Teste">
-                                Teste
-                            </option>
-                            {listWS.map((vpc, index) => {
+                        <select value={nomeVpcSub} className='sel' id="nome_Sel" onChange={e => setNomeVpcSub(e.target.value)}>
+                            <option value="0">selecione uma vpc</option>
+                            {listWS.map((vpc) => {
                                 return (
-                                    <option key={index} value={vpc.name}>
-                                        {vpc.name}
+                                    <option key={vpc._id} value={vpc._id + "_" + vpc.resource_name}>
+                                        {vpc.resource_name}
                                     </option>
                                 );
                             })}
 
-                        </select> */}
-
-                        <input
-                            value={subnet.vpc_name}
-                            onChange={e => setSubnet(prevState => ({
-                                ...prevState,
-                                vpc_name: e.target.value
-                            }))}
-                            type="text" className='input_Name'
-                        />
+                        </select>
 
 
                         <label htmlFor="ami_Sel" className='ami_Sel'>Cidr Block</label>
@@ -840,21 +808,61 @@ export default function Workspace() {
                 </form>
             </Modal>
             <div className="MainWK">
+                <div className="wrapperMainHeader">
 
-                <div className="containerNameWK">
 
-                    <div className="ContainerTitle">
-                        <h1>{location.state.name}</h1>
-                        <h2>{location.state.region}</h2>
+                    <div className="containerNameWK">
+
+                        <div className="ContainerTitle">
+                            <h1>{location.state.name}</h1>
+                            <h2>{location.state.region}</h2>
+
+
+                        </div>
+
+
+
+                    </div>
+                    <div className="containerManeger">
+
+                        <div className="buttonEc2VPC">
+
+
+                            <button className="BtnWK" onClick={() => OpenModal3()} ><span>+</span> Adicionar Vpc</button>
+                            <button className="BtnWK" onClick={() => OpenModal4()} ><span>+</span> Adicionar Subnet</button>
+                            <button className="BtnWK" onClick={() => OpenModal()} ><span>+</span> Adicionar Ec2</button>
+
+
+                        </div>
+                        <div className="ContainerViewrButtons">
+                            {
+                                loadingD === true && <button className="btn_Destory disable" disabled onClick={() => destoryEC2()} >Destroy</button>
+                            }
+                            {
+                                loadingD === false && <button className="btn_Destory " onClick={() => destoryEC2()} >Destroy</button>
+                            }
+                            {
+                                listWS.length === 0 && <button className="btn_ViewrNoHover disable" disabled onClick={() => deployEc2()} >Deploy</button>
+                            }
+                            {
+                                listWS.length > 0 && <button className="btn_Viewr" onClick={() => deployEc2()} >Deploy</button>
+                            }
+                        </div>
+
 
                     </div>
 
-
-
                 </div>
-
                 <div className="contWrapper">
+
                     <div className="listWS">
+
+                        {
+
+                            listWS.length === 0 && <div className="display"><div className="dialogue"><p>Voce Precisa criar no minimo uma Vpc para efetuar o deploy</p></div> </div>
+
+                        }
+
 
                         {listWS.map((elements, index) => {
 
@@ -867,7 +875,7 @@ export default function Workspace() {
                                     </div>
                                     <div className="vpcblock">
                                         {
-                                            listSubnet.map((sub, index) => {
+                                            listSubnet.filter((sub) => sub.vpc_id === elements._id).map((sub, index) => {
 
                                                 // let bC = {
                                                 //     borderColor: sub.access ? '#7646a6' : '#C285FF'
@@ -882,9 +890,9 @@ export default function Workspace() {
                                                             <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
                                                         </div>
                                                         <div className="subnet">
-                                                            {listEc2.map((ec2, index) =>
+                                                            {listEc2.filter((e) => e.subnet_id === sub._id).map((ec2, index) =>
                                                             (
-                                                                <div key={index} className="ContainerEc2Count">
+                                                                <div key={ec2._id} className="ContainerEc2Count">
                                                                     {
                                                                         ec2.count === "2" && <div className="Ec2PlaceHolder top2"></div>
                                                                     }
@@ -929,75 +937,7 @@ export default function Workspace() {
 
                     </div>
 
-                    <div className="containerManeger">
 
-                        <div className="buttonEc2VPC">
-
-
-                            <button className="BtnWK" onClick={() => OpenModal3()} ><span>+</span> Adicionar Vpc</button>
-                            <button className="BtnWK" onClick={() => OpenModal4()} ><span>+</span> Adicionar Subnet</button>
-                            <button className="BtnWK" onClick={() => OpenModal()} ><span>+</span> Adicionar Ec2</button>
-
-                            <div className="ContainerViewrButtons">
-                                {
-                                    loadingD === true && <button className="btn_Destory disable" disabled onClick={() => destoryEC2()} >Destroy</button>
-                                }
-                                {
-                                    loadingD === false && <button className="btn_Destory " onClick={() => destoryEC2()} >Destroy</button>
-                                }
-                                {
-                                    listWS.length === 0 && <button className="btn_ViewrNoHover disable" disabled onClick={() => deployEc2()} >Deploy</button>
-                                }
-                                {
-                                    listWS.length > 0 && <button className="btn_Viewr" onClick={() => deployEc2()} >Deploy</button>
-                                }
-                            </div>
-
-                        </div>
-                        {
-
-                            listWS.length === 0 && <div className="display"><div className="dialogue"><p>Voce Precisa criar no minimo uma Vpc para efetuar o deploy</p></div> </div>
-
-                        }
-
-
-
-                        {/* <div className="Forms_V ">
-                            <div className="ContainerViewr">
-                            <div className="TerraformCode">
-                            <span>resource "aws_instance" "<span className="span_color">{ec2.resource_name}</span>" {'{'}</span>
-                            
-                            <span className="mfl">ami = <span className="span_color">{ec2.ami}</span></span>
-                            
-                            <span className="mfl">instance_type           = <span className="span_color">{ec2.type}</span></span>
-                            
-                            <span className="mfl">count                   = <span className="span_color">{ec2.count}</span></span>
-                            
-                            <span className="mfl">{'root_block_device {'}</span>
-                            
-                            {
-                                TandF === true && <span className="mfll">delete_on_termination = <span className="span_color">true</span></span>
-                            }
-                            
-                            {
-                                TandF === false && <span className="mfll">delete_on_termination = <span className="span_color">false</span></span>
-                            }
-                            
-                            < span className="mfl">{'}'}</span>
-                            
-                            <span className="mfl">{'tags = { '}</span>
-                            
-                            <span className="mfll">Name = "<span className="span_color">{ec2.tag_name}</span>"</span>
-                            
-                            <span className="mfl">{'}'}</span>
-                            
-                            <span>{'}'}</span>
-                            </div>
-                            </div>
-                        </div> */}
-
-
-                    </div>
                 </div>
             </div>
             <ToastContainer />

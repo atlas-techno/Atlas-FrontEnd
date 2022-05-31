@@ -55,14 +55,14 @@ export default function Cadastrar() {
                 setNomeC('')
                 setAccess('')
                 setPrivate('')
-
-                navigate("/")
-
+                toast.success("Cadastro realizado com sucesso!")
+                // navigate("/")
+                
             }
-
-
+            
+            
         })
-
+        
 
 
     }

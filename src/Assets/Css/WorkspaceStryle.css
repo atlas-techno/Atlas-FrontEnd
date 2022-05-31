@@ -166,12 +166,9 @@
 }
 
 .ContainerTitle {
-  /* padding-top: 1rem; */
-  /* position: fixed; */
+    
   width: auto;
-  height: 9vh;
-
-
+  height: 100%;
   font-size: 1.3rem;
   display: flex;
   justify-content: flex-start;
@@ -193,8 +190,9 @@
 }
 
 .listWS {
+  
   min-height: 60vh;
-  width: 80%;
+  width: 100%;
   padding: 5rem;
   border-radius: 10px;
   background: white;
@@ -205,13 +203,11 @@
 }
 
 .buttonEc2VPC {
-  height: 47%;
-  width: 88%;
+  height: 100%;
+  width: 67%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-
 }
 
 .GeneralContainer {
@@ -221,29 +217,19 @@
 }
 
 .BtnWK {
-  width: 100%;
+  width: 31%;
   height: 4rem;
   background: rgba(0, 0, 0, 0.40);
   border: none;
   border-radius: 10px;
   outline: none;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   color: white;
   cursor: pointer;
-  -webkit-transition: ease-in-out;
-  -o-transition: ease-in-out;
   transition: ease-in-out;
-  -webkit-transition-duration: 0.5s;
-  -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
 }
 
@@ -276,21 +262,17 @@
 .containerNameWK {
   display: flex;
   align-items: flex-start;
-  height: 90%;
-  width: 78%;
-  margin-bottom: 3rem
+  height: 100%;
+  width: 15%;
+  margin-bottom: 1rem;
 }
 
 .containerManeger {
-  height: 60vh;
-  width: 20vw;
+  height: 18vh;
+  width: 65%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-
-
-
 }
 
 .contWrapper {
@@ -313,9 +295,12 @@
   border-bottom-left-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  padding-right: 3rem;
+  padding-left: 3rem;
   /* flex-wrap: wrap; */
+  
 }
 
 .private {
@@ -337,11 +322,13 @@
   align-items: center;
   color: white;
   font-size: 1em;
+  
   cursor: pointer;
 
 }
 
 .entireSubnet {
+  
   margin-left: 1rem;
   margin-bottom: 2rem;
   width: 98%;
@@ -462,4 +449,12 @@
 
 .navNamesSub h1 span {
   color: var(--roxobase);
+}
+
+.wrapperMainHeader {
+  width: 78%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

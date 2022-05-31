@@ -16,20 +16,20 @@ export default function Perfil() {
 
     
 
-    function SubmitForm(event) {
-        event.preventDefault()
+    // function SubmitForm(event) {
+    //     event.preventDefault()
         
         
         
-        user.changePassword(oldPassword, newPassword, (err, result) => {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log(result)
-            }
-        })
+    //     user.changePassword(oldPassword, newPassword, (err, result) => {
+    //         if (err) {
+    //             console.log(err)
+    //         } else {
+    //             console.log(result)
+    //         }
+    //     })
 
-    }
+    // }
 
     // user.getUserAttributes((err, attributes) => {
     //     if (err) {
@@ -52,11 +52,11 @@ export default function Perfil() {
                     <h1>{parseToken.email}</h1>
 
                 </div>
-                <form onSubmit={SubmitForm}>
+                {/* <form onSubmit={SubmitForm}>
                     <input type="text" placeholder={"old passworld"} onChange={(e) => setOldPassword(e.target.value)} />
                     <input type="text" placeholder={"new passworld"} onChange={(e) => setNewPassword(e.target.value)} />
                     <button type="submit">Change Password</button>
-                </form>
+                </form> */}
             </main>
         </div>
     )

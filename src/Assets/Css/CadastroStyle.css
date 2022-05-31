@@ -296,7 +296,7 @@
         width: 22rem
     }
 }
-@media only screen and (max-width: 900px)  and (max-height: 900px){
+@media only screen and (max-width: 1300px)  and (max-height: 1300px){
     
 
     .FormSingup{
@@ -372,6 +372,24 @@
 
     .BtnSignup{
         width: 100%;
+    }
+    
+}
+
+@media only screen and (max-width: 500px) and (max-height: 800px) {
+    .FormSingup{
+        font-size: .8rem;
+        height: auto;
+    }
+
+    .ContainerInputs2{
+        height: 5;
+    width: 75.7%;
+    }
+
+    #AccessKey{
+        margin-top: .5rem
+        ;
     }
     
 }
