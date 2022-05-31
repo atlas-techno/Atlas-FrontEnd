@@ -195,7 +195,7 @@ export default function Workspace() {
             console.log(ec2)
             // console.log(TandF)
 
-            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_ec2", ec2,)
+            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -214,8 +214,8 @@ export default function Workspace() {
     }
     function createVpc() {
         console.log(vpc)
-        // axios.post("http://localhost:8000/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
-        axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
+        // axios.post("https://api.atlas.senai.info/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
+        axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -248,7 +248,7 @@ export default function Workspace() {
 
             console.log(subnet)
 
-            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
+            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -271,7 +271,7 @@ export default function Workspace() {
 
         setLoadingDe(true)
 
-        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/deploy")
+        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -299,7 +299,7 @@ export default function Workspace() {
 
 
 
-        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/destroy")
+        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -391,7 +391,7 @@ export default function Workspace() {
     }
 
     function ListarVpcs() {
-        axios("http://localhost:8000/" + idWk + "/query_vpcs")
+        axios("https://api.atlas.senai.info/" + idWk + "/query_vpcs")
             .then((r) => {
                 console.log(r.data)
                 setListWS(r.data)
@@ -404,7 +404,7 @@ export default function Workspace() {
 
     function ListarSubs() {
 
-        axios("http://localhost:8000/" + idWk + "/query_subnets")
+        axios("https://api.atlas.senai.info/" + idWk + "/query_subnets")
             .then((r) => {
                 console.log(r)
                 setListSubnet(r.data)
@@ -415,7 +415,7 @@ export default function Workspace() {
     }
 
     function ListarEc2s() {
-        axios("http://localhost:8000/" + idWk + "/query_instances")
+        axios("https://api.atlas.senai.info/" + idWk + "/query_instances")
             .then((r) => {
                 console.log(r.data)
                 setListEc2(r.data)
