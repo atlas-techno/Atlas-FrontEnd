@@ -418,7 +418,7 @@
 
 .CloseIconVpc {
   width: 95%;
-  height: 15%;
+  height: 18%;
   padding-top: 1rem;
   font-size: 2rem;
   display: flex;
@@ -428,12 +428,13 @@
 }
 
 .navNamesVpc {
-  height: 35%;
+  height: 63%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: flex-start;
 }
+
 
 .navNamesVpc h1 span {
   color: var(--roxobase);

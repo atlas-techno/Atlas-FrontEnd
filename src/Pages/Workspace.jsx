@@ -83,8 +83,8 @@ const StyleEc2 = {
 
     },
     content: {
-        width: '40%',
-        height: '35%',
+        width: '32%',
+        height: '27%',
         top: '50%',
         left: '50%',
         right: 'auto',
@@ -314,30 +314,30 @@ export default function Workspace() {
         navigate('/main')
     }
 
-    function DeleteVpc() {
+    // function DeleteVpc() {
 
-        listWS.splice(indexEc2, 1)
-        setListEc2([])
-        setListSubnet([])
-        setModalVpc(false)
-    }
+    //     listWS.splice(indexEc2, 1)
+    //     setListEc2([])
+    //     setListSubnet([])
+    //     setModalVpc(false)
+    // }
 
-    function DeleteSub() {
-        listSubnet.splice(indexEc2, 1)
-        setListEc2([])
-        setModalSub(false)
-    }
+    // function DeleteSub() {
+    //     listSubnet.splice(indexEc2, 1)
+    //     setListEc2([])
+    //     setModalSub(false)
+    // }
 
-    function DeleteEc2() {
-        console.log(indexEc2)
-        listEc2.splice(indexEc2, 1)
-        setModa2lIsOpen(false)
-    }
+    // function DeleteEc2() {
+    //     console.log(indexEc2)
+    //     listEc2.splice(indexEc2, 1)
+    //     setModa2lIsOpen(false)
+    // }
 
 
     function OpenVpc(e) {
         setModalVpc(true)
-        setIndexEc2(e)
+        setEc2PH(e)
 
 
     }
@@ -347,7 +347,7 @@ export default function Workspace() {
     }
     function OpenSub(e) {
         setModalSub(true)
-        setIndexEc2(e)
+        setEc2PH(e)
         console.log(e)
     }
 
@@ -366,9 +366,9 @@ export default function Workspace() {
         setModa2lIsOpen(true)
         setEc2PH(e)
         console.log(ec2PH)
-        
 
-        
+
+
 
     }
 
@@ -451,7 +451,7 @@ export default function Workspace() {
             >
                 <div className="containerModelEc2">
                     <div className="CloseIcon">
-                        <h1>Ec2 <span>{indexEc2 + 1}</span></h1> <span onClick={() => CloseModal2()}>X</span>
+                        <h1>Ec2 </h1> <span onClick={() => CloseModal2()}>X</span>
                     </div>
                     <div className="navNames">
 
@@ -500,8 +500,8 @@ export default function Workspace() {
 
                     <div className="navNamesVpc">
 
-                        <h1>Vpc Name: <span>{ }</span></h1>
-                        <h1>Cidr Block: <span>{ }</span></h1>
+                        <h1>Vpc Name: <span>{ec2PH.resource_name}</span></h1>
+                        <h1>Cidr Block: <span>{ec2PH.cidr_block}</span></h1>
                     </div>
 
 
@@ -527,8 +527,8 @@ export default function Workspace() {
                     <div className="navNamesSub">
 
 
-                        <h1>Resource Name: <span>{subnet.resource_name}</span></h1>
-                        <h1>Cidr Block: <span>{subnet.cidr_block}</span></h1>
+                        <h1>Resource Name: <span>{ec2PH.resource_name}</span></h1>
+                        <h1>Cidr Block: <span>{ec2PH.cidr_block}</span></h1>
                         {/* <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1> */}
 
                     </div>
@@ -893,13 +893,13 @@ export default function Workspace() {
                         }
 
 
-                        {listWS.map((elements, index) => {
+                        {listWS.map((elements) => {
 
                             return (
 
-                                <div key={index} className="EntireVpc">
+                                <div key={vpc._id} className="EntireVpc">
 
-                                    <div onClick={() => OpenVpc(index)} className="VpcPlaceHolder">
+                                    <div onClick={() => OpenVpc(elements)} className="VpcPlaceHolder">
                                         <span>Vpc </span>
                                     </div>
                                     <div className="vpcblock">
@@ -914,8 +914,8 @@ export default function Workspace() {
                                                 //     backgroundColor: sub.access ? '#7646a6' : '#C285FF'
                                                 // }
                                                 return (
-                                                    <div key={index} className="entireSubnet">
-                                                        <div onClick={() => OpenSub(index)} className="Subnetblock">
+                                                    <div key={sub._id} className="entireSubnet">
+                                                        <div onClick={() => OpenSub(sub)} className="Subnetblock">
                                                             <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
                                                         </div>
                                                         <div className="subnet">
