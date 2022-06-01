@@ -134,6 +134,7 @@ export default function Workspace() {
     const [modalVpc, setModalVpc] = useState(false)
     const [modalSub, setModalSub] = useState(false)
     const [indexEc2, setIndexEc2] = useState(0)
+    const [ec2PH, setEc2PH] = useState({})
 
     const [vpc, setVpc] = useState({
         resource_name: '',
@@ -363,10 +364,11 @@ export default function Workspace() {
     }
     function OpenModal2(e) {
         setModa2lIsOpen(true)
-        setIndexEc2(e)
-        console.log(indexEc2)
+        setEc2PH(e)
+        console.log(ec2PH)
+        
 
-        console.log(listEc2)
+        
 
     }
 
@@ -454,21 +456,21 @@ export default function Workspace() {
                     <div className="navNames">
 
 
-                        <h1>Name: <span>{ec2.resource_name}</span></h1>
-                        <h1>Ami: <span>{ec2.ami}</span></h1>
-                        <h1>Type: <span>{ec2.type}</span></h1>
-                        <h1>Count: <span>{ec2.count}</span></h1>
-                        <h1>Size: <span>{ec2.volume_size} Gb</span></h1>
-                        <h1>Volume Type: <span>{ec2.volume_type}</span></h1>
-                        <h1>Delete on Termination: <span>{ec2.delete_on_termination ? "True" : "False"}</span></h1>
+                        <h1>Name: <span>{ec2PH.resource_name}</span></h1>
+                        <h1>Ami: <span>{ec2PH.ami}</span></h1>
+                        <h1>Type: <span>{ec2PH.type}</span></h1>
+                        <h1>Count: <span>{ec2PH.count}</span></h1>
+                        <h1>Size: <span>{ec2PH.volume_size} Gb</span></h1>
+                        <h1>Volume Type: <span>{ec2PH.volume_type}</span></h1>
+                        <h1>Delete on Termination: <span>{ec2PH.delete_on_termination ? "True" : "False"}</span></h1>
 
                     </div>
                     <form action="" className="formSSHmodel">
                         <div className="containerSSH">
 
 
-                            <label htmlFor="" style={{color: "#46246D"}} className="ami_Sel ">Chave SSH</label>
-                            <input type="text" name="city" style={{backgroundColor: "#46246D", color: "#C285FF"}} list="cityname" value={ec2.key_name} onChange={e => setEc2(prevState => ({ ...prevState, key_name: e.target.value }))} className="input_Name" />
+                            <label htmlFor="" style={{ color: "#46246D" }} className="ami_Sel ">Chave SSH</label>
+                            <input type="text" name="city" style={{ backgroundColor: "#46246D", color: "#C285FF" }} list="cityname" value={ec2.key_name} onChange={e => setEc2(prevState => ({ ...prevState, key_name: e.target.value }))} className="input_Name" />
                             <datalist id="cityname">
                                 <option value="Boston" />
                                 <option value="Cambridge" />
@@ -498,8 +500,8 @@ export default function Workspace() {
 
                     <div className="navNamesVpc">
 
-                        <h1>Vpc Name: <span>{}</span></h1>
-                        <h1>Cidr Block: <span>{}</span></h1>
+                        <h1>Vpc Name: <span>{ }</span></h1>
+                        <h1>Cidr Block: <span>{ }</span></h1>
                     </div>
 
 
@@ -644,19 +646,19 @@ export default function Workspace() {
 
 
 
-                                <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
-                                <select value={idnameVpc} className='sel' name="Ami" id="vpcEc2_sel" onChange={e => setIdNameVpc(e.target.value)}>
+                        <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
+                        <select value={idnameVpc} className='sel' name="Ami" id="vpcEc2_sel" onChange={e => setIdNameVpc(e.target.value)}>
 
-                                    <option className='opt' value="0">Selecione uma Subnet</option>
-                                    {listSubnet.map((sub) => {
-                                        return (
-                                            <option key={sub._id} value={sub._id + "_" + sub.resource_name}>
-                                                {sub.resource_name}
-                                            </option>
-                                        );
-                                    })}
+                            <option className='opt' value="0">Selecione uma Subnet</option>
+                            {listSubnet.map((sub) => {
+                                return (
+                                    <option key={sub._id} value={sub._id + "_" + sub.resource_name}>
+                                        {sub.resource_name}
+                                    </option>
+                                );
+                            })}
 
-                                </select>
+                        </select>
                         {
                             loading === true && <button type='submit' disabled className="btn_FormD disable" >Create</button>
                         }
@@ -930,7 +932,7 @@ export default function Workspace() {
                                                                         ec2.count === "3" && <div className="Ec2PlaceHolder top2"></div>
                                                                     }
 
-                                                                    <div value={ec2.resource_name} onClick={() => OpenModal2(ec2._id)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
+                                                                    <div value={ec2.resource_name} onClick={() => OpenModal2(ec2)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
 
                                                                         <img src={Ec2Icon} alt="Icon Ec2" />
                                                                     </div>
