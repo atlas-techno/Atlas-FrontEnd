@@ -135,6 +135,41 @@
   align-items: center;
 }
 
+.btn_FormSSH {
+  
+  width: 300px;
+  height: 3rem;
+  border: none;
+  background: var(--roxoescuro);
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  /* backdrop-filter: blur(40px); */
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: .5rem;
+
+}
+
+.btn_FormSSH:hover{
+  transition: ease-in;
+  transition-duration: 0.3s;
+  transform: scale(1.09);
+  box-shadow: 10px 10px 9px -3px rgba(0,0,0,0.5);
+}
+
+.formSSHmodel{
+  margin-top: 1rem;
+  display: flex;
+  width: 95%;
+  height:5rem;
+  justify-content: space-between; 
+  align-items: flex-end; 
+}
+
 .btn_Form:hover {
   transition-duration: 0.1s;
   background-color: var(--roxohover);
@@ -223,7 +258,7 @@
   margin-bottom: 0.3rem;
   position: relative;
   width: 15%;
-  height: 4%; 
+  height: 4%;
 }
 
 .switch input {

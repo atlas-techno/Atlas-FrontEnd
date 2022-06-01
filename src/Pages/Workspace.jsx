@@ -463,7 +463,22 @@ export default function Workspace() {
                         <h1>Delete on Termination: <span>{ec2.delete_on_termination ? "True" : "False"}</span></h1>
 
                     </div>
-                    <button className="btn_Destory" onClick={() => DeleteEc2()}>Excluir</button>
+                    <form action="" className="formSSHmodel">
+                        <div className="containerSSH">
+
+
+                            <label htmlFor="" style={{color: "#46246D"}} className="ami_Sel ">Chave SSH</label>
+                            <input type="text" name="city" style={{backgroundColor: "#46246D", color: "#C285FF"}} list="cityname" value={ec2.key_name} onChange={e => setEc2(prevState => ({ ...prevState, key_name: e.target.value }))} className="input_Name" />
+                            <datalist id="cityname">
+                                <option value="Boston" />
+                                <option value="Cambridge" />
+                            </datalist>
+
+                        </div>
+                        <button type='submit' className="btn_FormSSH " >Submit Key</button>
+
+                    </form>
+                    {/* <button className="btn_Destory" onClick={() => DeleteEc2()}>Excluir</button> */}
                 </div>
 
 
@@ -490,7 +505,7 @@ export default function Workspace() {
 
 
 
-                    <button className="btn_Destory" onClick={() => DeleteVpc()}>Excluir</button>
+                    {/* <button className="btn_Destory" onClick={() => DeleteVpc()}>Excluir</button> */}
                 </div>
 
             </Modal>
@@ -518,7 +533,7 @@ export default function Workspace() {
 
 
 
-                    <button className="btn_Destory" onClick={() => DeleteSub()}>Excluir</button>
+                    {/* <button className="btn_Destory" onClick={() => DeleteSub()}>Excluir</button> */}
                 </div>
 
             </Modal>
@@ -629,13 +644,6 @@ export default function Workspace() {
 
 
 
-
-                    </div>
-                    <div className="containerEc2b">
-                        <div className="inputsContb">
-
-                            <div>
-
                                 <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
                                 <select value={idnameVpc} className='sel' name="Ami" id="vpcEc2_sel" onChange={e => setIdNameVpc(e.target.value)}>
 
@@ -649,7 +657,21 @@ export default function Workspace() {
                                     })}
 
                                 </select>
+                        {
+                            loading === true && <button type='submit' disabled className="btn_FormD disable" >Create</button>
+                        }
+
+                        {
+                            loading === false && <button type='submit' className="btn_Form " >Create</button>
+                        }
+
+                    </div>
+                    {/* <div className="containerEc2b">
+                            <div>
+
                             </div>
+                        <div className="inputsContb">
+
                             <div className="containerSSH">
 
 
@@ -664,14 +686,7 @@ export default function Workspace() {
 
                         </div>
 
-                        {
-                            loading === true && <button type='submit' disabled className="btn_FormD disable" >Create</button>
-                        }
-
-                        {
-                            loading === false && <button type='submit' className="btn_Form " >Create</button>
-                        }
-                    </div>
+                    </div> */}
 
                 </form>
             </Modal>
