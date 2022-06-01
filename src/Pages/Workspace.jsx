@@ -187,11 +187,14 @@ export default function Workspace() {
         if (listSubnet.length > 0) {
             // ec2.subnet_name = subnet.resource_name
             // console.log(ec2) 
+            
             console.log(idnameVpc)
             var arrayslip = idnameVpc.split("_")
             ec2.subnet_id = arrayslip[0]
             ec2.subnet_name = arrayslip[1]
             ec2.delete_on_termination = TandF
+
+            ec2.resource_name.trim()
             console.log(ec2)
             // console.log(TandF)
 
@@ -214,6 +217,8 @@ export default function Workspace() {
     }
     function createVpc() {
         console.log(vpc)
+
+        vpc.resource_name.trim()
         // axios.post("http://192.168.5.119:8000/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
         axios.post("http://192.168.5.119:8000/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
             .then((r) => {
@@ -245,6 +250,7 @@ export default function Workspace() {
             console.log(idName[0])
             subnet.vpc_name = idName[1]
             subnet.vpc_id = idName[0]
+            subnet.vpc_name.trim()
 
             console.log(subnet)
 
