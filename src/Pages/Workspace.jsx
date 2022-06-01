@@ -366,7 +366,7 @@ export default function Workspace() {
         setIndexEc2(e)
         console.log(indexEc2)
 
-        console.log(listEc2)
+        
 
     }
 
@@ -449,10 +449,12 @@ export default function Workspace() {
             >
                 <div className="containerModelEc2">
                     <div className="CloseIcon">
-                        <h1>Ec2 <span>{indexEc2 + 1}</span></h1> <span onClick={() => CloseModal2()}>X</span>
+                        <h1>Ec2 <span>{indexEc2 }</span></h1> <span onClick={() => CloseModal2()}>X</span>
                     </div>
                     <div className="navNames">
-
+                        {/* {
+                            listEc2.filter
+                        } */}
 
                         <h1>Name: <span>{ec2.resource_name}</span></h1>
                         <h1>Ami: <span>{ec2.ami}</span></h1>
@@ -483,8 +485,8 @@ export default function Workspace() {
 
                     <div className="navNamesVpc">
 
-                        <h1>Vpc Name: <span>{listWS.length > 0 && listWS[indexEc2].name}</span></h1>
-                        <h1>Cidr Block: <span>{listWS.length > 0 && listWS[indexEc2].cidr_block}</span></h1>
+                        <h1>Vpc Name: <span>{}</span></h1>
+                        <h1>Cidr Block: <span>{}</span></h1>
                     </div>
 
 
@@ -903,7 +905,7 @@ export default function Workspace() {
                                                                         ec2.count === "3" && <div className="Ec2PlaceHolder top2"></div>
                                                                     }
 
-                                                                    <div value={ec2.resource_name} onClick={() => OpenModal2(index)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
+                                                                    <div value={ec2.resource_name} onClick={() => OpenModal2(ec2.resource_name)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
 
                                                                         <img src={Ec2Icon} alt="Icon Ec2" />
                                                                     </div>
