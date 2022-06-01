@@ -498,8 +498,8 @@ export default function Workspace() {
 
                     <div className="navNamesVpc">
 
-                        <h1>Vpc Name: <span>{listWS.length > 0 && listWS[indexEc2].name}</span></h1>
-                        <h1>Cidr Block: <span>{listWS.length > 0 && listWS[indexEc2].cidr_block}</span></h1>
+                        <h1>Vpc Name: <span>{}</span></h1>
+                        <h1>Cidr Block: <span>{}</span></h1>
                     </div>
 
 
@@ -647,7 +647,7 @@ export default function Workspace() {
                                 <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
                                 <select value={idnameVpc} className='sel' name="Ami" id="vpcEc2_sel" onChange={e => setIdNameVpc(e.target.value)}>
 
-                                    <option className='opt' value="0">seleecione uma Vpc</option>
+                                    <option className='opt' value="0">Selecione uma Subnet</option>
                                     {listSubnet.map((sub) => {
                                         return (
                                             <option key={sub._id} value={sub._id + "_" + sub.resource_name}>
@@ -917,7 +917,7 @@ export default function Workspace() {
                                                             <span>Subnet <img className="cadPrivate" src={sub.access ? Cad : CadAberto} alt="Icone de Cadeado aberto ou fechado" /> </span>
                                                         </div>
                                                         <div className="subnet">
-                                                            {listEc2.filter((e) => e.subnet_id === sub._id).map((ec2, index) =>
+                                                            {listEc2.filter((e) => e.subnet_id === sub._id).map((ec2) =>
                                                             (
                                                                 <div key={ec2._id} className="ContainerEc2Count">
                                                                     {
@@ -930,7 +930,7 @@ export default function Workspace() {
                                                                         ec2.count === "3" && <div className="Ec2PlaceHolder top2"></div>
                                                                     }
 
-                                                                    <div value={ec2.resource_name} onClick={() => OpenModal2(index)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
+                                                                    <div value={ec2.resource_name} onClick={() => OpenModal2(ec2._id)} style={{ cursor: 'pointer' }} className="Ec2PlaceHolder ">
 
                                                                         <img src={Ec2Icon} alt="Icon Ec2" />
                                                                     </div>
