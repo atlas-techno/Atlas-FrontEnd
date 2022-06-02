@@ -11,19 +11,18 @@
 }
 
 .h1_ec2 {
-  color: var(--roxoclaro2);
+  color: #7549a1;
   font-size: 50px;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  text-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
   letter-spacing: 3px;
 }
 
 .Forms_PEc2 {
-  width: 90%;
+  width: 100%;
   height: 100%;
   background: #000;
 
   border-radius: 10px;
-  padding: 3rem;
 
 
   display: flex;
@@ -70,7 +69,7 @@
 }
 
 .input_Name {
-  background: var(--roxoclaro2);
+  background: #844FBA;
   outline: none;
   margin-bottom: 5px;
   width: 300px;
@@ -79,7 +78,7 @@
   border-radius: 5px;
   border: none;
   padding: 10px;
-  color: var(--roxoescuro);
+  color: white;
 }
 
 .input_range {
@@ -123,11 +122,11 @@
   width: 300px;
   height: 56px;
   border: none;
-  background: var(--roxoclaro2);
-  color: var(--roxoescuro);
+  background: #844FBA;
+  color: white;
   font-size: 30px;
   border-radius: 10px;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  text-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
   /* backdrop-filter: blur(40px); */
   text-decoration: none;
   display: flex;
@@ -136,7 +135,7 @@
 }
 
 .btn_FormSSH {
-  
+
   width: 300px;
   height: 3rem;
   border: none;
@@ -154,20 +153,20 @@
 
 }
 
-.btn_FormSSH:hover{
+.btn_FormSSH:hover {
   transition: ease-in;
   transition-duration: 0.3s;
   transform: scale(1.09);
-  box-shadow: 10px 10px 9px -3px rgba(0,0,0,0.5);
+  box-shadow: 10px 10px 9px -3px rgba(0, 0, 0, 0.5);
 }
 
-.formSSHmodel{
+.formSSHmodel {
   margin-top: 1rem;
   display: flex;
   width: 95%;
-  height:5rem;
-  justify-content: space-between; 
-  align-items: flex-end; 
+  height: 5rem;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .btn_Form:hover {
@@ -205,9 +204,8 @@
   font-size: 15px;
   font-weight: 100;
   border-radius: 5px;
-  color: var(--roxoescuro);
-  background: var(--roxoclaro2);
-
+  color: white;
+  background: #844FBA;
 }
 
 .sel:focus {
@@ -234,8 +232,7 @@
 }
 
 .ami_Sel {
-
-  color: var(--roxoclaro2);
+  color: #844FBA;
   margin-bottom: 5px;
 }
 
@@ -248,7 +245,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: 100%;
+  justify-content: space-around;
+  height: 93%;
   width: 68%;
 }
 
@@ -257,7 +255,7 @@
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
   position: relative;
-  width: 15%;
+  width: 20%;
   height: 4%;
 }
 

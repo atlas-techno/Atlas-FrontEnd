@@ -40,15 +40,15 @@ const ec2Form = {
 
     },
     content: {
-        width: '50%',
-        height: '85%',
+        width: '30%',
+        height: '90%',
         top: '50%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
 
 
-        // borderRadius: '10px',
+        borderRadius: '30px',
         backgroundColor: '#000',
         transform: 'translate(-50%, -50%)',
 
@@ -83,8 +83,8 @@ const StyleEc2 = {
 
     },
     content: {
-        width: '32%',
-        height: '27%',
+        width: '28%',
+        height: '47%',
         top: '50%',
         left: '50%',
         right: 'auto',
@@ -237,7 +237,7 @@ export default function Workspace() {
         event.preventDefault()
         if (listWS.length === 0) {
             toast.warn("Não ha nenhuma vpc cadastrada na Workspace")
-            return
+            
         }
 
         if (listWS.length > 0) {
@@ -246,31 +246,36 @@ export default function Workspace() {
             console.log(idName[0])
             subnet.vpc_name = idName[1]
             subnet.vpc_id = idName[0]
+            console.log(subnet.vpc_id)
 
-            console.log(subnet)
+            if (subnet.vpc_name === 0) {
+                toast.warn("Selecione uma Vpc")
+                
+            } else {
+                
+                axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
+                    .then((r) => {
+                        console.log(r)
+                        setLoading(false)
+                        setLoadingDe(false)
+                        ListarSubs()
+                    })
+                    .catch((erro) => {
+                        console.log(erro)
+                        setLoading(false)
+                        toast.warn("Selecione uma Vpc")
+                    })
+                setModal4IsOpen(false)
+                setTandF(false)
 
-            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
-                .then((r) => {
-                    console.log(r)
-                    setLoading(false)
-                    setLoadingDe(false)
-                    ListarSubs()
-                })
-                .catch((erro) => {
-                    console.log(erro)
-                    setLoading(false)
-                })
-            // console.log(subnet)
-            // console.log(listSubnet)
-            setModal4IsOpen(false)
-            setTandF(false)
-
+            }            
         }
     }
 
     function deployEc2(event) {
 
         setLoadingDe(true)
+        console.log(subnet)
 
         axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/deploy")
             .then((r) => {
@@ -313,27 +318,6 @@ export default function Workspace() {
 
         navigate('/main')
     }
-
-    // function DeleteVpc() {
-
-    //     listWS.splice(indexEc2, 1)
-    //     setListEc2([])
-    //     setListSubnet([])
-    //     setModalVpc(false)
-    // }
-
-    // function DeleteSub() {
-    //     listSubnet.splice(indexEc2, 1)
-    //     setListEc2([])
-    //     setModalSub(false)
-    // }
-
-    // function DeleteEc2() {
-    //     console.log(indexEc2)
-    //     listEc2.splice(indexEc2, 1)
-    //     setModa2lIsOpen(false)
-    // }
-
 
     function OpenVpc(e) {
         setModalVpc(true)
@@ -514,7 +498,7 @@ export default function Workspace() {
             <Modal
                 isOpen={modalSub}
                 onRequestClose={CloseSub}
-                style={StyleSub}
+                style={StyleEc2}
                 contentLabel="Example Modal"
             >
 
