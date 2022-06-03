@@ -21,15 +21,15 @@ const customStyles = {
     },
     content: {
         width: '30%',
-        height: '68%',
+        height: '46%',
         top: '50%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
         zIndex: '4',
 
-        // borderRadius: '10px',
-        backgroundColor: '#000',
+        borderRadius: '3rem',
+        backgroundColor: '#fff',
         transform: 'translate(-50%, -50%)',
 
     },
@@ -215,22 +215,28 @@ export default function Workspace() {
     }
     function createVpc() {
         console.log(vpc)
-        // axios.post("https://api.atlas.senai.info/" + "oi"+ "/" + "oi" + "/create_vpc", vpc)
-        axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
+        if (vpc.name === "") {
+            toast.warn("Cadastre um nome a sua Vpc")
+        } else{
+            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
             .then((r) => {
                 console.log(r)
                 setLoading(false)
                 setLoadingDe(false)
+                toast.success("Sua vpc foi cadastrada com sucesso!")
                 ListarVpcs()
 
             })
             .catch((erro) => {
                 console.log(erro)
+                console.log("Houve um erro ao cadastrar sua vpc")
                 setLoading(false)
             })
 
         console.log(listWS)
         setModa3lIsOpen(false)
+        }
+        
     }
     function createSubnet(event) {
         // setLoading(true)
@@ -773,39 +779,6 @@ export default function Workspace() {
                             <option className='opt' value="1">1</option>
                             <option className='opt' value="2">2</option>
                         </select>
-
-                        {/* <label className="ami_Sel fontSize">Acesso</label>
-
-
-
-                        <label className="switch">
-
-                            <input
-                                type="checkbox"
-
-                                value={TandF}
-
-                                onChange={e => setTandF(e.target.checked)}
-
-
-                            />
-                            <span className="slider round"></span>
-
-
-
-
-
-
-                        </label>
-
-                        {
-                            TandF && <span className="private">privado</span>
-                        }
-                        {
-                            !TandF && <span className="private">publico</span>
-                        } */}
-
-
 
                         {
                             loading === true && <button type='submit' disabled className="btn_FormD disable" >Create</button>

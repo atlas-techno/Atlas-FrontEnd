@@ -11,9 +11,8 @@
 }
 
 .h1_ec2 {
-  color: #7549a1;
+  color: #844FBA;
   font-size: 50px;
-  text-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
   letter-spacing: 3px;
 }
 
@@ -35,15 +34,9 @@
 .Forms_P {
   width: 100%;
   height: 100%;
-  /* background: linear-gradient(180.06deg, #844FBA 4.74%, #46246D 66.71%);  */
-  background: #000;
-
+  background: #fff;
   border-radius: 10px;
-
-
   display: flex;
-  /* flex-direction: column; */
-
   justify-content: center;
   align-items: center;
 
@@ -126,7 +119,7 @@
   color: white;
   font-size: 30px;
   border-radius: 10px;
-  text-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
+  
   /* backdrop-filter: blur(40px); */
   text-decoration: none;
   display: flex;
@@ -171,7 +164,7 @@
 
 .btn_Form:hover {
   transition-duration: 0.1s;
-  background-color: var(--roxohover);
+  background-color: var(--roxoescuro);
   color: var(--roxoclaro);
 }
 
@@ -241,6 +234,7 @@
 }
 
 .container_Form {
+  padding-top: 1rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;

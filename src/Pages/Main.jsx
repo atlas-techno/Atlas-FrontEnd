@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import UserPool from "../Utils/UserPool";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 
 
@@ -52,18 +54,18 @@ export default function MainPage() {
         })
     }
 
-    function CreateWS() {
-
+    function CreateWS(e) {
+        e.preventDefault()
         axios.post("https://api.atlas.senai.info/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
             "name" : nomeWS,
             "region" : regionWS
         } ).then((r) => {
             console.log(r)
-
+            toast.success("Sua workspace foi cadastrada com sucesso!")
             ListWorkspaces()
             // navigate('workspace', { state: { name: nomeWS.toString(), region: regionWS.toString(), id: r.data.workspace_id.toString() } })
-            
-            
+
+            setModalIsOpen(false)
 
         }).catch((err) => {
             console.error(err)
@@ -151,6 +153,7 @@ export default function MainPage() {
                 </div>
 
             </main>
+            <ToastContainer />
         </>
     )
 }
