@@ -38,10 +38,10 @@ export default function Header() {
                 <div className="Container_Header">
 
                     <img src={Logo} onClick={BackHome} alt="Foto de Perfil" className="PfPHeader" />
-                    <div className="contloginbtn">
-                        
+                    <div onClick={Logout} className="contloginbtn">
+
+                        <span   className="boxHeader" ><img className="logoutIcon" src={logoutIcon} alt="Botão Logout" /> Logout</span>
                     </div>
-                    <span href="#" onClick={Logout}  className="boxHeader" ><img className="logoutIcon" src={logoutIcon} alt="Botão Logout" /> Logout</span>
 
 
                 </div>
