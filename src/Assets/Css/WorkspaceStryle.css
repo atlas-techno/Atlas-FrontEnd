@@ -380,7 +380,7 @@
 }
 
 .navNames {
-  height: 65%;
+  height: 66%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -418,7 +418,7 @@
 
 .CloseIconVpc {
   width: 95%;
-  height: 18%;
+  height: 35%;
   padding-top: 1rem;
   font-size: 2rem;
   display: flex;
@@ -441,7 +441,7 @@
 }
 
 .navNamesSub {
-  height: 47%;
+  height: 66%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;

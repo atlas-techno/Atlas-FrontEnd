@@ -1,5 +1,5 @@
 import Header from "../Components/Header";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "../Assets/Css/WorkspaceStryle.css";
 import { useState, useEffect } from "react";
 import Modal from 'react-modal';
@@ -49,7 +49,7 @@ const ec2Form = {
 
 
         borderRadius: '30px',
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
         transform: 'translate(-50%, -50%)',
 
     },
@@ -84,7 +84,7 @@ const StyleEc2 = {
     },
     content: {
         width: '28%',
-        height: '47%',
+        height: '25%',
         top: '50%',
         left: '50%',
         right: 'auto',
@@ -106,8 +106,8 @@ const StyleSub = {
 
     },
     content: {
-        width: '40%',
-        height: '35%',
+        width: '38%',
+        height: '20%',
         top: '50%',
         left: '50%',
         right: 'auto',
@@ -217,33 +217,33 @@ export default function Workspace() {
         console.log(vpc)
         if (vpc.name === "") {
             toast.warn("Cadastre um nome a sua Vpc")
-        } else{
+        } else {
             axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
-            .then((r) => {
-                console.log(r)
-                setLoading(false)
-                setLoadingDe(false)
-                toast.success("Sua vpc foi cadastrada com sucesso!")
-                ListarVpcs()
+                .then((r) => {
+                    console.log(r)
+                    setLoading(false)
+                    setLoadingDe(false)
+                    toast.success("Sua vpc foi cadastrada com sucesso!")
+                    ListarVpcs()
 
-            })
-            .catch((erro) => {
-                console.log(erro)
-                console.log("Houve um erro ao cadastrar sua vpc")
-                setLoading(false)
-            })
+                })
+                .catch((erro) => {
+                    console.log(erro)
+                    console.log("Houve um erro ao cadastrar sua vpc")
+                    setLoading(false)
+                })
 
-        console.log(listWS)
-        setModa3lIsOpen(false)
+            console.log(listWS)
+            setModa3lIsOpen(false)
         }
-        
+
     }
     function createSubnet(event) {
         // setLoading(true)
         event.preventDefault()
         if (listWS.length === 0) {
             toast.warn("Não ha nenhuma vpc cadastrada na Workspace")
-            
+
         }
 
         if (listWS.length > 0) {
@@ -256,9 +256,9 @@ export default function Workspace() {
 
             if (subnet.vpc_name === 0) {
                 toast.warn("Selecione uma Vpc")
-                
+
             } else {
-                
+
                 axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
                     .then((r) => {
                         console.log(r)
@@ -274,7 +274,7 @@ export default function Workspace() {
                 setModal4IsOpen(false)
                 setTandF(false)
 
-            }            
+            }
         }
     }
 
@@ -459,15 +459,27 @@ export default function Workspace() {
                         <div className="containerSSH">
 
 
+
                             <label htmlFor="" style={{ color: "#46246D" }} className="ami_Sel ">Chave SSH</label>
-                            <input type="text" name="city" style={{ backgroundColor: "#46246D", color: "#C285FF" }} list="cityname" value={ec2.key_name} onChange={e => setEc2(prevState => ({ ...prevState, key_name: e.target.value }))} className="input_Name" />
+                            {/* <input type="text" name="city" style={{ backgroundColor: "#46246D", color: "#C285FF" }} list="cityname" value={ec2.key_name} onChange={e => setEc2(prevState => ({ ...prevState, key_name: e.target.value }))} className="input_Name" />
                             <datalist id="cityname">
                                 <option value="Boston" />
                                 <option value="Cambridge" />
-                            </datalist>
+                            </datalist>  */}
+                            <select value={ec2.key_name} className='sel' name="Ami" id="ami_Sel"
+                                onChange={e => setEc2(prevState => ({
+                                    ...prevState,
+                                    key_name: e.target.value
+                                }))}>
+                                <option className='opt' value="ami-04505e74c0741db8d">Ubuntu</option>
+
+                            </select>
 
                         </div>
-                        <button type='submit' className="btn_FormSSH " >Submit Key</button>
+                        <div className="contKEY">
+                            <span>Nao tem uma chave? </span>
+                            <span onClick={() => navigate("/keys")} className="spanButton">Cadastre uma chave</span>
+                        </div>
 
                     </form>
                     {/* <button className="btn_Destory" onClick={() => DeleteEc2()}>Excluir</button> */}
@@ -504,7 +516,7 @@ export default function Workspace() {
             <Modal
                 isOpen={modalSub}
                 onRequestClose={CloseSub}
-                style={StyleEc2}
+                style={StyleSub}
                 contentLabel="Example Modal"
             >
 
@@ -517,7 +529,7 @@ export default function Workspace() {
                     <div className="navNamesSub">
 
 
-                        <h1>Resource Name: <span>{ec2PH.resource_name}</span></h1>
+                        <h1>Subnet Name: <span>{ec2PH.resource_name}</span></h1>
                         <h1>Cidr Block: <span>{ec2PH.cidr_block}</span></h1>
                         {/* <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1> */}
 
@@ -595,9 +607,9 @@ export default function Workspace() {
                                 ...prevState,
                                 volume_size: e.target.value
                             }))}
-                            type="range" style={{ color: "white" }} className='input_range' min="4" max="16" />
+                            type="range" style={{ color: "white" }} className='input_range' min="4" max="16" step={2} />
                         <div className="rangeviewr">
-                            <span style={{ color: "black" }} >{ec2.volume_size}</span>
+                            <span  >{ec2.volume_size}</span>
 
                         </div>
 
@@ -658,27 +670,6 @@ export default function Workspace() {
                         }
 
                     </div>
-                    {/* <div className="containerEc2b">
-                            <div>
-
-                            </div>
-                        <div className="inputsContb">
-
-                            <div className="containerSSH">
-
-
-                                <label htmlFor="" className="ami_Sel">Chave SSH</label>
-                                <input type="text" name="city" list="cityname" value={ec2.key_name} onChange={e => setEc2(prevState => ({ ...prevState, key_name: e.target.value }))} className="input_Name" />
-                                <datalist id="cityname">
-                                    <option value="Boston" />
-                                    <option value="Cambridge" />
-                                </datalist>
-
-                            </div>
-
-                        </div>
-
-                    </div> */}
 
                 </form>
             </Modal>
@@ -749,13 +740,6 @@ export default function Workspace() {
                         />
                         <label htmlFor="ami_Sel" className='ami_Sel'>Vpc Name</label>
 
-                        {/* e => setSubnet(prevState => ({
-                            ...prevState,
-                            vpc_name: e.target.value
-
-                        }) */}
-
-                        {/* listWS.length != null && */}
                         <select value={nomeVpcSub} className='sel' id="nome_Sel" onChange={e => setNomeVpcSub(e.target.value)}>
                             <option value="0">selecione uma vpc</option>
                             {listWS.map((vpc) => {

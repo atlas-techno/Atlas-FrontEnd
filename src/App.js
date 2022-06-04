@@ -6,6 +6,7 @@ import Main from "./Pages/Main";
 import NotFound from "./Pages/notFound";
 import Workspace from "./Pages/Workspace";
 import Perfil from './Pages/Perfil';
+import Keys from './Pages/Keys';
 
 function App() {
   
@@ -64,6 +65,7 @@ function App() {
             </Route>
           <Route path="main/workspace" element={<Workspace />}/>
           <Route path="/profile" element={<Perfil/>}/>
+          <Route path="/keys" element={<Keys/>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

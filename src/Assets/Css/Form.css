@@ -19,7 +19,7 @@
 .Forms_PEc2 {
   width: 100%;
   height: 100%;
-  background: #000;
+  background: #fff;
 
   border-radius: 10px;
 
@@ -76,7 +76,7 @@
 
 .input_range {
   -webkit-appearance: none;
-  background: var(--roxoescuro);
+  background: var(--roxobase);
   outline: none;
 
   width: 300px;
@@ -100,12 +100,14 @@
 }
 
 .rangeviewr {
-  background-color: white;
+  background-color: var(--roxoclaro);
   width: 3rem;
+  height: 1.4rem;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
   box-shadow: inset 18px 16px 15px -3px rgba(0, 0, 0, 0.1);
 
 }
@@ -136,7 +138,6 @@
   color: white;
   font-size: 1.5rem;
   border-radius: 10px;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   /* backdrop-filter: blur(40px); */
   text-decoration: none;
   display: flex;
@@ -159,7 +160,7 @@
   width: 95%;
   height: 5rem;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .btn_Form:hover {
@@ -177,7 +178,6 @@
   color: var(--roxoescuro);
   font-size: 30px;
   border-radius: 10px;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   /* backdrop-filter: blur(40px); */
   text-decoration: none;
   display: flex;
@@ -219,7 +219,7 @@
 
 
 .opt {
-  background-color: var(--roxoclaro2);
+  background-color: var(--roxobase);
   padding: 5px;
   letter-spacing: 1.7px;
 }
@@ -323,10 +323,9 @@ input:checked+.slider:before {
   height: 4rem;
   border: none;
   background: var(--roxoclaro2);
-  color: var(--roxoescuro);
+  color: white;
   font-size: 1.5rem;
   border-radius: 10px;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   /* backdrop-filter: blur(40px); */
   text-decoration: none;
   display: flex;
@@ -344,7 +343,6 @@ input:checked+.slider:before {
   color: var(--roxoescuro);
   font-size: 1.5rem;
   border-radius: 10px;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   /* backdrop-filter: blur(40px); */
   text-decoration: none;
   display: flex;
@@ -392,7 +390,6 @@ input:checked+.slider:before {
   color: var(--roxoescuro);
   font-size: 1.5rem;
   border-radius: 10px;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   /* backdrop-filter: blur(40px); */
   text-decoration: none;
   display: flex;
@@ -408,7 +405,6 @@ input:checked+.slider:before {
   color: #fff;
   font-size: 1.3rem;
   border-radius: 10px;
-  text-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
   /* backdrop-filter: blur(40px); */
   text-decoration: none;
   display: flex;
@@ -433,7 +429,6 @@ input:checked+.slider:before {
   color: #fff;
   font-size: 30px;
   border-radius: 10px;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   /* backdrop-filter: blur(40px); */
   text-decoration: none;
   display: flex;
@@ -478,4 +473,18 @@ input:checked+.slider:before {
 
 .span_color {
   color: #fff;
+}
+
+.contKEY{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.spanButton{
+  font-size: 1.5rem;
+}
+
+.spanButton:hover{
+  cursor: pointer;
+  text-decoration: underline;
 }
