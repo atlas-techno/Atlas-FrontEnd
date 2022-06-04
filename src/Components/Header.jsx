@@ -38,16 +38,11 @@ export default function Header() {
                 <div className="Container_Header">
 
                     <img src={Logo} onClick={BackHome} alt="Foto de Perfil" className="PfPHeader" />
-
-                    <div class="dropdown">
-                        <button class="dropbtn"> <img src={Defaultpfp} className="iconProfile" alt="Icone Perfil" /> </button>
-                        <div class="dropdown-content">
-                            {/* <button onClick={Logout} className="btnLogoutHeader"> </button> */}
-                            {/* <span onClick={() => navigate("/profile")}><img src={profileIconsvg} className="logoutIcon"/>Perfil</span> */}
-                            <span href="#" onClick={Logout} ><img className="logoutIcon" src={logoutIcon} alt="Botão Logout" /> Logout</span>
-
-                        </div>
+                    <div className="contloginbtn">
+                        
                     </div>
+                    <span href="#" onClick={Logout}  className="boxHeader" ><img className="logoutIcon" src={logoutIcon} alt="Botão Logout" /> Logout</span>
+
 
                 </div>
             </div>
