@@ -148,7 +148,7 @@
 .contloginbtn{
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 23%;
   height: 51%;
   padding-left: 1rem;
