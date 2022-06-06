@@ -80,7 +80,7 @@ export default function Cadastrar() {
                     </div>
                     <div className="ContainerInputs1">
 
-                        <Link to="/" className="VoltarCadastro">Voltar</Link>
+                        <Link to="/" className="VoltarCadastro"><img src={BackBtn} className="backBtn" alt="Botão para voltar a tela de login" /></Link>
                         <h1 >Cadastro</h1>
                         <label htmlFor="Name">Nome Completo</label>
                         <input type="text" value={nomeC} id="Name" onChange={(e) => setNomeC(e.target.value)} />

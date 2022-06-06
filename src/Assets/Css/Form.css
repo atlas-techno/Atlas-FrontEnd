@@ -354,22 +354,7 @@ input:checked+.slider:before {
 
 
 
-.dialogue {
 
-  opacity: 0.8;
-  height: 10vh;
-  width: 15vw;
-  background: #c4c4c4;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 2rem;
-  border-radius: 10px;
-}
-
-.dialogue p {
-  text-align: justify;
-}
 
 
 

@@ -11,6 +11,7 @@ import CadAberto from "../Assets/img/lock-open-solid.svg";
 import Cad from "../Assets/img/lock-solid.svg";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
+import NotFound from "./notFound.jsx";
 
 
 Modal.setAppElement('#root')
@@ -54,29 +55,7 @@ const ec2Form = {
 
     },
 };
-const customStyles2 = {
-    overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.30)'
 
-    },
-    content: {
-        width: '40%',
-        height: '50%',
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        paddingLeft: '3rem',
-        paddingBottom: '3rem',
-        // paddingRight: '2rem',
-
-
-        borderRadius: '10px',
-        // backgroundColor: 'rgba(255, 255, 255, 1)',
-        transform: 'translate(-50%, -50%)',
-        backdropFilter: 'blur(6px)',
-    },
-};
 const StyleEc2 = {
     overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0.30)'
@@ -423,9 +402,6 @@ export default function Workspace() {
         ListarSubs()
     }, [])
 
-
-
-
     return (
         <>
 
@@ -436,7 +412,9 @@ export default function Workspace() {
                 isOpen={modal2IsOpen}
 
                 onRequestClose={CloseModal2}
-                style={customStyles2}
+                className="ContentMEc2"
+
+                overlayClassName="Overlay"
                 contentLabel="Example Modal"
             >
                 <div className="containerModelEc2">
@@ -489,7 +467,7 @@ export default function Workspace() {
             </Modal>
             <Modal
                 isOpen={modalVpc}
-
+                                    
                 onRequestClose={CloseVpc}
                 style={StyleEc2}
                 contentLabel="Example Modal"
@@ -545,7 +523,10 @@ export default function Workspace() {
                 isOpen={modalIsOpen}
 
                 onRequestClose={CloseModal}
-                style={ec2Form}
+                // style={ec2Form}
+                className="ContentFEc2"
+
+                overlayClassName="Overlay"
                 contentLabel="Example Modal"
             >
                 <form className="Forms_PEc2" onSubmit={createEc2}>
@@ -829,7 +810,7 @@ export default function Workspace() {
 
                         {
 
-                            listWS.length === 0 && <div className="display"><div className="dialogue"><p>Voce Precisa criar no minimo uma Vpc para efetuar o deploy</p></div> </div>
+                            listWS.length === 0 && <div className="dialogue"><p>Você precisa criar no mínimo de uma Vpc para efetuar o deploy</p></div> 
 
                         }
 
@@ -913,4 +894,6 @@ export default function Workspace() {
             <ToastContainer />
         </>
     )
+
+
 }

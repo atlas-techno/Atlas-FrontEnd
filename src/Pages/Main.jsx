@@ -96,7 +96,7 @@ export default function MainPage() {
             <main className="MainBG">
                 <div className="containerBtnCreate">
 
-                    <button className="btnMain" onClick={OpenModal}><span>+</span> Adicionar Cliente</button>
+                    <button className="btnMain" onClick={OpenModal}><span>+</span> Adicionar Workspace</button>
 
                 </div>
                 <Modal
@@ -134,6 +134,13 @@ export default function MainPage() {
                     </form>
                 </Modal>
                 <div className="containerWrapper">
+
+                    {
+                        listworkspaces.length === 0 && <div className="boxListNull">
+
+                            <p>Pelo visto você não tem workspaces cadastradas ainda. Clique no botao "<button className="btnMainN" disabled onClick={OpenModal}><span>+</span> Adicionar Workspace</button>" para cadastrar uma.</p>
+                        </div>
+                    }
                     {
                         listworkspaces.map((WK) => {
 

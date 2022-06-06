@@ -5,6 +5,7 @@ import "../Assets/Css/HeaderStyle.css"
 import Pool from "../Utils/UserPool";
 import profileIconsvg from "../Assets/img/ProfileIcon.svg"
 import Defaultpfp from "../Assets/img/DefaultPfp.svg";
+import Key from "../Assets/img/key-solid.svg";
 
 
 export default function Header() {
@@ -38,9 +39,15 @@ export default function Header() {
                 <div className="Container_Header">
 
                     <img src={Logo} onClick={BackHome} alt="Foto de Perfil" className="PfPHeader" />
-                    <div onClick={Logout} className="contloginbtn">
-
-                        <span   className="boxHeader" ><img className="logoutIcon" src={logoutIcon} alt="Botão Logout" /> Logout</span>
+                    <div className="contloginbtn">
+                        <div onClick={() => navigate("/keys")} className="contMykeys">
+                            <img className="logoutIcon" src={Key} alt="Botão Logout" />
+                            <h2>Keys</h2>
+                        </div>
+                        <div onClick={Logout} className="boxHeader" >
+                            <img className="logoutIcon" src={logoutIcon} alt="Botão Logout" />
+                            <span className="logoutTXT">Logout</span>
+                        </div>
                     </div>
 
 

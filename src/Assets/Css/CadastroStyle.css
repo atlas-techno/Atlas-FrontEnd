@@ -151,9 +151,12 @@
 
 .VoltarCadastro{
     color: white;
-    
-
+    height: 5%;
+    -webkit-transition: 1s; /* For Safari 3.0 to 6.0 */
+        transition:  1s; /* For modern browsers */
 }
+
+
 
 .containerListCad{
     /* margin-top:; */
@@ -164,6 +167,15 @@
     display: none;
 }
 
+.backBtn {
+    width: 100%;
+    height: 100%;
+    fill: var(--roxobase);
+}
+
+.backBtn:hover{
+    fill: #844FBA;
+}
 
 
 @media only screen and (max-height: 768px) {
