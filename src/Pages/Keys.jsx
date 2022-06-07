@@ -32,9 +32,9 @@ export default function Keys() {
 
     }
 
-    // useEffect(() => {
-    //     ListKeys()
-    // }, [])
+    useEffect(() => {
+        ListKeys()
+    }, [])
 
     return (
         <>
