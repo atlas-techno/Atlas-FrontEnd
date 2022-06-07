@@ -37,7 +37,7 @@ export default function Keys() {
                             <td>AdminKey</td>
                             <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
                         </tr>
-                        <tr>
+                        {/* <tr>
                             <td>MainKey</td>
                             <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" /> Download</button></td>
                         </tr>
@@ -60,7 +60,7 @@ export default function Keys() {
                         <tr class="active-row">
                             <td>AdminKey</td>
                             <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
-                        </tr>
+                        </tr> */}
                         
                     </tbody>
                 </table>
