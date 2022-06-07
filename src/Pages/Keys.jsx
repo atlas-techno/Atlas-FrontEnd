@@ -3,19 +3,20 @@ import Header from '../Components/Header'
 import axios from 'axios';
 import '../Assets/Css/Keys.css'
 import DI from "../Assets/img/DownloadIcon.svg";
+import UserPool from "../Utils/UserPool";
 
 export default function Keys() {
     const [key_name, setKey_name] = useState("")
     const [listKey, setListKey] = useState([])
 
-    // function ListKeys() {
-    //     axios("http://localhost:8000/")
-    //         .then((r) => {
-    //             console.log(r)
-    //             setListKey(r)
+    function ListKeys() {
+        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "query_ssh_key")
+            .then((r) => {
+                console.log(r)
+                setListKey(r)
 
-    //         }).catch((err) =>{ console.log(err)})
-    // }
+            }).catch((err) => { console.log(err) })
+    }
 
     function CreateKey(event) {
         event.preventDefault()
@@ -23,18 +24,18 @@ export default function Keys() {
         let Key = {
             name: key_name
         }
-        
-        axios.post("http://localhost:8000/", Key)
+
+        axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/create_key", Key)
             .then((r) =>
                 console.log(r)
-            ).catch((err) =>{ console.log(err)})
+            ).catch((err) => { console.log(err) })
 
     }
 
     // useEffect(() => {
     //     ListKeys()
     // }, [])
-    
+
     return (
         <>
             <Header />
@@ -59,19 +60,21 @@ export default function Keys() {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {
+                        {
                             listKey.map((key) => {
-                                return()
+                                return (
+                                    <tr>
+                                        <td>{key.name}</td>
+                                        <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
+                                    </tr>
+                                )
                             })
-                        } */}
-                        <tr>
-                            <td>MainKey</td>
-                            <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" /> Download</button></td>
-                        </tr>
-                        <tr class="active-row">
+                        }
+
+                        {/* <tr class="active-row">
                             <td>AdminKey</td>
                             <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
-                        </tr>
+                        </tr> */}
                         {/* <tr>
                             <td>MainKey</td>
                             <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" /> Download</button></td>
