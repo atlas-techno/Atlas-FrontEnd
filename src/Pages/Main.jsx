@@ -44,7 +44,7 @@ export default function MainPage() {
 
 
     function ListWorkspaces(){
-        axios("https://api.atlas.senai.info/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -56,7 +56,7 @@ export default function MainPage() {
 
     function CreateWS(e) {
         e.preventDefault()
-        axios.post("https://api.atlas.senai.info/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
+        axios.post("http://localhost:8000/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
             "name" : nomeWS,
             "region" : regionWS
         } ).then((r) => {
