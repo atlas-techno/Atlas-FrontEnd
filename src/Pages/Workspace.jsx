@@ -400,6 +400,7 @@ export default function Workspace() {
         ListarVpcs()
         ListarEc2s()
         ListarSubs()
+        
     }, [])
 
     return (
@@ -448,8 +449,8 @@ export default function Workspace() {
                                 onChange={e => setEc2(prevState => ({
                                     ...prevState,
                                     key_name: e.target.value
-                                }))}>
-                                <option className='opt' value="ami-04505e74c0741db8d">Ubuntu</option>
+                                }) )}>
+                                <option className='opt' value="MainKey">MainKey</option>
 
                             </select>
 

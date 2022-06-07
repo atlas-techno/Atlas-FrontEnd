@@ -1,0 +1,208 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: 1.7px;
+}
+
+
+:root {
+  --roxobase: #844FBA;
+  --roxoclaro: #C285FF;
+  --roxoclaro2: #af62fc;
+  --roxoescuro: #46246D;
+  --roxohover: #7646a6;
+  --redDestroy: #CD0032;
+  --redDestroyHover: #9b0027;
+  --fontColor: #46246D;
+}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: 1.7px;
+}
+
+
+:root {
+  --roxobase: #844FBA;
+  --roxoclaro: #C285FF;
+  --roxoclaro2: #af62fc;
+  --roxoescuro: #46246D;
+  --roxohover: #7646a6;
+  --redDestroy: #CD0032;
+  --redDestroyHover: #9b0027;
+  --fontColor: #46246D;
+}
+
+.MainKeys{
+    background: -o-linear-gradient(340.32deg, #46246D 6.82%, #844FBA 100%);
+    background: linear-gradient(109.68deg, #46246D 6.82%, #844FBA 100%);
+    /* transform: matrix(1, 1, 0, 1, 0, 0);; */
+    /* height: 80vh; */
+    /* max-height: none; */
+    width: 100%;
+    /* overflow-y: initial; */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  
+    -webkit-box-align: center;
+  
+    -ms-flex-align: center;
+  
+    align-items: center;
+    height: 85vh;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  
+}
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+}
+
+.styled-table thead tr {
+    background-color: var(--roxobase);
+    color: #ffffff;
+    text-align: left;
+}
+
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    color: #ffffff;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid var(--roxoclaro);
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: var(--roxoclaro);
+}
+
+.containerKeys{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  height: 10rem;
+
+}
+
+.ContainerTitleKeys{
+  width: auto;
+  height: auto;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  color: white;
+  text-transform: capitalize;
+}
+
+.input_NameK {
+  background: white;
+  outline: none;
+  margin-bottom: 5px;
+  width: 300px;
+  height: 3rem;
+  font-size: 15px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  color: var(--roxobase);
+}
+
+.btn_FormK {
+  width: 10rem;
+  height: 3rem;
+  border: none;
+  background: #844FBA;
+  color: white;
+  font-size: 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+}
+.btn_FormKCadastro {
+  width: 10rem;
+  height: 3rem;
+  border: none;
+  background: #844FBA;
+  color: white;
+  font-size: 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn_FormKCadastro:hover{
+  background-color: var(--roxohover);
+}
+
+.btn_FormK:hover{
+  background: var(--roxohover);
+}
+
+.Forms_Keys{
+  width: 47%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.DIkeys{
+  width: 10%;
+  fill: white;
+}
