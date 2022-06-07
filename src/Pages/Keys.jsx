@@ -8,27 +8,32 @@ export default function Keys() {
     const [key_name, setKey_name] = useState("")
     const [listKey, setListKey] = useState([])
 
-    function ListKeys() {
-        axios("")
-            .then((r) => {
-                console.log(r)
-                setListKey(r)
+    // function ListKeys() {
+    //     axios("http://localhost:8000/")
+    //         .then((r) => {
+    //             console.log(r)
+    //             setListKey(r)
 
-            }).catch((err) =>{ console.log(err)})
-    }
+    //         }).catch((err) =>{ console.log(err)})
+    // }
 
     function CreateKey(event) {
         event.preventDefault()
-        axios.post("", key_name)
+
+        let Key = {
+            name: key_name
+        }
+        
+        axios.post("http://localhost:8000/", Key)
             .then((r) =>
                 console.log(r)
             ).catch((err) =>{ console.log(err)})
 
     }
 
-    useEffect(() => {
-        ListKeys()
-    }, [])
+    // useEffect(() => {
+    //     ListKeys()
+    // }, [])
     
     return (
         <>
