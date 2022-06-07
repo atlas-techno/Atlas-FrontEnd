@@ -244,6 +244,17 @@
   width: 68%;
 }
 
+.container_FormEc2{
+  padding-top: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 93%;
+  width: 68%;
+}
+
 /* switch input */
 .switch {
   margin-top: 0.3rem;

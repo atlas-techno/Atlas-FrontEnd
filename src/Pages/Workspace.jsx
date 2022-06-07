@@ -135,7 +135,7 @@ export default function Workspace() {
         volume_type: 'gp2',
         delete_on_termination: false,
         subnet_name: '',
-        key_name: 'dodo'
+        key_name: 'Main'
     }
     );
 
@@ -524,14 +524,14 @@ export default function Workspace() {
                 isOpen={modalIsOpen}
 
                 onRequestClose={CloseModal}
-                // style={ec2Form}
-                className="ContentFEc2"
+                style={ec2Form}
+                
 
                 overlayClassName="Overlay"
                 contentLabel="Example Modal"
             >
                 <form className="Forms_PEc2" onSubmit={createEc2}>
-                    <div className='container_Form'>
+                    <div className='container_FormEc2'>
                         <h1 className="h1_ec2">Ec2</h1>
                         <label htmlFor="ami_Sel" className='ami_Sel'>Resource Name</label>
 
