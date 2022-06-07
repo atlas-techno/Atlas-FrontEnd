@@ -1,10 +1,35 @@
-import React from 'react'
+import { useState, useEffect } from "react";
 import Header from '../Components/Header'
-
+import axios from 'axios';
 import '../Assets/Css/Keys.css'
-import  DI  from "../Assets/img/DownloadIcon.svg";
+import DI from "../Assets/img/DownloadIcon.svg";
 
 export default function Keys() {
+    const [key_name, setKey_name] = useState("")
+    const [listKey, setListKey] = useState([])
+
+    function ListKeys() {
+        axios("")
+            .then((r) => {
+                console.log(r)
+                setListKey(r)
+
+            }).catch((err) =>{ console.log(err)})
+    }
+
+    function CreateKey(event) {
+        event.preventDefault()
+        axios.post("", key_name)
+            .then((r) =>
+                console.log(r)
+            ).catch((err) =>{ console.log(err)})
+
+    }
+
+    useEffect(() => {
+        ListKeys()
+    }, [])
+    
     return (
         <>
             <Header />
@@ -14,9 +39,9 @@ export default function Keys() {
                     <div className='ContainerTitleKeys'>
                         <h1>Minhas Keys</h1>
                     </div>
-                    <form className='Forms_Keys'>
-                        <input type="text" placeholder='Cadastre sua chave' className='input_NameK' />
-                        <button className='btn_FormKCadastro'>Cadastrar</button>
+                    <form className='Forms_Keys' onSubmit={CreateKey}>
+                        <input type="text" placeholder='Cadastre sua chave' onChange={(e) => setKey_name(e.target.value)} className='input_NameK' />
+                        <button type="submit" className='btn_FormKCadastro'>Cadastrar</button>
 
                     </form>
                 </div>
@@ -29,6 +54,11 @@ export default function Keys() {
                         </tr>
                     </thead>
                     <tbody>
+                        {/* {
+                            listKey.map((key) => {
+                                return()
+                            })
+                        } */}
                         <tr>
                             <td>MainKey</td>
                             <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" /> Download</button></td>
@@ -61,7 +91,7 @@ export default function Keys() {
                             <td>AdminKey</td>
                             <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
                         </tr> */}
-                        
+
                     </tbody>
                 </table>
             </main>
