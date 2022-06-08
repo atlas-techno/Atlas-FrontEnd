@@ -136,7 +136,7 @@ export default function Workspace() {
         volume_type: 'gp2',
         delete_on_termination: false,
         subnet_name: '',
-        key_name: 'Main'
+        key_name: ''
     }
     );
 
