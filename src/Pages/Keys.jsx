@@ -10,7 +10,7 @@ export default function Keys() {
     const [listKey, setListKey] = useState([])
 
     function ListKeys() {
-        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "query_ssh_key")
+        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_key")
             .then((r) => {
                 console.log(r)
                 setListKey(r)
