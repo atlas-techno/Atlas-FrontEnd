@@ -160,7 +160,7 @@ export default function Workspace() {
         axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_keys")
             .then((r) => {
                 console.log(r)
-                setListkeys(r)
+                setListkeys(r.data)
 
             }).catch((err) => { console.log(err) })
     }
