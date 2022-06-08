@@ -319,9 +319,21 @@ export default function Workspace() {
 
     function OpenVpc(e) {
         setModalVpc(true)
+
+        if (e.cidr_block = "0") {
+            e.cidr_block = "10.0.0.0/16"
+                
+        }  else if (e.cidr_block = "1") {
+            e.cidr_block = "172.16.0.0/16"
+                
+        } else if (e.cidr_block = "2") {
+            e.cidr_block = "192.168.0.0/24"
+        }
+        
         setEc2PH(e)
+        
 
-
+        
     }
 
     function CloseVpc() {
@@ -330,7 +342,17 @@ export default function Workspace() {
     function OpenSub(e) {
         setModalSub(true)
         setEc2PH(e)
-        console.log(e)
+        if (e.cidr_block = "0") {
+            e.cidr_block = "10.0.1.0/24"
+                
+        }  else if (e.cidr_block = "5") {
+            e.cidr_block = "172.16.1.0/24"
+                
+        } else if (e.cidr_block = "9") {
+            e.cidr_block = "192.168.1.0/24"
+        }
+        
+        setEc2PH(e)
     }
 
     function CloseSub() {
@@ -447,30 +469,6 @@ export default function Workspace() {
                         <h1>Delete on Termination: <span>{ec2PH.delete_on_termination ? "True" : "False"}</span></h1>
 
                     </div>
-                    {/* <form action="" className="formSSHmodel">
-                        <div className="containerSSH">
-
-
-
-                            <label htmlFor="" style={{ color: "#46246D" }} className="ami_Sel ">Chave SSH</label>
-
-                            <select value={ec2.key_name} className='sel' name="Ami" id="ami_Sel"
-                                onChange={e => setEc2(prevState => ({
-                                    ...prevState,
-                                    key_name: e.target.value
-                                }))}>
-                                <option className='opt' value="MainKey">MainKey</option>
-
-                            </select>
-
-                        </div>
-                        <div className="contKEY">
-                            <span>Nao tem uma chave? </span>
-                            <span onClick={() => navigate("/keys")} className="spanButton">Cadastre uma chave</span>
-                        </div>
-
-                    </form> */}
-                    {/* <button className="btn_Destory" onClick={() => DeleteEc2()}>Excluir</button> */}
                 </div>
 
 
@@ -758,9 +756,9 @@ export default function Workspace() {
                             cidr_block: e.target.value
 
                         }))}>
-                            <option className='opt' value="0">10.0.0.0/16</option>
-                            <option className='opt' value="1">172.16.0.0/16</option>
-                            <option className='opt' value="2">192.168.0.0/24</option>
+                            <option className='opt' value="0">10.0.1.0/24</option>
+                            <option className='opt' value="5">172.16.1.0/24</option>
+                            <option className='opt' value="9">192.168.1.0/24</option>
                         </select>
 
                         {

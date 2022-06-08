@@ -52,6 +52,21 @@ export default function Keys() {
 
     }
 
+    function DownloadKey(e) {
+        e.preventDefault()
+
+        let Key = {
+            name: key_name
+        }
+        axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/keys", Key)
+        .then((r) => {
+            console.log(r)
+            axios(r.data.url)
+            .catch((err) => console.log(err))
+        })
+        .catch((err) => console.log(err))
+    }
+
     useEffect(() => {
         ListKeys()
         ListWorkspaces()
@@ -87,7 +102,7 @@ export default function Keys() {
                                 return (
                                     <tr key={key._id} class="active-row">
                                         <td>{key.key_name}</td>
-                                        <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
+                                        <td><button className='btn_FormK' onClick={() => DownloadKey()}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
                                     </tr>
                                 )
                             })
