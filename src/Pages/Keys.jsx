@@ -26,9 +26,10 @@ export default function Keys() {
         }
 
         axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/create_key", Key)
-            .then((r) =>
+            .then((r) =>{
                 console.log(r)
-            ).catch((err) => { console.log(err) })
+                ListKeys()
+            }).catch((err) => { console.log(err) })
 
     }
 
@@ -55,7 +56,7 @@ export default function Keys() {
                 <table class="styled-table">
                     <thead>
                         <tr>
-                            <th>Key Name </th>
+                            <th>Key Name</th>
                             <th>Download</th>
                         </tr>
                     </thead>

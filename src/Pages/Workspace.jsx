@@ -140,13 +140,15 @@ export default function Workspace() {
     }
     );
 
+
+    const [keyph, setKeyph] = useState("")
     const [nomeVpcSub, setNomeVpcSub] = useState("")
     const [idnameVpc, setIdNameVpc] = useState("")
     const [loading, setLoading] = useState(false)
     const [loadingD, setLoadingD] = useState(true)
     const [loadingDe, setLoadingDe] = useState(true)
-    const [wsName, setWsName] = useState(location.state.name)
-    const [wsRegion, setWsRegion] = useState(location.state.region)
+    // const [wsName, setWsName] = useState(location.state.name)
+    // const [wsRegion, setWsRegion] = useState(location.state.region)
 
     const [TandF, setTandF] = useState(false)
 
@@ -177,11 +179,12 @@ export default function Workspace() {
         if (listSubnet.length > 0) {
             // ec2.subnet_name = subnet.resource_name
             // console.log(ec2) 
-            console.log(idnameVpc)
+            console.log(keyph)
             var arrayslip = idnameVpc.split("_")
             ec2.subnet_id = arrayslip[0]
             ec2.subnet_name = arrayslip[1]
             ec2.delete_on_termination = TandF
+            ec2.key_name = keyph
             console.log(ec2)
             // console.log(TandF)
 
@@ -629,18 +632,15 @@ export default function Workspace() {
 
                         </label>
 
-                        <label htmlFor="" style={{ color: "#46246D" }} className="ami_Sel ">Chave SSH</label>
+                        <label htmlFor="key_sel" style={{ color: "#46246D" }} className="ami_Sel ">Chave SSH</label>
 
-                        <select value={ec2.key_name} className='sel' name="Ami" id="ami_Sel"
-                            onChange={e => setEc2(prevState => ({
-                                ...prevState,
-                                key_name: e.target.value
-                            }))}>
+                        <select value={keyph} className='sel' name="Ami" id="key_sel" onChange={e => setKeyph(e.target.value)}>
+                        <option className='opt' value="0">Selecione uma Key</option>
                                 {
                                     listkeys.map((key) => {
                                         return(
                                             <option key={key._id} value={key.key_name}>{key.key_name}</option>
-                                        )
+                                        );
                                     })
                                 }
                             
