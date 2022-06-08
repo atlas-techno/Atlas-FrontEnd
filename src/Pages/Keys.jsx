@@ -64,7 +64,7 @@ export default function Keys() {
                             listKey.map((key) => {
                                 return (
                                     <tr key={key._id} >
-                                        <td>{key.name}</td>
+                                        <td>{key.key_name}</td>
                                         <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
                                     </tr>
                                 )
