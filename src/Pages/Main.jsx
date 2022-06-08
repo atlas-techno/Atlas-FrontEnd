@@ -15,7 +15,7 @@ Modal.setAppElement('#root')
 export default function MainPage() {
 
 
-    const [listworkspaces, setListworkspaces] = useState([])
+    const [listworkspaces, setListworkspaces] = useState([{}])
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [nomeWS, setNomeWS] = useState("")
     const [regionWS, setRegionWS] = useState("us-east-1")

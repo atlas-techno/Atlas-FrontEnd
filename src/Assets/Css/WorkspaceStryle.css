@@ -380,7 +380,7 @@
 }
 
 .navNames {
-  height: 66%;
+  height: 80%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;

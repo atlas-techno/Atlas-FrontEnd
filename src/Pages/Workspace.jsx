@@ -114,6 +114,7 @@ export default function Workspace() {
     const [modalSub, setModalSub] = useState(false)
     const [indexEc2, setIndexEc2] = useState(0)
     const [ec2PH, setEc2PH] = useState({})
+    const [listkeys, setListkeys] = useState([])
 
     const [vpc, setVpc] = useState({
         resource_name: '',
@@ -154,6 +155,15 @@ export default function Workspace() {
     const [listEc2, setListEc2] = useState([])
     const [listSubnet, setListSubnet] = useState([])
     const [idWk, setIdWk] = useState(location.state.id)
+
+    function ListKeys() {
+        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_keys")
+            .then((r) => {
+                console.log(r)
+                setListkeys(r)
+
+            }).catch((err) => { console.log(err) })
+    }
 
     function createEc2(event) {
         // setLoading(true)
@@ -400,7 +410,7 @@ export default function Workspace() {
         ListarVpcs()
         ListarEc2s()
         ListarSubs()
-        
+        ListKeys()
     }, [])
 
     return (
@@ -434,22 +444,18 @@ export default function Workspace() {
                         <h1>Delete on Termination: <span>{ec2PH.delete_on_termination ? "True" : "False"}</span></h1>
 
                     </div>
-                    <form action="" className="formSSHmodel">
+                    {/* <form action="" className="formSSHmodel">
                         <div className="containerSSH">
 
 
 
                             <label htmlFor="" style={{ color: "#46246D" }} className="ami_Sel ">Chave SSH</label>
-                            {/* <input type="text" name="city" style={{ backgroundColor: "#46246D", color: "#C285FF" }} list="cityname" value={ec2.key_name} onChange={e => setEc2(prevState => ({ ...prevState, key_name: e.target.value }))} className="input_Name" />
-                            <datalist id="cityname">
-                                <option value="Boston" />
-                                <option value="Cambridge" />
-                            </datalist>  */}
+
                             <select value={ec2.key_name} className='sel' name="Ami" id="ami_Sel"
                                 onChange={e => setEc2(prevState => ({
                                     ...prevState,
                                     key_name: e.target.value
-                                }) )}>
+                                }))}>
                                 <option className='opt' value="MainKey">MainKey</option>
 
                             </select>
@@ -460,7 +466,7 @@ export default function Workspace() {
                             <span onClick={() => navigate("/keys")} className="spanButton">Cadastre uma chave</span>
                         </div>
 
-                    </form>
+                    </form> */}
                     {/* <button className="btn_Destory" onClick={() => DeleteEc2()}>Excluir</button> */}
                 </div>
 
@@ -468,7 +474,7 @@ export default function Workspace() {
             </Modal>
             <Modal
                 isOpen={modalVpc}
-                                    
+
                 onRequestClose={CloseVpc}
                 style={StyleEc2}
                 contentLabel="Example Modal"
@@ -525,7 +531,7 @@ export default function Workspace() {
 
                 onRequestClose={CloseModal}
                 style={ec2Form}
-                
+
 
                 overlayClassName="Overlay"
                 contentLabel="Example Modal"
@@ -622,13 +628,24 @@ export default function Workspace() {
 
 
                         </label>
-                        {/* setEc2(prevState => ({
-                            ...prevState,
-                            subnet_name: e.target.value
 
-                        })) */}
+                        <label htmlFor="" style={{ color: "#46246D" }} className="ami_Sel ">Chave SSH</label>
 
+                        <select value={ec2.key_name} className='sel' name="Ami" id="ami_Sel"
+                            onChange={e => setEc2(prevState => ({
+                                ...prevState,
+                                key_name: e.target.value
+                            }))}>
+                                {
+                                    listkeys.map((key) => {
+                                        return(
+                                            <option key={key._id} value={key.name}>{key.name}</option>
+                                        )
+                                    })
+                                }
+                            
 
+                        </select>
 
                         <label htmlFor="ami_Sel" className='ami_Sel'>Subnet</label>
                         <select value={idnameVpc} className='sel' name="Ami" id="vpcEc2_sel" onChange={e => setIdNameVpc(e.target.value)}>
@@ -811,7 +828,7 @@ export default function Workspace() {
 
                         {
 
-                            listWS.length === 0 && <div className="dialogue"><p>Você precisa criar no mínimo de uma Vpc para efetuar o deploy</p></div> 
+                            listWS.length === 0 && <div className="dialogue"><p>Você precisa criar no mínimo de uma Vpc para efetuar o deploy</p></div>
 
                         }
 
