@@ -12,7 +12,7 @@ export default function Keys() {
     const [listworkspaces, setListworkspaces] = useState([])
 
     function ListWorkspaces(){
-        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        axios("https://api.atlas.senai.info/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -23,7 +23,7 @@ export default function Keys() {
     }
 
     function ListKeys() {
-        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_keys")
+        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_keys")
             .then((r) => {
                 console.log(r)
                 setListKey(r.data)
@@ -40,7 +40,7 @@ export default function Keys() {
             toast.warn("Você precisa criar uma workspace antes de criar uma Key")
             return
         } else{
-            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/create_key", Key)
+            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/create_key", Key)
                 .then((r) =>{
                     console.log(r)
                     toast.success("Key criada com sucesso!")
