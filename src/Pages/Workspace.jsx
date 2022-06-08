@@ -700,9 +700,9 @@ export default function Workspace() {
                             cidr_block: e.target.value
 
                         }))}>
-                            <option className='opt' value="0">0</option>
-                            <option className='opt' value="1">1</option>
-                            <option className='opt' value="2">2</option>
+                            <option className='opt' value="0">10.0.0.0/16</option>
+                            <option className='opt' value="1">172.16.0.0/16</option>
+                            <option className='opt' value="2">192.168.0.0/24</option>
                         </select>
 
                         {
@@ -758,9 +758,9 @@ export default function Workspace() {
                             cidr_block: e.target.value
 
                         }))}>
-                            <option className='opt' value="0">0</option>
-                            <option className='opt' value="1">1</option>
-                            <option className='opt' value="2">2</option>
+                            <option className='opt' value="0">10.0.0.0/16</option>
+                            <option className='opt' value="1">172.16.0.0/16</option>
+                            <option className='opt' value="2">192.168.0.0/24</option>
                         </select>
 
                         {

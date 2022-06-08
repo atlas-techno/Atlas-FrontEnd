@@ -4,10 +4,23 @@ import axios from 'axios';
 import '../Assets/Css/Keys.css'
 import DI from "../Assets/img/DownloadIcon.svg";
 import UserPool from "../Utils/UserPool";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Keys() {
     const [key_name, setKey_name] = useState("")
     const [listKey, setListKey] = useState([])
+    const [listworkspaces, setListworkspaces] = useState([])
+
+    function ListWorkspaces(){
+        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        .then((r) => {
+            console.log(r)
+            setListworkspaces(r.data)
+        })
+        .catch((err)=>{
+            console.error(err)
+        })
+    }
 
     function ListKeys() {
         axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_keys")
@@ -19,27 +32,35 @@ export default function Keys() {
     }
 
     function CreateKey(event) {
-        event.preventDefault()
-
         let Key = {
             name: key_name
         }
+        if (listworkspaces.length === 0) {
+            event.preventDefault()
+            toast.warn("Você precisa criar uma workspace antes de criar uma Key")
+            return
+        } else{
+            axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/create_key", Key)
+                .then((r) =>{
+                    console.log(r)
+                    toast.success("Key criada com sucesso!")
+                    ListKeys()
+                }).catch((err) => { console.log(err) })
 
-        axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/create_key", Key)
-            .then((r) =>{
-                console.log(r)
-                ListKeys()
-            }).catch((err) => { console.log(err) })
+        }
+
 
     }
 
     useEffect(() => {
         ListKeys()
+        ListWorkspaces()
     }, [])
 
     return (
         <>
             <Header />
+            <ToastContainer/>
             <main className='MainBG'>
                 <div className="containerKeys">
 
