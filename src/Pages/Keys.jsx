@@ -52,8 +52,8 @@ export default function Keys() {
 
     }
 
-    function DownloadKey(e) {
-        e.preventDefault()
+    function DownloadKey() {
+        
 
         let Key = {
             name: key_name
@@ -102,7 +102,7 @@ export default function Keys() {
                                 return (
                                     <tr key={key._id} class="active-row">
                                         <td>{key.key_name}</td>
-                                        <td><button className='btn_FormK' onClick={() => DownloadKey()}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
+                                        <td><button className='btn_FormK' onClick={DownloadKey}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
                                     </tr>
                                 )
                             })
