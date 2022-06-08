@@ -85,7 +85,7 @@ export default function Keys() {
                         {
                             listKey.map((key) => {
                                 return (
-                                    <tr key={key._id} >
+                                    <tr key={key._id} class="active-row">
                                         <td>{key.key_name}</td>
                                         <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
                                     </tr>
@@ -93,10 +93,6 @@ export default function Keys() {
                             })
                         }
 
-                        {/* <tr class="active-row">
-                            <td>AdminKey</td>
-                            <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
-                        </tr> */}
                         {/* <tr>
                             <td>MainKey</td>
                             <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" /> Download</button></td>
