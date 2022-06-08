@@ -639,7 +639,7 @@ export default function Workspace() {
                                 {
                                     listkeys.map((key) => {
                                         return(
-                                            <option key={key._id} value={key.name}>{key.name}</option>
+                                            <option key={key._id} value={key.key_name}>{key.key_name}</option>
                                         )
                                     })
                                 }
