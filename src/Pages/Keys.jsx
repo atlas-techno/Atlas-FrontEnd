@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 export default function Keys() {
     const [key_name, setKey_name] = useState("")
-    const [listKey, setListKey] = useState([{_id:"1",key_name:"oi"}])
+    const [listKey, setListKey] = useState([])
     const [listworkspaces, setListworkspaces] = useState([])
 
     function ListWorkspaces(){
@@ -103,7 +103,7 @@ export default function Keys() {
                                 return (
                                     <tr key={key._id} class="active-row">
                                         <td>{key.key_name}</td>
-                                        <td><button className='btn_FormK' onClick={DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
+                                        <td><button className='btn_FormK' onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
                                     </tr>
                                 )
                             })
