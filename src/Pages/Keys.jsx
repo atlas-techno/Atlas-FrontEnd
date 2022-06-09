@@ -5,6 +5,7 @@ import '../Assets/Css/Keys.css'
 import DI from "../Assets/img/DownloadIcon.svg";
 import RI from "../Assets/img/ReloadIcon.svg";
 import UserPool from "../Utils/UserPool";
+import { saveAs } from "file-saver";
 import { toast, ToastContainer } from "react-toastify";
 
 export default function Keys() {
@@ -54,20 +55,16 @@ export default function Keys() {
     }
 
     function DownloadKey(keyname) {
-
-
         let Key = {
             name: keyname
         }
-        
-
         console.log(Key)
         axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/keys", Key)
             .then((r) => {
                 console.log(r)
-
-                setKN(r.data.url)
-                toast.success("A "+keyname+" ja pode ser baixada!")
+                // setKN(r.data.url)
+                // toast.success("A "+keyname+" ja pode ser baixada!")
+                saveAs(r.data.url,"example.pem")
                 // axios(r.data.url)
                 //     .then((r) => {
                 //         console.log(r)
@@ -80,12 +77,12 @@ export default function Keys() {
     }
 
     useEffect(() => {
-        listKey.forEach(element => {
-            DownloadKey(element.key_name)
-        });
+        
         ListKeys()
         ListWorkspaces()
     }, [])
+
+    
 
     return (
         <>
@@ -118,8 +115,9 @@ export default function Keys() {
                                     <tr key={key._id} class="active-row">
                                         <td>{key.key_name}</td>
                                         <td className="BlockBtn">
-                                            <button className='btn_FormK' onClick={() => DownloadKey(key.key_name)}><img src={RI} className="DIkeys" alt="Icone de download para a ssh key" />Load Key</button>
-                                            <a className='btn_FormK' href={KN}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</a>
+                                            <button className='btn_FormK' onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button>
+                                            {/* <button className='btn_FormK' onClick={() => saveFile()}><img src={RI} className="DIkeys" alt="Icone de download para a ssh key" />Load Key</button> */}
+                                            {/* <a className='btn_FormK' href={KN}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</a> */}
                                             
                                         </td>
                                     </tr>
