@@ -65,7 +65,15 @@ export default function Keys() {
             .then((r) => {
                 console.log(r)
                 axios(r.data.url)
+                    .then((r) => {
+                        console.log(r)
+                    })
                     .catch((err) => console.log(err))
+
+                    // const link = document.createElement("a");
+                    // link.style.display = "none";
+                    // link.href = URL.createObjectURL(file);
+                    // link.download = file.name;     
             })
             .catch((err) => console.log(err))
     }
@@ -106,9 +114,7 @@ export default function Keys() {
                                     <tr key={key._id} class="active-row">
                                         <td>{key.key_name}</td>
                                         <td>
-                                            <form action={KN + ".pem"} method="get">
                                                 <button className='btn_FormK' download onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button>
-                                            </form>
                                         </td>
                                     </tr>
                                 )
