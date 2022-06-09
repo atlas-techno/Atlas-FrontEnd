@@ -3,7 +3,9 @@ import Header from '../Components/Header'
 import axios from 'axios';
 import '../Assets/Css/Keys.css'
 import DI from "../Assets/img/DownloadIcon.svg";
+import RI from "../Assets/img/ReloadIcon.svg";
 import UserPool from "../Utils/UserPool";
+import { saveAs } from "file-saver";
 import { toast, ToastContainer } from "react-toastify";
 
 export default function Keys() {
@@ -33,7 +35,7 @@ export default function Keys() {
 
     function CreateKey(event) {
         let Key = {
-            name: key_name
+            name: key_name.trim()
         }
         if (listworkspaces.length === 0) {
             event.preventDefault()
@@ -52,15 +54,40 @@ export default function Keys() {
 
     }
 
+    function DownloadKey(keyname) {
+        let Key = {
+            name: keyname
+        }
+        console.log(Key)
+        axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/keys", Key)
+            .then((r) => {
+                console.log(r)
+                // setKN(r.data.url)
+                // toast.success("A "+keyname+" ja pode ser baixada!")
+                saveAs(r.data.url,"example.pem")
+                // axios(r.data.url)
+                //     .then((r) => {
+                //         console.log(r)
+                //     })
+                //     .catch((err) => console.log(err))
+
+                
+            })
+            .catch((err) => console.log(err))
+    }
+
     useEffect(() => {
+        
         ListKeys()
         ListWorkspaces()
     }, [])
 
+    
+
     return (
         <>
             <Header />
-            <ToastContainer/>
+            <ToastContainer />
             <main className='MainBG'>
                 <div className="containerKeys">
 
@@ -69,7 +96,7 @@ export default function Keys() {
                     </div>
                     <form className='Forms_Keys' onSubmit={CreateKey}>
                         <input type="text" placeholder='Cadastre sua chave' onChange={(e) => setKey_name(e.target.value)} className='input_NameK' />
-                        <button type="submit" className='btn_FormKCadastro'>Cadastrar</button>
+                        <button type="submit" className='btn_FormKCadastro' >Cadastrar</button>
 
                     </form>
                 </div>
@@ -87,7 +114,12 @@ export default function Keys() {
                                 return (
                                     <tr key={key._id} class="active-row">
                                         <td>{key.key_name}</td>
-                                        <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
+                                        <td className="BlockBtn">
+                                            <button className='btn_FormK' onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button>
+                                            {/* <button className='btn_FormK' onClick={() => saveFile()}><img src={RI} className="DIkeys" alt="Icone de download para a ssh key" />Load Key</button> */}
+                                            {/* <a className='btn_FormK' href={KN}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</a> */}
+                                            
+                                        </td>
                                     </tr>
                                 )
                             })

@@ -206,3 +206,9 @@
   width: 10%;
   fill: white;
 }
+
+.BlockBtn{
+  display: flex; 
+  width: 50%;
+  justify-content: space-between;
+}
