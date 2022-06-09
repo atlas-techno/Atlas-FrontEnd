@@ -10,16 +10,16 @@ export default function Keys() {
     const [key_name, setKey_name] = useState("")
     const [listKey, setListKey] = useState([])
     const [listworkspaces, setListworkspaces] = useState([])
-
-    function ListWorkspaces(){
-        axios("http://localhost:8000/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
-        .then((r) => {
-            console.log(r)
-            setListworkspaces(r.data)
-        })
-        .catch((err)=>{
-            console.error(err)
-        })
+    const [KN, setKN] = useState("")
+    function ListWorkspaces() {
+        axios("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/query_workspaces")
+            .then((r) => {
+                console.log(r)
+                setListworkspaces(r.data)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
     }
 
     function ListKeys() {
@@ -39,9 +39,9 @@ export default function Keys() {
             event.preventDefault()
             toast.warn("Você precisa criar uma workspace antes de criar uma Key")
             return
-        } else{
+        } else {
             axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/create_key", Key)
-                .then((r) =>{
+                .then((r) => {
                     console.log(r)
                     toast.success("Key criada com sucesso!")
                     ListKeys()
@@ -53,19 +53,21 @@ export default function Keys() {
     }
 
     function DownloadKey(keyname) {
-        
+
 
         let Key = {
             name: keyname
-        } 
+        }
+        setKN(keyname)
+
         console.log(Key)
         axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/keys", Key)
-        .then((r) => {
-            console.log(r)
-            axios(r.data.url)
+            .then((r) => {
+                console.log(r)
+                axios(r.data.url)
+                    .catch((err) => console.log(err))
+            })
             .catch((err) => console.log(err))
-        })
-        .catch((err) => console.log(err))
     }
 
     useEffect(() => {
@@ -76,7 +78,7 @@ export default function Keys() {
     return (
         <>
             <Header />
-            <ToastContainer/>
+            <ToastContainer />
             <main className='MainBG'>
                 <div className="containerKeys">
 
@@ -103,7 +105,11 @@ export default function Keys() {
                                 return (
                                     <tr key={key._id} class="active-row">
                                         <td>{key.key_name}</td>
-                                        <td><button className='btn_FormK' download onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
+                                        <td>
+                                            <form action={KN + ".pem"} method="get">
+                                                <button className='btn_FormK' download onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 )
                             })
