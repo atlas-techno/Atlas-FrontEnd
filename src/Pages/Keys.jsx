@@ -85,7 +85,7 @@ export default function Keys() {
                     </div>
                     <form className='Forms_Keys' onSubmit={CreateKey}>
                         <input type="text" placeholder='Cadastre sua chave' onChange={(e) => setKey_name(e.target.value)} className='input_NameK' />
-                        <button type="submit" className='btn_FormKCadastro'>Cadastrar</button>
+                        <button type="submit" className='btn_FormKCadastro' >Cadastrar</button>
 
                     </form>
                 </div>
@@ -103,7 +103,7 @@ export default function Keys() {
                                 return (
                                     <tr key={key._id} class="active-row">
                                         <td>{key.key_name}</td>
-                                        <td><button className='btn_FormK' onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
+                                        <td><button className='btn_FormK' download onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
                                     </tr>
                                 )
                             })
