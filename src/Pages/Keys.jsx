@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 export default function Keys() {
     const [key_name, setKey_name] = useState("")
-    const [listKey, setListKey] = useState([])
+    const [listKey, setListKey] = useState([{}])
     const [listworkspaces, setListworkspaces] = useState([])
     const [KN, setKN] = useState("")
     function ListWorkspaces() {
@@ -58,24 +58,21 @@ export default function Keys() {
         let Key = {
             name: keyname
         }
-        setKN(keyname)
+        
 
         console.log(Key)
         axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/keys", Key)
             .then((r) => {
                 console.log(r)
+
+                setKN(r.data.url)
                 // axios(r.data.url)
                 //     .then((r) => {
                 //         console.log(r)
                 //     })
                 //     .catch((err) => console.log(err))
 
-                const link = document.createElement("a");
-                link.style.display = "none";
-                link.href = URL.createObjectURL(r.data.url);
-                link.download = KN + ".pem";
-                document.body.appendChild(link);
-                link.click();
+                
             })
             .catch((err) => console.log(err))
     }
@@ -116,7 +113,10 @@ export default function Keys() {
                                     <tr key={key._id} class="active-row">
                                         <td>{key.key_name}</td>
                                         <td>
-                                            <button className='btn_FormK' download onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button>
+                                            <button className='btn_FormK' onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button>
+                                            {
+                                               KN !== "" &&  <a href={KN}>Download</a>
+                                            }
                                         </td>
                                     </tr>
                                 )
