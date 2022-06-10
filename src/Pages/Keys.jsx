@@ -59,7 +59,7 @@ export default function Keys() {
             name: keyname
         }
         console.log(Key)
-        axios.post("http://localhost:8000/" + UserPool.getCurrentUser().getUsername() + "/keys", Key)
+        axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/keys", Key)
             .then((r) => {
                 console.log(r)
                 // setKN(r.data.url)
