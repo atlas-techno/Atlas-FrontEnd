@@ -56,7 +56,6 @@ export default function Cadastrar() {
                 setAccess('')
                 setPrivate('')
                 toast.success("Cadastro realizado com sucesso!")
-                // navigate("/")
                 
             }
             
@@ -118,11 +117,7 @@ export default function Cadastrar() {
 
                         </div>
                     </div>
-
-
-
                 </form>
-                {/* <input type="file"  id="PrivateKey" /> */}
             </div>
         </>
     )

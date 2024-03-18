@@ -14,35 +14,6 @@ export default function Perfil() {
 
     var parseToken = parseJwt(token)
 
-    
-
-    // function SubmitForm(event) {
-    //     event.preventDefault()
-        
-        
-        
-    //     user.changePassword(oldPassword, newPassword, (err, result) => {
-    //         if (err) {
-    //             console.log(err)
-    //         } else {
-    //             console.log(result)
-    //         }
-    //     })
-
-    // }
-
-    // user.getUserAttributes((err, attributes) => {
-    //     if (err) {
-    //         console.log(err)
-    //     } else {
-    //         console.log(attributes)
-    //     }
-    // })
-
-    // console.log(user)
-    // useEffect(() => {
-    //     c
-    // }, [])
     return (
         <div>
             <Header />
@@ -52,11 +23,6 @@ export default function Perfil() {
                     <h1>{parseToken.email}</h1>
 
                 </div>
-                {/* <form onSubmit={SubmitForm}>
-                    <input type="text" placeholder={"old passworld"} onChange={(e) => setOldPassword(e.target.value)} />
-                    <input type="text" placeholder={"new passworld"} onChange={(e) => setNewPassword(e.target.value)} />
-                    <button type="submit">Change Password</button>
-                </form> */}
             </main>
         </div>
     )

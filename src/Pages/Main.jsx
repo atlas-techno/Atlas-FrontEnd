@@ -36,15 +36,12 @@ export default function MainPage() {
 
     function GoWS(WK) {
         console.log(WK)
-
-        // var selectedWk = listworkspaces.filter((w) => w.name == WK.name)
-        // console.log(selectedWk)
         navigate("workspace", { state: { name: WK.name, region: WK.region, id: WK._id } })
     }
 
 
     function ListWorkspaces(){
-        axios("https://api.atlas.senai.info/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        axios("http://localhost:8080/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -56,14 +53,13 @@ export default function MainPage() {
 
     function CreateWS(e) {
         e.preventDefault()
-        axios.post("https://api.atlas.senai.info/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
+        axios.post("http://localhost:8080/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
             "name" : nomeWS,
             "region" : regionWS
         } ).then((r) => {
             console.log(r)
             toast.success("Sua workspace foi cadastrada com sucesso!")
             ListWorkspaces()
-            // navigate('workspace', { state: { name: nomeWS.toString(), region: regionWS.toString(), id: r.data.workspace_id.toString() } })
 
             setModalIsOpen(false)
 
@@ -72,23 +68,12 @@ export default function MainPage() {
         })
 
         console.log(nomeWS)
-        console.log(regionWS)
-
-
-        
-        
+        console.log(regionWS) 
     }
-
-
 
     useEffect(() => {
         ListWorkspaces()
     }, [])
-
-    
-
-
-
 
     return (
         <>

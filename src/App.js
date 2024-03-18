@@ -9,51 +9,6 @@ import Perfil from './Pages/Perfil';
 import Keys from './Pages/Keys';
 
 function App() {
-  
-  
-
-
-  // const Permissaoadm = ({ component: Element }) => (
-  //   <Route
-  //     element={(props) =>
-  //       usuarioAutenticado() === true ? (
-  //         <Element {...props} />
-  //       ) : (
-  //         <Link to="/" />
-  //       )
-  //     }
-  //   />
-  // );
-
-
-
-  // usuarioAutenticado() ? (
-  //   <Navigate replace to="/main" />
-  //   ) : (
-  //     <Main />
-  //   )
-
-  // element={
-  //   usuarioAutenticado() ? (
-  //     <Navigate replace to="main" />
-  //     ) : (
-  //     <Login />
-  // )} />
-  // localStorage.getItem('usuario-login') != null
-
-  
-  // UserPool.getCurrentUser() ? (
-  //   <Main />
-  //   ) : (
-  //     <Navigate to="/" />
-  // )} >
-
-  
-  // UserPool.getCurrentUser() ? (
-  //   <Workspace />
-  //   ) : (
-  //     <Navigate to="/" />
-  // )} />
 
   return (
     <>

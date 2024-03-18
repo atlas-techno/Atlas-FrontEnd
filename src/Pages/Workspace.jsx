@@ -70,11 +70,9 @@ const StyleEc2 = {
         bottom: 'auto',
         paddingLeft: '3rem',
         paddingBottom: '3rem',
-        // paddingRight: '2rem',
 
 
         borderRadius: '10px',
-        // backgroundColor: 'rgba(255, 255, 255, 1)',
         transform: 'translate(-50%, -50%)',
         backdropFilter: 'blur(6px)',
     },
@@ -93,11 +91,9 @@ const StyleSub = {
         bottom: 'auto',
         paddingLeft: '3rem',
         paddingBottom: '3rem',
-        // paddingRight: '2rem',
 
 
         borderRadius: '10px',
-        // backgroundColor: 'rgba(255, 255, 255, 1)',
         transform: 'translate(-50%, -50%)',
         backdropFilter: 'blur(6px)',
     },
@@ -147,8 +143,6 @@ export default function Workspace() {
     const [loading, setLoading] = useState(false)
     const [loadingD, setLoadingD] = useState(true)
     const [loadingDe, setLoadingDe] = useState(true)
-    // const [wsName, setWsName] = useState(location.state.name)
-    // const [wsRegion, setWsRegion] = useState(location.state.region)
 
     const [TandF, setTandF] = useState(false)
 
@@ -159,7 +153,7 @@ export default function Workspace() {
     const [idWk, setIdWk] = useState(location.state.id)
 
     function ListKeys() {
-        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_keys")
+        axios("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_keys")
             .then((r) => {
                 console.log(r)
                 setListkeys(r.data)
@@ -177,8 +171,6 @@ export default function Workspace() {
         }
 
         if (listSubnet.length > 0) {
-            // ec2.subnet_name = subnet.resource_name
-            // console.log(ec2) 
             console.log(keyph)
             var arrayslip = idnameVpc.split("_")
             ec2.subnet_id = arrayslip[0]
@@ -186,9 +178,8 @@ export default function Workspace() {
             ec2.delete_on_termination = TandF
             ec2.key_name = keyph
             console.log(ec2)
-            // console.log(TandF)
 
-            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_ec2", ec2,)
+            axios.post("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -201,7 +192,6 @@ export default function Workspace() {
                 })
 
 
-            // console.log(listEc2)
             setModalIsOpen(false)
         }
     }
@@ -210,7 +200,7 @@ export default function Workspace() {
         if (vpc.name === "") {
             toast.warn("Cadastre um nome a sua Vpc")
         } else {
-            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
+            axios.post("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -231,7 +221,6 @@ export default function Workspace() {
 
     }
     function createSubnet(event) {
-        // setLoading(true)
         event.preventDefault()
         if (listWS.length === 0) {
             toast.warn("Não ha nenhuma vpc cadastrada na Workspace")
@@ -239,7 +228,6 @@ export default function Workspace() {
         }
 
         if (listWS.length > 0) {
-            // subnet.access = TandF
             var idName = nomeVpcSub.split("_")
             console.log(idName[0])
             subnet.vpc_name = idName[1]
@@ -251,7 +239,7 @@ export default function Workspace() {
 
             } else {
 
-                axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
+                axios.post("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
                     .then((r) => {
                         console.log(r)
                         setLoading(false)
@@ -275,7 +263,7 @@ export default function Workspace() {
         setLoadingDe(true)
         console.log(subnet)
 
-        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/deploy")
+        axios("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -303,7 +291,7 @@ export default function Workspace() {
 
 
 
-        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/destroy")
+        axios("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -397,7 +385,7 @@ export default function Workspace() {
     }
 
     function ListarVpcs() {
-        axios("https://api.atlas.senai.info/" + idWk + "/query_vpcs")
+        axios("http://localhost:8080/" + idWk + "/query_vpcs")
             .then((r) => {
                 console.log(r.data)
                 setListWS(r.data)
@@ -410,7 +398,7 @@ export default function Workspace() {
 
     function ListarSubs() {
 
-        axios("https://api.atlas.senai.info/" + idWk + "/query_subnets")
+        axios("http://localhost:8080/" + idWk + "/query_subnets")
             .then((r) => {
                 console.log(r)
                 setListSubnet(r.data)
@@ -421,7 +409,7 @@ export default function Workspace() {
     }
 
     function ListarEc2s() {
-        axios("https://api.atlas.senai.info/" + idWk + "/query_instances")
+        axios("http://localhost:8080/" + idWk + "/query_instances")
             .then((r) => {
                 console.log(r.data)
                 setListEc2(r.data)
@@ -491,11 +479,6 @@ export default function Workspace() {
                         <h1>Vpc Name: <span>{ec2PH.resource_name}</span></h1>
                         <h1>Cidr Block: <span>{ec2PH.cidr_block}</span></h1>
                     </div>
-
-
-
-
-                    {/* <button className="btn_Destory" onClick={() => DeleteVpc()}>Excluir</button> */}
                 </div>
 
             </Modal>
@@ -505,25 +488,14 @@ export default function Workspace() {
                 style={StyleSub}
                 contentLabel="Example Modal"
             >
-
                 <div className="containerModelEc2">
                     <div className="CloseIconVpc">
                         <span onClick={() => CloseSub()}>X</span>
                     </div>
-
-
                     <div className="navNamesSub">
-
-
                         <h1>Subnet Name: <span>{ec2PH.resource_name}</span></h1>
                         <h1>Cidr Block: <span>{ec2PH.cidr_block}</span></h1>
-                        {/* <h1>Acesso: <span>{subnet.access ? <span>privado</span> : <span>publico</span>}</span></h1> */}
-
                     </div>
-
-
-
-                    {/* <button className="btn_Destory" onClick={() => DeleteSub()}>Excluir</button> */}
                 </div>
 
             </Modal>

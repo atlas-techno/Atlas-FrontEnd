@@ -14,7 +14,7 @@ export default function Keys() {
     const [listworkspaces, setListworkspaces] = useState([])
 
     function ListWorkspaces(){
-        axios("https://api.atlas.senai.info/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        axios("http://localhost:8080/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -25,7 +25,7 @@ export default function Keys() {
     }
 
     function ListKeys() {
-        axios("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_keys")
+        axios("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_keys")
             .then((r) => {
                 console.log(r)
                 setListKey(r.data)
@@ -42,7 +42,7 @@ export default function Keys() {
             toast.warn("Você precisa criar uma workspace antes de criar uma Key")
             return
         } else{
-            axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/create_key", Key)
+            axios.post("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/create_key", Key)
                 .then((r) =>{
                     console.log(r)
                     toast.success("Key criada com sucesso!")
@@ -59,19 +59,10 @@ export default function Keys() {
             name: keyname
         }
         console.log(Key)
-        axios.post("https://api.atlas.senai.info/" + UserPool.getCurrentUser().getUsername() + "/keys", Key)
+        axios.post("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/keys", Key)
             .then((r) => {
                 console.log(r)
-                // setKN(r.data.url)
-                // toast.success("A "+keyname+" ja pode ser baixada!")
                 saveAs(r.data.url,"example.pem")
-                // axios(r.data.url)
-                //     .then((r) => {
-                //         console.log(r)
-                //     })
-                //     .catch((err) => console.log(err))
-
-                
             })
             .catch((err) => console.log(err))
     }
@@ -116,40 +107,11 @@ export default function Keys() {
                                         <td>{key.key_name}</td>
                                         <td className="BlockBtn">
                                             <button className='btn_FormK' onClick={() => DownloadKey(key.key_name)}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button>
-                                            {/* <button className='btn_FormK' onClick={() => saveFile()}><img src={RI} className="DIkeys" alt="Icone de download para a ssh key" />Load Key</button> */}
-                                            {/* <a className='btn_FormK' href={KN}><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</a> */}
-                                            
                                         </td>
                                     </tr>
                                 )
                             })
                         }
-
-                        {/* <tr>
-                            <td>MainKey</td>
-                            <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" /> Download</button></td>
-                        </tr>
-                        <tr class="active-row">
-                            <td>AdminKey</td>
-                            <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
-                        </tr>
-                        <tr>
-                            <td>MainKey</td>
-                            <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" /> Download</button></td>
-                        </tr>
-                        <tr class="active-row">
-                            <td>AdminKey</td>
-                            <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
-                        </tr>
-                        <tr>
-                            <td>MainKey</td>
-                            <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" /> Download</button></td>
-                        </tr>
-                        <tr class="active-row">
-                            <td>AdminKey</td>
-                            <td><button className='btn_FormK'><img src={DI} className="DIkeys" alt="Icone de download para a ssh key" />Download</button></td>
-                        </tr> */}
-
                     </tbody>
                 </table>
             </main>

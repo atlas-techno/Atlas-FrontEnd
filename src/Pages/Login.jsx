@@ -8,33 +8,31 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { parseJwt } from "../Services/auth";
-// import {AccountContext} from "../Components/Account";
-
 
 
 export default function Login() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
-    // const [msg, setMsg] = useState(false)
+    
     const [loading, setLoading] = useState(false)
 
-    // const { authenticate } = useContext(AccountContext);
+    
 
     const navigate = useNavigate()
 
 
 
     const EfetuarLogin = (e) => {
-        // window.location.reload(false)
+         window.location.reload(false)
         setLoading(true)
 
-        // authenticate(email, senha)
-        //     .then((data) => {
-        //         console.log(data)
-        //     })
-        //     .catch((err) => {
-        //         console.error(err)
-        //     })
+        authenticate(email, senha)
+             .then((data) => {
+                 console.log(data)
+             })
+             .catch((err) => {
+                 console.error(err)
+             })
 
         const user = new CognitoUser({
             Username: email,
@@ -56,8 +54,6 @@ export default function Login() {
                     }
                 })
 
-
-
                 user.getSession((err, session) => {
                     if (err) {
                         console.log(err)
@@ -68,38 +64,30 @@ export default function Login() {
 
                 localStorage.setItem('usuario-login', data.getIdToken().getJwtToken());
                 navigate("/main")
-                // toast.success("Login efetuado com sucesso!", {autoClose: 1000})
+                
                 setLoading(false)
 
             },
             onFailure: (err) => {
                 setLoading(false)
-                // setMsg(true)
+                
                 console.error("onFailure: ", err);
                 toast.error("Login não efetuado com sucesso!")
             },
             newPasswordRequired: (data) => {
                 setLoading(false)
-                // navigate("/main")
+                
                 console.log("newPasswordRequired: ", data);
             },
         });
-
-
     }
 
-    // useEffect(() => {
-    //     localStorage.removeItem("usuario-login")
-    // }, [])
 
     return (
         <div>
             <main className="mainContainerLogin" >
                 <img src={logo} className="imgLogo" alt="" />
                 <div className="BgMainLogin">
-                    {/* <div className="containerHeaderMobile">
-
-                    </div> */}
                         <img src={logo} className="LogoMobile" alt="" />
                         <h1 className="H1Mobile">Bem Vindo ao Atlas</h1>
                     <form className="FormContainerLogin" >
@@ -118,15 +106,12 @@ export default function Login() {
                                     <label htmlFor="Senha">Senha</label>
                                     <input type="password" value={senha} id="Senha" onChange={(e) => setSenha(e.target.value)} />
                                 </div>
-                                {/* {
-                                    msg === true && <span className="ErrorMsGLogin">Login não efetuado corretamente</span>
-                                } */}
 
                             </div>
                             {
                                 loading === true && <button type="submit" disabled className="BtnLogin">Login</button>
                             }
-                            {/* <Link className="linkBtnLogin" to='/main'>Login</Link> */}
+
                             {
                                 loading === false && <button onClick={EfetuarLogin} className="BtnLogin">Login</button>
                             }
