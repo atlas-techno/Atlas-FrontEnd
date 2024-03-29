@@ -26,14 +26,14 @@ export default function Login() {
          window.location.reload(false)
         setLoading(true)
 
-        authenticate(email, senha)
+        /*authenticate(email, senha)
              .then((data) => {
                  console.log(data)
              })
              .catch((err) => {
                  console.error(err)
              })
-
+	*/
         const user = new CognitoUser({
             Username: email,
             Pool: UserPool,
