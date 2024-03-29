@@ -1,0 +1,38 @@
+name: main
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Installing dependencies...
+        run: npm install
+      - name: Building react app...
+        run: npm run build 
+      - name: Archiving build...
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build/*
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Cleaning up...
+        run: rm -rf ./*
+      - name: Grabing build...
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+      - name: Deploy static site to S3 bucket...
+        run: aws s3 sync . s3://atlas-technologies-frontend --delete --exclude '.git/*' --exclude '.github/*' --exclude '.gitignore'
