@@ -12,6 +12,7 @@ import Cad from "../Assets/img/lock-solid.svg";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import NotFound from "./notFound.jsx";
+//import { getCurrentUser } from "../Utils/UserPool.jsx";
 
 
 Modal.setAppElement('#root')
@@ -112,6 +113,8 @@ export default function Workspace() {
     const [ec2PH, setEc2PH] = useState({})
     const [listkeys, setListkeys] = useState([])
 
+    //const currentUser = getCurrentUser("a");
+    const currentUser = "Weslley"
     const [vpc, setVpc] = useState({
         resource_name: '',
         cidr_block: 0
@@ -153,7 +156,7 @@ export default function Workspace() {
     const [idWk, setIdWk] = useState(location.state.id)
 
     function ListKeys() {
-        axios("http://localhost:8080/" + currentUser + "/query_ssh_keys")
+        axios("https://atlastechnologies.cloud/" + currentUser + "/query_ssh_keys")
             .then((r) => {
                 console.log(r)
                 setListkeys(r.data)
@@ -179,7 +182,7 @@ export default function Workspace() {
             ec2.key_name = keyph
             console.log(ec2)
 
-            axios.post("http://localhost:8080/" + currentUser + "/" + idWk + "/create_ec2", ec2,)
+            axios.post("https://atlastechnologies.cloud/" + currentUser + "/" + idWk + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -190,7 +193,7 @@ export default function Workspace() {
                     console.log(erro)
                     setLoading(false)
                 })
-
+            listEc2.push({resource_name: "a" })
 
             setModalIsOpen(false)
         }
@@ -200,7 +203,7 @@ export default function Workspace() {
         if (vpc.name === "") {
             toast.warn("Cadastre um nome a sua Vpc")
         } else {
-            axios.post("http://localhost:8080/" + currentUser + "/" + idWk + "/create_vpc", vpc)
+            axios.post("https://atlastechnologies.cloud/" + currentUser + "/" + idWk + "/create_vpc", vpc)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -214,6 +217,8 @@ export default function Workspace() {
                     console.log("Houve um erro ao cadastrar sua vpc")
                     setLoading(false)
                 })
+            
+            listWS.push({resource_name: "a" })
 
             console.log(listWS)
             setModa3lIsOpen(false)
@@ -239,7 +244,8 @@ export default function Workspace() {
 
             } else {
 
-                axios.post("http://localhost:8080/" + currentUser + "/" + idWk + "/create_subpub", subnet)
+                listSubnet.push({resource_name: "a" })
+                axios.post("https://atlastechnologies.cloud/" + currentUser + "/" + idWk + "/create_subpub", subnet)
                     .then((r) => {
                         console.log(r)
                         setLoading(false)
@@ -263,7 +269,7 @@ export default function Workspace() {
         setLoadingDe(true)
         console.log(subnet)
 
-        axios("http://localhost:8080/" + currentUser + "/" + idWk + "/deploy")
+        axios("https://atlastechnologies.cloud/" + currentUser + "/" + idWk + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -291,7 +297,7 @@ export default function Workspace() {
 
 
 
-        axios("http://localhost:8080/" + currentUser + "/" + idWk + "/destroy")
+        axios("https://atlastechnologies.cloud/" + currentUser + "/" + idWk + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -385,7 +391,7 @@ export default function Workspace() {
     }
 
     function ListarVpcs() {
-        axios("http://localhost:8080/" + idWk + "/query_vpcs")
+        axios("https://atlastechnologies.cloud/" + idWk + "/query_vpcs")
             .then((r) => {
                 console.log(r.data)
                 setListWS(r.data)
@@ -398,7 +404,7 @@ export default function Workspace() {
 
     function ListarSubs() {
 
-        axios("http://localhost:8080/" + idWk + "/query_subnets")
+        axios("https://atlastechnologies.cloud/" + idWk + "/query_subnets")
             .then((r) => {
                 console.log(r)
                 setListSubnet(r.data)
@@ -409,7 +415,7 @@ export default function Workspace() {
     }
 
     function ListarEc2s() {
-        axios("http://localhost:8080/" + idWk + "/query_instances")
+        axios("https://atlastechnologies.cloud/" + idWk + "/query_instances")
             .then((r) => {
                 console.log(r.data)
                 setListEc2(r.data)

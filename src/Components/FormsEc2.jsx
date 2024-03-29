@@ -32,7 +32,7 @@ function FormsEc2() {
     console.log(ec2)
     console.log(TandF)
 
-    axios.post('http://localhost:8080/create-ec2', ec2,)
+    axios.post('https://atlastechnologies.cloud/create-ec2', ec2,)
       .then((r) => {
         console.log(r)
         toast.success('Ec2 has been created with success!')
@@ -52,7 +52,7 @@ function FormsEc2() {
     setLoadingDe(true)
     toast.info('Deploy has been iniated, this should take some seconds')
 
-    axios('http://localhost:8080/deploy')
+    axios('https://atlastechnologies.cloud/deploy')
       .then((r) => {
         console.log(r)
         toast.success('Ec2 has been deployed with success!')
@@ -76,7 +76,7 @@ function FormsEc2() {
     setLoadingD(true)
     toast.info('Destroy has been iniated, this should take some seconds')
 
-    axios('http://localhost:8080/destroy')
+    axios('https://atlastechnologies.cloud/destroy')
       .then((r) => {
         console.log(r)
         toast.success('Ec2 has been destroyed with success!')

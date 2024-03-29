@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Header from '../Components/Header'
-import Pool from "../Utils/UserPool";
+import {getCurrentUser} from "../Utils/UserPool";
 import { parseJwt } from "../Services/auth";
 
 export default function Perfil() {
@@ -8,7 +8,7 @@ export default function Perfil() {
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
 
-    const user = Pool.getCurrentUser()
+    const user = getCurrentUser("a");
 
     var token = localStorage.getItem("usuario-login")
 

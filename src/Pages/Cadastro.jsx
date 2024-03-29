@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import BackBtn from "../Assets/img/BackBtn.svg";
+import { signIn, signUp } from "../Services/authService";
 
 
 export default function Cadastrar() {
@@ -27,8 +28,8 @@ export default function Cadastrar() {
         console.log(nomeC)
 
         try {
-            await signUp(email, password);
-            
+            await signUp(nomeC,email, senha,Access,Private);
+            toast.success("Cadastro realizado com sucesso!")  
             
           } catch (error) {
             setLoading(false)
@@ -36,7 +37,7 @@ export default function Cadastrar() {
             toast.error("Cadastro não efetuado corretamente!")
           }
 
-        toast.success("Cadastro realizado com sucesso!")    
+          
 
         // UserPool.signUp(email, senha, [{
         //     Name: 'name',

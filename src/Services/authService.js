@@ -14,9 +14,14 @@ export const signIn = async (username, password) => {
         PASSWORD: password,
         },
     };
+
+
     try {
         const command = new InitiateAuthCommand(params);
+        
         const { AuthenticationResult } = await cognitoClient.send(command);
+        console.log("AuthenticationResult: " + AuthenticationResult)
+
         if (AuthenticationResult) {
         sessionStorage.setItem("idToken", AuthenticationResult.IdToken || '');
         sessionStorage.setItem("accessToken", AuthenticationResult.AccessToken || '');
@@ -40,11 +45,11 @@ export const signUp = async (name,email, password,access,priv) => {
             Value: name,
         },
         {
-            Name: 'custom:Access_Key',
+            Name: 'custom:Access_key',
             Value: access
         },
         {
-            Name: 'custom:Private_Key',
+            Name: 'custom:Private_key',
             Value: priv
         }],
     };

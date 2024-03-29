@@ -2,7 +2,7 @@ import logo from "../Assets/img/Logo.svg";
 import "../Assets/Css/NotFoundStyle.css";
 import { useNavigate } from "react-router-dom";
 
-import Pool from "../Utils/UserPool";
+import {getCurrentUser} from "../Utils/UserPool";
 
 export default function NotFound() {
 
@@ -12,7 +12,7 @@ export default function NotFound() {
     function Logout(e) {
         e.preventDefault()
 
-        const user = Pool.getCurrentUser()
+        const user = getCurrentUser("a")
 
 
 

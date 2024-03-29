@@ -24,8 +24,9 @@ export default function MainPage() {
     const [idWorkspace, setIdWorkspace] = useState("")
     const navigate = useNavigate()
     
-    const currentUser = getCurrentUser(location.state.email)
-
+    //const currentUser = getCurrentUser(location.state.email)
+    const currentUser = "Weslley";
+    
     function OpenModal() {
         setModalIsOpen(true)
 
@@ -42,7 +43,7 @@ export default function MainPage() {
 
 
     function ListWorkspaces(){
-        axios("http://localhost:8080/"+currentUser+"/query_workspaces")
+        axios("https://atlastechnologies.cloud/"+currentUser+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -54,20 +55,22 @@ export default function MainPage() {
 
     function CreateWS(e) {
         e.preventDefault()
-        axios.post("http://localhost:8080/"+ currentUser +"/create_workspace",{
-            "name" : nomeWS,
-            "region" : regionWS
-        } ).then((r) => {
-            console.log(r)
-            toast.success("Sua workspace foi cadastrada com sucesso!")
-            ListWorkspaces()
+        // axios.post("https://atlastechnologies.cloud/"+ currentUser +"/create_workspace",{
+        //     "name" : nomeWS,
+        //     "region" : regionWS
+        // } ).then((r) => {
+        //     console.log(r)
+        //     toast.success("Sua workspace foi cadastrada com sucesso!")
+        //     ListWorkspaces()
 
-            setModalIsOpen(false)
+        //     setModalIsOpen(false)
 
-        }).catch((err) => {
-            console.error(err)
-        })
+        // }).catch((err) => {
+        //     console.error(err)
+        // })
 
+        listworkspaces.push({name: nomeWS, region: regionWS})
+        setModalIsOpen(false)
         console.log(nomeWS)
         console.log(regionWS) 
     }

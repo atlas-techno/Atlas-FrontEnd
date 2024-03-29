@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { parseJwt } from "../Services/auth";
-import { signIn, signUp } from './authService';
+import { signIn, signUp } from '../Services/authService';
 
 
 export default function Login() {
@@ -27,26 +27,26 @@ export default function Login() {
         setLoading(true)
 
         e.preventDefault();
-        try {
-        const session = await signIn(email, senha);
-        console.log('Sign in successful', session);
-        if (session && session.AccessToken !== 'undefined') {
-            sessionStorage.setItem('user-session', session.AccessToken);
-            if (sessionStorage.getItem('accessToken')) {
-                localStorage.setItem('usuario-login', data.getIdToken().getJwtToken());
-                navigate("/main", {state:{email: email}})
-            } else {
-                setLoading(false)
-                console.error('Session token was not set properly.');
-            }
-        } else {
-            setLoading(false)
-            console.error('SignIn session or AccessToken is undefined.');
-        }
-        } catch (error) {
-            alert(`Sign in failed: ${error}`);
-            setLoading(false)
-        }
+        // try {
+        // const session = await signIn(email, senha);
+        // console.log('Sign in successful', session);
+        // if (session && session.AccessToken !== 'undefined') {
+        //     sessionStorage.setItem('user-session', session.AccessToken);
+        //     if (sessionStorage.getItem('accessToken')) {
+                
+        //     } else {
+        //         setLoading(false)
+        //         console.error('Session token was not set properly.');
+        //     }
+        // } else {
+        //     setLoading(false)
+        //     console.error('SignIn session or AccessToken is undefined.');
+        //     console.log(session);
+        // }
+        // } catch (error) {
+        //     alert(`Sign in failed: ${error}`);
+        //     setLoading(false)
+        // }
 
         // const user = new CognitoUser({
         //     Username: email,
@@ -94,6 +94,7 @@ export default function Login() {
         //         console.log("newPasswordRequired: ", data);
         //     },
         // });
+        navigate("/main", {state:{email: email}})
     }
 
     return (

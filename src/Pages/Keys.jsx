@@ -7,15 +7,16 @@ import RI from "../Assets/img/ReloadIcon.svg";
 //import UserPool from "../Utils/UserPool";
 import { saveAs } from "file-saver";
 import { toast, ToastContainer } from "react-toastify";
+import { getCurrentUser } from "../Utils/UserPool";
 
 export default function Keys() {
     const [key_name, setKey_name] = useState("")
     const [listKey, setListKey] = useState([])
     const [listworkspaces, setListworkspaces] = useState([])
-
+    const currentUser = getCurrentUser("A")
 
     function ListWorkspaces(){
-        axios("http://localhost:8080/"+currentUser+"/query_workspaces")
+        axios("https://atlastechnologies.cloud/"+currentUser+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -26,7 +27,7 @@ export default function Keys() {
     }
 
     function ListKeys() {
-        axios("http://localhost:8080/" + currentUser + "/query_ssh_keys")
+        axios("https://atlastechnologies.cloud/" + currentUser + "/query_ssh_keys")
             .then((r) => {
                 console.log(r)
                 setListKey(r.data)
@@ -43,7 +44,7 @@ export default function Keys() {
             toast.warn("Você precisa criar uma workspace antes de criar uma Key")
             return
         } else{
-            axios.post("http://localhost:8080/" + currentUser + "/create_key", Key)
+            axios.post("https://atlastechnologies.cloud/" + currentUser + "/create_key", Key)
                 .then((r) =>{
                     console.log(r)
                     toast.success("Key criada com sucesso!")
@@ -60,7 +61,7 @@ export default function Keys() {
             name: keyname
         }
         console.log(Key)
-        axios.post("http://localhost:8080/" + currentUser + "/keys", Key)
+        axios.post("https://atlastechnologies.cloud/" + currentUser + "/keys", Key)
             .then((r) => {
                 console.log(r)
                 saveAs(r.data.url,"example.pem")
