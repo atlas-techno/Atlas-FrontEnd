@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import UserPool from "../Utils/UserPool";
+//import UserPool from "../Utils/UserPool";
 import "../Assets/Css/CadastroStyle.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -19,54 +19,54 @@ export default function Cadastrar() {
     const navigate = useNavigate()
 
 
-    const Cadastrar = (event) => {
+    const  Cadastrar = async (event) => {
         event.preventDefault()
         setLoading(true)
         console.log(email)
         console.log(senha)
         console.log(nomeC)
 
-
-    
-
-
-        UserPool.signUp(email, senha, [{
-            Name: 'name',
-            Value: nomeC
-        },
-        {
-            Name: 'custom:Access_Key',
-            Value: Access
-        },
-        {
-            Name: 'custom:Private_Key',
-            Value: Private
-        }], null, (err, data) => {
-            if (err) {
-                setLoading(false)
-                toast.error("Cadastro não efetuado corretamente!")
-                console.error(err)
-            } else {
-                setLoading(false)
-                
-                console.log(data)
-                setEmail('')
-                setSenha('')
-                setNomeC('')
-                setAccess('')
-                setPrivate('')
-                toast.success("Cadastro realizado com sucesso!")
-                
-            }
+        try {
+            await signUp(email, password);
             
             
-        })
-        
+          } catch (error) {
+            setLoading(false)
+            alert(`Sign up failed: ${error}`);
+            toast.error("Cadastro não efetuado corretamente!")
+          }
 
+        toast.success("Cadastro realizado com sucesso!")    
 
+        // UserPool.signUp(email, senha, [{
+        //     Name: 'name',
+        //     Value: nomeC
+        // },
+        // {
+        //     Name: 'custom:Access_Key',
+        //     Value: Access
+        // },
+        // {
+        //     Name: 'custom:Private_Key',
+        //     Value: Private
+        // }], null, (err, data) => {
+        //     if (err) {
+        //         setLoading(false)
+        //         toast.error("Cadastro não efetuado corretamente!")
+        //         console.error(err)
+        //     } else {
+        //         setLoading(false)
+                
+        //         console.log(data)
+        //         setEmail('')
+        //         setSenha('')
+        //         setNomeC('')
+        //         setAccess('')
+        //         setPrivate('')
+        //         toast.success("Cadastro realizado com sucesso!")  
+        //     }     
+        // })
     }
-
-
 
     return (
         <>

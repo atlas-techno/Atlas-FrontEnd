@@ -12,10 +12,7 @@ export default function Header() {
 
     function Logout(e) {
         e.preventDefault()
-
         const user = Pool.getCurrentUser()
-
-
 
         if (user) {
             user.signOut()
@@ -28,8 +25,6 @@ export default function Header() {
     const BackHome = () => {
         navigate("/main")
     }
-
-
 
     return (
         <>

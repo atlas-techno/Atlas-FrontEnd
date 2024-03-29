@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import Header from "../Components/Header"
 import "../Assets/Css/MainPage.css"
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
-import UserPool from "../Utils/UserPool";
+//import UserPool from "../Utils/UserPool";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
+import { getCurrentUser } from "../Utils/UserPool";
 
 
 
@@ -14,7 +15,7 @@ Modal.setAppElement('#root')
 
 export default function MainPage() {
 
-
+    const location = useLocation();
     const [listworkspaces, setListworkspaces] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [nomeWS, setNomeWS] = useState("")
@@ -23,7 +24,7 @@ export default function MainPage() {
     const [idWorkspace, setIdWorkspace] = useState("")
     const navigate = useNavigate()
     
-    
+    const currentUser = getCurrentUser(location.state.email)
 
     function OpenModal() {
         setModalIsOpen(true)
@@ -41,7 +42,7 @@ export default function MainPage() {
 
 
     function ListWorkspaces(){
-        axios("http://localhost:8080/"+UserPool.getCurrentUser().getUsername()+"/query_workspaces")
+        axios("http://localhost:8080/"+currentUser+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -53,7 +54,7 @@ export default function MainPage() {
 
     function CreateWS(e) {
         e.preventDefault()
-        axios.post("http://localhost:8080/"+ UserPool.getCurrentUser().getUsername() +"/create_workspace",{
+        axios.post("http://localhost:8080/"+ currentUser +"/create_workspace",{
             "name" : nomeWS,
             "region" : regionWS
         } ).then((r) => {

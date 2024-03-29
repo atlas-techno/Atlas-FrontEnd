@@ -1,13 +1,14 @@
 import logo from "../Assets/img/Logo.svg";
 import logoM from "../Assets/img/LogoMobile.svg";
 import React, { useState, useEffect, useContext } from "react"
-import UserPool from "../Utils/UserPool";
+//import UserPool from "../Utils/UserPool";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import "../Assets/Css/LoginStyle.css"
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { parseJwt } from "../Services/auth";
+import { signIn, signUp } from './authService';
 
 
 export default function Login() {
@@ -22,66 +23,78 @@ export default function Login() {
 
 
 
-    const EfetuarLogin = (e) => {
-         window.location.reload(false)
+    const EfetuarLogin = async (e) => {
         setLoading(true)
 
-        authenticate(email, senha)
-             .then((data) => {
-                 console.log(data)
-             })
-             .catch((err) => {
-                 console.error(err)
-             })
-
-        const user = new CognitoUser({
-            Username: email,
-            Pool: UserPool,
-        });
-
-        const authDetails = new AuthenticationDetails({
-            Username: email,
-            Password: senha,
-        });
-
-        user.authenticateUser(authDetails, {
-            onSuccess: (data) => {
-                user.getUserAttributes((err, attributes) => {
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        console.log(attributes)
-                    }
-                })
-
-                user.getSession((err, session) => {
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        sessionStorage.setItem('user-session', session.idToken.jwtToken)
-                    }
-                })
-
+        e.preventDefault();
+        try {
+        const session = await signIn(email, senha);
+        console.log('Sign in successful', session);
+        if (session && session.AccessToken !== 'undefined') {
+            sessionStorage.setItem('user-session', session.AccessToken);
+            if (sessionStorage.getItem('accessToken')) {
                 localStorage.setItem('usuario-login', data.getIdToken().getJwtToken());
-                navigate("/main")
-                
+                navigate("/main", {state:{email: email}})
+            } else {
                 setLoading(false)
+                console.error('Session token was not set properly.');
+            }
+        } else {
+            setLoading(false)
+            console.error('SignIn session or AccessToken is undefined.');
+        }
+        } catch (error) {
+            alert(`Sign in failed: ${error}`);
+            setLoading(false)
+        }
 
-            },
-            onFailure: (err) => {
-                setLoading(false)
+        // const user = new CognitoUser({
+        //     Username: email,
+        //     Pool: UserPool,
+        // });
+
+        // const authDetails = new AuthenticationDetails({
+        //     Username: email,
+        //     Password: senha,
+        // });
+
+        // user.authenticateUser(authDetails, {
+        //     onSuccess: (data) => {
+        //         user.getUserAttributes((err, attributes) => {
+        //             if (err) {
+        //                 console.log(err)
+        //             } else {
+        //                 console.log(attributes)
+        //             }
+        //         })
+
+        //         user.getSession((err, session) => {
+        //             if (err) {
+        //                 console.log(err)
+        //             } else {
+        //                 sessionStorage.setItem('user-session', session.idToken.jwtToken)
+        //             }
+        //         })
+
+        //         localStorage.setItem('usuario-login', data.getIdToken().getJwtToken());
+        //         navigate("/main")
                 
-                console.error("onFailure: ", err);
-                toast.error("Login não efetuado com sucesso!")
-            },
-            newPasswordRequired: (data) => {
-                setLoading(false)
+        //         setLoading(false)
+
+        //     },
+        //     onFailure: (err) => {
+        //         setLoading(false)
                 
-                console.log("newPasswordRequired: ", data);
-            },
-        });
+        //         console.error("onFailure: ", err);
+        //         toast.error("Login não efetuado com sucesso!")
+        //     },
+        //     newPasswordRequired: (data) => {
+        //         setLoading(false)
+                
+        //         console.log("newPasswordRequired: ", data);
+        //     },
+        // });
     }
-
 
     return (
         <div>

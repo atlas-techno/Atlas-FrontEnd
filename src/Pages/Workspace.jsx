@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 import Ec2Icon from "../Assets/img/Ec2Icon.svg";
 import axios from 'axios';
 import '../Assets/Css/Form.css';
-import UserPool from "../Utils/UserPool";
+//import UserPool from "../Utils/UserPool";
 import CadAberto from "../Assets/img/lock-open-solid.svg";
 import Cad from "../Assets/img/lock-solid.svg";
 import { toast, ToastContainer } from "react-toastify";
@@ -153,7 +153,7 @@ export default function Workspace() {
     const [idWk, setIdWk] = useState(location.state.id)
 
     function ListKeys() {
-        axios("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/query_ssh_keys")
+        axios("http://localhost:8080/" + currentUser + "/query_ssh_keys")
             .then((r) => {
                 console.log(r)
                 setListkeys(r.data)
@@ -179,7 +179,7 @@ export default function Workspace() {
             ec2.key_name = keyph
             console.log(ec2)
 
-            axios.post("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_ec2", ec2,)
+            axios.post("http://localhost:8080/" + currentUser + "/" + idWk + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -200,7 +200,7 @@ export default function Workspace() {
         if (vpc.name === "") {
             toast.warn("Cadastre um nome a sua Vpc")
         } else {
-            axios.post("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_vpc", vpc)
+            axios.post("http://localhost:8080/" + currentUser + "/" + idWk + "/create_vpc", vpc)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -239,7 +239,7 @@ export default function Workspace() {
 
             } else {
 
-                axios.post("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/create_subpub", subnet)
+                axios.post("http://localhost:8080/" + currentUser + "/" + idWk + "/create_subpub", subnet)
                     .then((r) => {
                         console.log(r)
                         setLoading(false)
@@ -263,7 +263,7 @@ export default function Workspace() {
         setLoadingDe(true)
         console.log(subnet)
 
-        axios("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/deploy")
+        axios("http://localhost:8080/" + currentUser + "/" + idWk + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -291,7 +291,7 @@ export default function Workspace() {
 
 
 
-        axios("http://localhost:8080/" + UserPool.getCurrentUser().getUsername() + "/" + idWk + "/destroy")
+        axios("http://localhost:8080/" + currentUser + "/" + idWk + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
