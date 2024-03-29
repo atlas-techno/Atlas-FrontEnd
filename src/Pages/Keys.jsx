@@ -8,12 +8,13 @@ import RI from "../Assets/img/ReloadIcon.svg";
 import { saveAs } from "file-saver";
 import { toast, ToastContainer } from "react-toastify";
 import { getCurrentUser } from "../Utils/UserPool";
+import config from "../Utils/config.json";
 
 export default function Keys() {
     const [key_name, setKey_name] = useState("")
     const [listKey, setListKey] = useState([])
     const [listworkspaces, setListworkspaces] = useState([])
-    const currentUser = getCurrentUser("A")
+    const currentUser = config.mockUser
 
     function ListWorkspaces(){
         axios("https://atlastechnologies.cloud/"+currentUser+"/query_workspaces")

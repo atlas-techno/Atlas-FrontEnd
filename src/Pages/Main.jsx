@@ -8,7 +8,7 @@ import Modal from 'react-modal';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import { getCurrentUser } from "../Utils/UserPool";
-
+import config from "../Utils/config.json";
 
 
 Modal.setAppElement('#root')
@@ -24,8 +24,7 @@ export default function MainPage() {
     const [idWorkspace, setIdWorkspace] = useState("")
     const navigate = useNavigate()
     
-    //const currentUser = getCurrentUser(location.state.email)
-    const currentUser = "Weslley";
+    const currentUser = config.mockUser;
     
     function OpenModal() {
         setModalIsOpen(true)

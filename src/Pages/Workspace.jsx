@@ -12,6 +12,7 @@ import Cad from "../Assets/img/lock-solid.svg";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import NotFound from "./notFound.jsx";
+import config from "../Utils/config.json";
 //import { getCurrentUser } from "../Utils/UserPool.jsx";
 
 
@@ -113,8 +114,8 @@ export default function Workspace() {
     const [ec2PH, setEc2PH] = useState({})
     const [listkeys, setListkeys] = useState([])
 
-    //const currentUser = getCurrentUser("a");
-    const currentUser = "Weslley"
+    //const currentUser = config.mockUsergetCurrentUser("a");
+    const currentUser = config.mockUser
     const [vpc, setVpc] = useState({
         resource_name: '',
         cidr_block: 0
