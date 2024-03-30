@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 //import UserPool from "../Utils/UserPool";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
-import { getCurrentUser } from "../Utils/UserPool";
+import { parseJwt } from "../Services/auth";
 import config from "../Utils/config.json";
 
 
@@ -23,9 +23,10 @@ export default function MainPage() {
 
     const [idWorkspace, setIdWorkspace] = useState("")
     const navigate = useNavigate()
+
+    const currentUser =  (parseJwt(sessionStorage.getItem('idToken')).name).trim()
     
-    const currentUser = getCurrentUser(location.state.email);
-    
+    console.log("CurrentUser: " + currentUser.trim())
     function OpenModal() {
         setModalIsOpen(true)
 
@@ -67,8 +68,6 @@ export default function MainPage() {
         }).catch((err) => {
             console.error(err)
         })
-
-        //listworkspaces.push({name: nomeWS, region: regionWS})
         setModalIsOpen(false)
         console.log(nomeWS)
         console.log(regionWS) 

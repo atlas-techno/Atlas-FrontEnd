@@ -23,6 +23,25 @@
     color: var(--roxobase);
 }
 
+.containerNotfound img{
+    animation: Rotation 6s infinite;
+}
+
+@keyframes Rotation {
+    0% {
+        transform: scale(.9);
+        /* border-radius: 100%; */
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(.9);
+    }
+} 
+
 
 .BackLoginNF{
     margin-top: 3rem;

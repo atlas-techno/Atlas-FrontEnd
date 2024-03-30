@@ -4,17 +4,16 @@ import axios from 'axios';
 import '../Assets/Css/Keys.css'
 import DI from "../Assets/img/DownloadIcon.svg";
 import RI from "../Assets/img/ReloadIcon.svg";
-//import UserPool from "../Utils/UserPool";
+import { parseJwt } from "../Services/auth";
 import { saveAs } from "file-saver";
 import { toast, ToastContainer } from "react-toastify";
-import { getCurrentUser } from "../Utils/UserPool";
 import config from "../Utils/config.json";
 
 export default function Keys() {
     const [key_name, setKey_name] = useState("")
     const [listKey, setListKey] = useState([])
     const [listworkspaces, setListworkspaces] = useState([])
-    const currentUser = getCurrentUser();
+    const currentUser =  (parseJwt(sessionStorage.getItem('idToken')).name).trim()
 
     function ListWorkspaces(){
         axios(config.apiEndpoint+currentUser+"/query_workspaces")

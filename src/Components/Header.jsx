@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../Assets/img/Logo.svg";
 import logoutIcon from "../Assets/img/logoutIcon.svg";
 import "../Assets/Css/HeaderStyle.css"
-import {getCurrentUser} from "../Utils/UserPool";
+import { parseJwt } from "../Services/auth";
 import Key from "../Assets/img/key-solid.svg";
 
 
@@ -12,12 +12,12 @@ export default function Header() {
 
     function Logout(e) {
         e.preventDefault()
-        // const user = getCurrentUser("email")
+        
+        const currentUser =  (parseJwt(sessionStorage.getItem('idToken')).name).trim()
 
-        // if (user) {
-        //     user.signOut()
-        //     localStorage.clear()
-        // }
+        if (currentUser) {
+            sessionStorage.clear()
+        }
         navigate("/")
 
     }

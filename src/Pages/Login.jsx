@@ -16,13 +16,7 @@ export default function Login() {
     const [senha, setSenha] = useState("")
     
     const [loading, setLoading] = useState(false)
-
-    
-
     const navigate = useNavigate()
-
-
-
     const EfetuarLogin = async (e) => {
         setLoading(true)
 
@@ -34,7 +28,7 @@ export default function Login() {
         if (session && session.AccessToken !== 'undefined') {
             sessionStorage.setItem('user-session', session.AccessToken);
             if (sessionStorage.getItem('accessToken')) {
-                navigate("/main", {state:{email: email,nome: senha }})
+                navigate("/main")
             } else {
                 setLoading(false)
                 console.error('Session token was not set properly.');
@@ -48,53 +42,6 @@ export default function Login() {
             alert(`Sign in failed: ${error}`);
             setLoading(false)
         }
-
-        // const user = new CognitoUser({
-        //     Username: email,
-        //     Pool: UserPool,
-        // });
-
-        // const authDetails = new AuthenticationDetails({
-        //     Username: email,
-        //     Password: senha,
-        // });
-
-        // user.authenticateUser(authDetails, {
-        //     onSuccess: (data) => {
-        //         user.getUserAttributes((err, attributes) => {
-        //             if (err) {
-        //                 console.log(err)
-        //             } else {
-        //                 console.log(attributes)
-        //             }
-        //         })
-
-        //         user.getSession((err, session) => {
-        //             if (err) {
-        //                 console.log(err)
-        //             } else {
-        //                 sessionStorage.setItem('user-session', session.idToken.jwtToken)
-        //             }
-        //         })
-
-        //         localStorage.setItem('usuario-login', data.getIdToken().getJwtToken());
-        //         navigate("/main")
-                
-        //         setLoading(false)
-
-        //     },
-        //     onFailure: (err) => {
-        //         setLoading(false)
-                
-        //         console.error("onFailure: ", err);
-        //         toast.error("Login não efetuado com sucesso!")
-        //     },
-        //     newPasswordRequired: (data) => {
-        //         setLoading(false)
-                
-        //         console.log("newPasswordRequired: ", data);
-        //     },
-        // });
         
     }
 
@@ -134,6 +81,10 @@ export default function Login() {
                             <div className="ContainerNaoTemConta">
                                 <span>Não tem uma conta?</span>
                                 <Link to="/cadastro" className="linktoCadastro">Cadastre-se</Link>
+                            </div>
+                            <div className="ContainerNaoTemConta">
+                                <span>Email não confirmado?</span>
+                                <Link to="/confirm" className="linktoCadastro">Confirme</Link>
                             </div>
                         </div>
                     </form>

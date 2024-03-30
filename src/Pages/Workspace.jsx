@@ -6,14 +6,14 @@ import Modal from 'react-modal';
 import Ec2Icon from "../Assets/img/Ec2Icon.svg";
 import axios from 'axios';
 import '../Assets/Css/Form.css';
-//import UserPool from "../Utils/UserPool";
 import CadAberto from "../Assets/img/lock-open-solid.svg";
 import Cad from "../Assets/img/lock-solid.svg";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import NotFound from "./notFound.jsx";
 import config from "../Utils/config.json";
-import { getCurrentUser } from "../Utils/UserPool.jsx";
+import { parseJwt } from "../Services/auth";
+
 
 
 Modal.setAppElement('#root')
@@ -114,8 +114,8 @@ export default function Workspace() {
     const [ec2PH, setEc2PH] = useState({})
     const [listkeys, setListkeys] = useState([])
 
-    //const currentUser = getCurrentUser();
-    const currentUser = getCurrentUser();
+    
+    const currentUser =  (parseJwt(sessionStorage.getItem('idToken')).name).trim()
     const [vpc, setVpc] = useState({
         resource_name: '',
         cidr_block: 0
@@ -287,16 +287,11 @@ export default function Workspace() {
     }
 
     function destoryEC2() {
-
         setLoading(true)
-
         setLoadingD(true)
-
         setListEc2([])
         setListWS([])
-
-
-
+        
         axios(config.apiEndpoint + currentUser + "/" + idWk + "/destroy")
             .then((r) => {
                 console.log(r)

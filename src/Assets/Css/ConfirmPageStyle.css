@@ -1,0 +1,529 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing: 1.7px;
+}
+
+
+:root {
+    --roxobase: #844FBA;
+    --roxoclaro: #C285FF;
+    --roxoclaro2: #af62fc;
+    --roxoescuro: #46246D;
+    --roxohover: #7646a6;
+    --redDestroy: #CD0032;
+    --redDestroyHover: #9b0027;
+    --fontColor: #46246D;
+}
+
+.mainContainerConfirm {
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+}
+
+
+.BgMainConfirm {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(90deg, #844FBA 4.13%, #000000 82.74%);
+    
+}
+
+.FormContainerConfirm {
+    display: flex;
+    align-items: center;
+    height: 68%;
+    width: 46%;
+    border-radius: 10%;
+    background-color: rgba(255, 255, 255, 0.25);
+
+}
+
+.ContainerVoltaLogin {
+    margin-top: 3%;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+}
+
+.containerForm {
+    padding: 4em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+}
+
+.ContainerInputsConfirm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 55%;
+    width: 100%;
+}
+
+.ContainerInputsConfirm label {
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    color: white;
+    font-size: 2.5em;
+
+}
+
+.ContainerInputsConfirm input {
+    height: 3.5rem;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: 1.5rem;
+    color: var(--roxohover);
+}
+
+.h1Confirm {
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #fff;
+    font-size: 3.5em;
+}
+
+.ContainerLabels {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.BtnConfirm {
+    /* margin-top: ; */
+    width: 100%;
+    height: 4rem;
+    background: rgba(0, 0, 0, 0.40);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    transition: ease-in-out;
+    transition-duration: 0.5s;
+}
+
+.BtnConfirm:hover {
+
+    background: rgba(0, 0, 0, 0.80);
+}
+
+.ContainerNaoTemConta {
+    margin-top: 10%;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+}
+
+
+.ContainerNaoTemConta span {
+    /* font-weight: 300; */
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.linktoCadastro {
+    color: white;
+    text-decoration: none;
+}
+
+.linktoCadastro:hover {
+
+    text-decoration: underline;
+}
+
+.ErrorMsGConfirm {
+    position: fixed;
+    bottom: 12em;
+    /* margin-top: 2em; */
+    z-index: 2;
+    font-size: 1.35em;
+    color: red;
+    font-weight: 700;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+.imgLogo {
+    margin-top: 30vh;
+    z-index: 2;
+    margin-left: 15%;
+    height: 25%;
+    width: 25%;
+
+}
+
+
+.linkBtnConfirm {
+    text-decoration: none;
+    color: #fff;
+}
+
+.LogoMobile{
+    display: none;
+}
+
+.H1Mobile{
+    display: none;
+}
+
+@media only screen and (max-width: 1100px) {
+    .mainContainerConfirm {
+        display: flex;
+        /* flex-direction: column; */
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        
+
+    }
+
+    .imgLogo {
+        display: none;
+    }
+
+    .BgMainConfirm {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        background: white;
+        clip-path: none;
+    }
+
+    .BtnConfirm{
+        height: 3.5rem;
+    }
+
+    .FormContainerConfirm {
+        display: flex;
+        font-size: 0.5rem;
+        align-items: center;
+        margin-right: 0;
+        height: 81%;
+        width: 100%;
+        border-radius: 0%;
+        background-color: var(--roxoescuro);
+        /* border-top-left-radius: 50px;
+        border-top-right-radius: 50px; */
+    }
+
+    .H1Mobile {
+        display: none;
+        color: var(--roxobase);
+        font-size: 1.3rem;
+        padding-bottom: 1.3rem;
+
+    }
+
+    .containerHeaderMobile {
+        width: 100%;
+        height: 10%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .h1Confirm {
+        display: none;
+    }
+
+    .BtnConfirm {
+        background: var(--roxobase);
+    }
+
+    .ContainerNaoTemConta span {
+        display: block;
+    }
+
+    .ContainerNaoTemConta {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .linktoCadastro {
+        width: 75%;
+        height: 3rem;
+
+        text-decoration: underline;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        font-size: 1.5rem;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: ease-in-out;
+        transition-duration: 0.5s;
+    }
+
+    .ContainerLabels input {
+        height: 3.5rem;
+        width: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+        outline: none;
+        border: none;
+        padding: 10px;
+        font-size: 1rem;
+        
+    }
+
+    .ContainerLabels label {
+        margin-left: 1rem;
+    }
+
+    
+
+    .LogoMobile{
+        display: block;
+        width: 40%;
+        
+        
+        animation: Rotation 6s infinite;
+    }
+
+    @keyframes Rotation {
+        0% {
+            transform: scale(.9);
+            /* border-radius: 100%; */
+        }
+
+        50% {
+            transform: scale(1);
+        }
+
+        100% {
+            transform: scale(.9);
+        }
+    } 
+
+
+}
+
+
+/* max-width: 1778px, max-height:768px*/
+@media only screen and ( min-width: 1100px) {
+    
+    .LogoMobile{
+        display: none;
+
+    }
+
+    .H1Mobile{
+        display: none;
+    }
+
+    .mainContainerConfirm {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100vw;
+        
+    }
+
+    /* .mainContainerConfirm img{
+        margin-bottom: 10%;
+        margin-top: %;
+    } */
+
+    .BgMainConfirm {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        background: linear-gradient(216.15deg, #844FBA 4.13%, #000000 82.74%);
+        /* clip-path: polygon(5% 0, 100% 0%, 100% 100%, 30% 100%); */
+    }
+
+    .FormContainerConfirm {
+        display: flex;
+        
+        align-items: center;
+        
+        height: 68%;
+        width: 40%;
+        border-radius: 10%;
+        background-color: rgba(255, 255, 255, 0.25);
+
+    }
+
+    .containerForm {
+        font-size: 1.5em;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 95%;
+        width: 100%;
+    }
+
+    .ContainerInputsConfirm {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 65%;
+        width: 100%;
+    }
+
+    .ContainerInputsConfirm label {
+        text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        color: white;
+        font-size: 1.5em;
+
+    }
+
+    .ContainerInputsConfirm input {
+        height: 3.5rem;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        outline: none;
+        border: none;
+        padding: 10px;
+        font-size: 1.5rem;
+        color: var(--roxohover);
+    }
+
+    .h1Confirm {
+        text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        color: #fff;
+        font-size: 2.5em;
+    }
+
+    .ContainerLabels {
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    .BtnConfirm {
+        /* margin-top: ; */
+        width: 100%;
+        height: 4.5rem;
+        background: rgba(0, 0, 0, 0.40);
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+        transition: ease-in-out;
+        transition-duration: 0.5s;
+    }
+
+    .BtnConfirm:hover {
+
+        background: rgba(0, 0, 0, 0.80);
+    }
+
+    .ContainerNaoTemConta {
+        margin-top: 10%;
+        color: white;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.5rem;
+    }
+
+
+    .ContainerNaoTemConta span {
+        /* font-weight: 300; */
+        font-family: 'Ubuntu', sans-serif;
+    }
+
+    .linktoCadastro {
+        color: white;
+        text-decoration: none;
+    }
+
+    .linktoCadastro:hover {
+        
+        text-decoration: underline;
+    }
+
+    .ErrorMsGConfirm {
+        position: fixed;
+        bottom: 12em;
+        /* margin-top: 2em; */
+        z-index: 2;
+        font-size: 1.35em;
+        color: red;
+        font-weight: 700;
+
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .mainContainerConfirm img {
+        margin-top: 0;
+        
+        margin-left: 15%;
+        height: 25%;
+        width: 25%;
+    }
+
+    .linkBtnConfirm {
+        text-decoration: none;
+        color: #fff;
+    }
+
+
+}
+
+@media only screen and ( max-width: 1366px) and (max-height: 768px) and (min-width: 1000px){
+    .containerForm{
+        padding: 3rem;
+        font-size: 0.7rem;
+    }
+
+    .FormContainerConfirm{
+        width: 60%;
+    }
+
+    .BtnConfirm{
+        font-size: 1.5rem;
+        height: 3.5rem;
+    }
+
+    .ContainerNaoTemConta{
+        font-size: 1.1rem;
+    }
+}   
+    

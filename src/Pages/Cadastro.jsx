@@ -36,37 +36,6 @@ export default function Cadastrar() {
             alert(`Sign up failed: ${error}`);
             toast.error("Cadastro não efetuado corretamente!")
           }
-
-          
-
-        // UserPool.signUp(email, senha, [{
-        //     Name: 'name',
-        //     Value: nomeC
-        // },
-        // {
-        //     Name: 'custom:Access_Key',
-        //     Value: Access
-        // },
-        // {
-        //     Name: 'custom:Private_Key',
-        //     Value: Private
-        // }], null, (err, data) => {
-        //     if (err) {
-        //         setLoading(false)
-        //         toast.error("Cadastro não efetuado corretamente!")
-        //         console.error(err)
-        //     } else {
-        //         setLoading(false)
-                
-        //         console.log(data)
-        //         setEmail('')
-        //         setSenha('')
-        //         setNomeC('')
-        //         setAccess('')
-        //         setPrivate('')
-        //         toast.success("Cadastro realizado com sucesso!")  
-        //     }     
-        // })
     }
 
     return (
@@ -75,11 +44,9 @@ export default function Cadastrar() {
             <div className="ContainerSignup">
                 <form onSubmit={Cadastrar} className="FormSingup">
                     <div className="contBtnBack">
-
                         <Link to="/" className="VoltarCadastroMobile"><img src={BackBtn} className="backBtn" alt="Botão para voltar a tela de login" /></Link>
                     </div>
                     <div className="ContainerInputs1">
-
                         <Link to="/" className="VoltarCadastro"><img src={BackBtn} className="backBtn" alt="Botão para voltar a tela de login" /></Link>
                         <h1 >Cadastro</h1>
                         <label htmlFor="Name">Nome Completo</label>
