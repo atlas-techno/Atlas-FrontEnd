@@ -14,7 +14,7 @@ export default function Keys() {
     const [key_name, setKey_name] = useState("")
     const [listKey, setListKey] = useState([])
     const [listworkspaces, setListworkspaces] = useState([])
-    const currentUser = config.mockUser
+    const currentUser = getCurrentUser();
 
     function ListWorkspaces(){
         axios(config.apiEndpoint+currentUser+"/query_workspaces")
@@ -37,11 +37,12 @@ export default function Keys() {
     }
 
     function CreateKey(event) {
+        event.preventDefault()
         let Key = {
             name: key_name.trim()
         }
         if (listworkspaces.length === 0) {
-            event.preventDefault()
+            
             toast.warn("Você precisa criar uma workspace antes de criar uma Key")
             return
         } else{

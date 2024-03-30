@@ -12,14 +12,14 @@ export default function NotFound() {
     function Logout(e) {
         e.preventDefault()
 
-        const user = getCurrentUser("a")
+         const user = getCurrentUser()
 
 
 
-        if (user) {
-            user.signOut()
-            localStorage.clear()
-        }
+        // if (user) {
+        //     user.signOut()
+        //     localStorage.clear()
+        // }
         navigate("/")
 
     }

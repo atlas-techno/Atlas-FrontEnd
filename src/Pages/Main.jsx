@@ -24,7 +24,7 @@ export default function MainPage() {
     const [idWorkspace, setIdWorkspace] = useState("")
     const navigate = useNavigate()
     
-    const currentUser = config.mockUser;
+    const currentUser = getCurrentUser(location.state.email);
     
     function OpenModal() {
         setModalIsOpen(true)
@@ -54,21 +54,21 @@ export default function MainPage() {
 
     function CreateWS(e) {
         e.preventDefault()
-        // axios.post(config.apiEndpoint+ currentUser +"/create_workspace",{
-        //     "name" : nomeWS,
-        //     "region" : regionWS
-        // } ).then((r) => {
-        //     console.log(r)
-        //     toast.success("Sua workspace foi cadastrada com sucesso!")
-        //     ListWorkspaces()
+        axios.post(config.apiEndpoint+ currentUser +"/create_workspace",{
+            "name" : nomeWS,
+            "region" : regionWS
+        } ).then((r) => {
+            console.log(r)
+            toast.success("Sua workspace foi cadastrada com sucesso!")
+            ListWorkspaces()
 
-        //     setModalIsOpen(false)
+            setModalIsOpen(false)
 
-        // }).catch((err) => {
-        //     console.error(err)
-        // })
+        }).catch((err) => {
+            console.error(err)
+        })
 
-        listworkspaces.push({name: nomeWS, region: regionWS})
+        //listworkspaces.push({name: nomeWS, region: regionWS})
         setModalIsOpen(false)
         console.log(nomeWS)
         console.log(regionWS) 

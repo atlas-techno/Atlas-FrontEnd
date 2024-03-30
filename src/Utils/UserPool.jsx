@@ -38,8 +38,6 @@ import config from "./config.json"
 
   const getCurrentUser = (email) =>{
     listUsers.filter((user) => user.Email == email)
-
-    
     return listUsers[0]
   }
   

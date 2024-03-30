@@ -13,7 +13,7 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import NotFound from "./notFound.jsx";
 import config from "../Utils/config.json";
-//import { getCurrentUser } from "../Utils/UserPool.jsx";
+import { getCurrentUser } from "../Utils/UserPool.jsx";
 
 
 Modal.setAppElement('#root')
@@ -114,8 +114,8 @@ export default function Workspace() {
     const [ec2PH, setEc2PH] = useState({})
     const [listkeys, setListkeys] = useState([])
 
-    //const currentUser = config.mockUsergetCurrentUser("a");
-    const currentUser = config.mockUser
+    //const currentUser = getCurrentUser();
+    const currentUser = getCurrentUser();
     const [vpc, setVpc] = useState({
         resource_name: '',
         cidr_block: 0
@@ -166,7 +166,6 @@ export default function Workspace() {
     }
 
     function createEc2(event) {
-        // setLoading(true)
         event.preventDefault()
 
         if (listSubnet.length === 0) {
@@ -194,7 +193,7 @@ export default function Workspace() {
                     console.log(erro)
                     setLoading(false)
                 })
-            listEc2.push({resource_name: "a" })
+            
 
             setModalIsOpen(false)
         }
@@ -219,7 +218,7 @@ export default function Workspace() {
                     setLoading(false)
                 })
             
-            listWS.push({resource_name: "a" })
+            
 
             console.log(listWS)
             setModa3lIsOpen(false)
@@ -245,7 +244,7 @@ export default function Workspace() {
 
             } else {
 
-                listSubnet.push({resource_name: "a" })
+                
                 axios.post(config.apiEndpoint + currentUser + "/" + idWk + "/create_subpub", subnet)
                     .then((r) => {
                         console.log(r)

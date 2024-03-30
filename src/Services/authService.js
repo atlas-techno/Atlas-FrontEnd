@@ -23,9 +23,9 @@ export const signIn = async (username, password) => {
         console.log("AuthenticationResult: " + AuthenticationResult)
 
         if (AuthenticationResult) {
-        sessionStorage.setItem("idToken", AuthenticationResult.IdToken || '');
-        sessionStorage.setItem("accessToken", AuthenticationResult.AccessToken || '');
-        sessionStorage.setItem("refreshToken", AuthenticationResult.RefreshToken || '');
+            sessionStorage.setItem("idToken", AuthenticationResult.IdToken || '');
+            sessionStorage.setItem("accessToken", AuthenticationResult.AccessToken || '');
+            sessionStorage.setItem("refreshToken", AuthenticationResult.RefreshToken || '');
         return AuthenticationResult;
         }
     } catch (error) {
@@ -45,21 +45,22 @@ export const signUp = async (name,email, password,access,priv) => {
             Value: name,
         },
         {
-            Name: 'custom:Access_key',
+            Name: "custom:Access_key",
             Value: access
         },
         {
-            Name: 'custom:Private_key',
+            Name: "custom:Private_key",
             Value: priv
         }],
     };
     try {
         const command = new SignUpCommand(params);
+        console.log(command)
         const response = await cognitoClient.send(command);
         console.log("Sign up success: ", response);
         return response;
     } catch (error) {
-        console.error("Error signing up: ", error);
+        console.log("Error signing up: ", error);
         throw error;
     }
 };
