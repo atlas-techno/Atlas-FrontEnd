@@ -45,7 +45,7 @@ export const signUp = async (name,email, password,access,priv) => {
             Value: name,
         },
         {
-            Name: "custom:Access_key",
+            Name: "custom:Access_Key",
             Value: access
         },
         {
