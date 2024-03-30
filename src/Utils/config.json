@@ -3,6 +3,5 @@
     "userPoolId": "us-east-1_RFFty2mN0",
     "clientId": "4bid9qrnjf0c2mrjbdbtbv7h3o",
     "mockUser": "Weslley",
-    "apiEndpoint": "https://api.atlastechnologies.cloud:403/"
-
+    "apiEndpoint": "https://api.atlastechnologies.cloud/"
 }
