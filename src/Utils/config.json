@@ -2,5 +2,7 @@
     "region": "us-east-1",
     "userPoolId": "us-east-1_RFFty2mN0",
     "clientId": "4bid9qrnjf0c2mrjbdbtbv7h3o",
-    "mockUser": "Weslley"
+    "mockUser": "Weslley",
+    "apiEndpoint": "https://api.atlastechnologies.cloud:403/"
+
 }

@@ -157,7 +157,7 @@ export default function Workspace() {
     const [idWk, setIdWk] = useState(location.state.id)
 
     function ListKeys() {
-        axios("https://api.atlastechnologies.cloud:403/" + currentUser + "/query_ssh_keys")
+        axios(config.apiEndpoint + currentUser + "/query_ssh_keys")
             .then((r) => {
                 console.log(r)
                 setListkeys(r.data)
@@ -183,7 +183,7 @@ export default function Workspace() {
             ec2.key_name = keyph
             console.log(ec2)
 
-            axios.post("https://api.atlastechnologies.cloud:403/" + currentUser + "/" + idWk + "/create_ec2", ec2,)
+            axios.post(config.apiEndpoint + currentUser + "/" + idWk + "/create_ec2", ec2,)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -204,7 +204,7 @@ export default function Workspace() {
         if (vpc.name === "") {
             toast.warn("Cadastre um nome a sua Vpc")
         } else {
-            axios.post("https://api.atlastechnologies.cloud:403/" + currentUser + "/" + idWk + "/create_vpc", vpc)
+            axios.post(config.apiEndpoint + currentUser + "/" + idWk + "/create_vpc", vpc)
                 .then((r) => {
                     console.log(r)
                     setLoading(false)
@@ -246,7 +246,7 @@ export default function Workspace() {
             } else {
 
                 listSubnet.push({resource_name: "a" })
-                axios.post("https://api.atlastechnologies.cloud:403/" + currentUser + "/" + idWk + "/create_subpub", subnet)
+                axios.post(config.apiEndpoint + currentUser + "/" + idWk + "/create_subpub", subnet)
                     .then((r) => {
                         console.log(r)
                         setLoading(false)
@@ -270,7 +270,7 @@ export default function Workspace() {
         setLoadingDe(true)
         console.log(subnet)
 
-        axios("https://api.atlastechnologies.cloud:403/" + currentUser + "/" + idWk + "/deploy")
+        axios(config.apiEndpoint + currentUser + "/" + idWk + "/deploy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -298,7 +298,7 @@ export default function Workspace() {
 
 
 
-        axios("https://api.atlastechnologies.cloud:403/" + currentUser + "/" + idWk + "/destroy")
+        axios(config.apiEndpoint + currentUser + "/" + idWk + "/destroy")
             .then((r) => {
                 console.log(r)
                 setLoading(false)
@@ -392,7 +392,7 @@ export default function Workspace() {
     }
 
     function ListarVpcs() {
-        axios("https://api.atlastechnologies.cloud:403/" + idWk + "/query_vpcs")
+        axios(config.apiEndpoint + idWk + "/query_vpcs")
             .then((r) => {
                 console.log(r.data)
                 setListWS(r.data)
@@ -405,7 +405,7 @@ export default function Workspace() {
 
     function ListarSubs() {
 
-        axios("https://api.atlastechnologies.cloud:403/" + idWk + "/query_subnets")
+        axios(config.apiEndpoint + idWk + "/query_subnets")
             .then((r) => {
                 console.log(r)
                 setListSubnet(r.data)
@@ -416,7 +416,7 @@ export default function Workspace() {
     }
 
     function ListarEc2s() {
-        axios("https://api.atlastechnologies.cloud:403/" + idWk + "/query_instances")
+        axios(config.apiEndpoint + idWk + "/query_instances")
             .then((r) => {
                 console.log(r.data)
                 setListEc2(r.data)
