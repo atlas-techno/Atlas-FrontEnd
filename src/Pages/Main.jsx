@@ -42,7 +42,7 @@ export default function MainPage() {
 
 
     function ListWorkspaces(){
-        axios("https://atlastechnologies.cloud/"+currentUser+"/query_workspaces")
+        axios("https://api.atlastechnologies.cloud/"+currentUser+"/query_workspaces")
         .then((r) => {
             console.log(r)
             setListworkspaces(r.data)
@@ -54,7 +54,7 @@ export default function MainPage() {
 
     function CreateWS(e) {
         e.preventDefault()
-        // axios.post("https://atlastechnologies.cloud/"+ currentUser +"/create_workspace",{
+        // axios.post("https://api.atlastechnologies.cloud/"+ currentUser +"/create_workspace",{
         //     "name" : nomeWS,
         //     "region" : regionWS
         // } ).then((r) => {
