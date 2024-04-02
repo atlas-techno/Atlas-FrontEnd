@@ -358,11 +358,6 @@ export default function Workspace() {
     function OpenModal2(e) {
         setModa2lIsOpen(true)
         setEc2PH(e)
-        console.log(ec2PH)
-
-
-
-
     }
 
     function CloseModal2() {
@@ -816,14 +811,6 @@ export default function Workspace() {
                                     <div className="vpcblock">
                                         {
                                             listSubnet.filter((sub) => sub.vpc_id === elements._id).map((sub, index) => {
-
-                                                // let bC = {
-                                                //     borderColor: sub.access ? '#7646a6' : '#C285FF'
-                                                // };
-
-                                                // let bg = {
-                                                //     backgroundColor: sub.access ? '#7646a6' : '#C285FF'
-                                                // }
                                                 return (
                                                     <div key={sub._id} className="entireSubnet">
                                                         <div onClick={() => OpenSub(sub)} className="Subnetblock">
@@ -872,17 +859,10 @@ export default function Workspace() {
                                 </div>
                             )
                         })}
-
-
-
                     </div>
-
-
                 </div>
             </div>
             <ToastContainer />
         </>
     )
-
-
 }
